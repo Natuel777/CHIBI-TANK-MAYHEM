@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8344077859543710354}
   - component: {fileID: 7642211250085311587}
   m_Layer: 0
-  m_Name: Head
+  m_Name: HeadMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,13 +27,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3718336081031489488}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.72, z: 0.98}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.19, z: 0.015000045}
   m_LocalScale: {x: 1.3748, y: 0.8483753, z: 1.3848473}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1517765638373598755}
-  m_Father: {fileID: 3827577224385991917}
+  m_Children: []
+  m_Father: {fileID: 4907707422390175691}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7901396572810626258
 MeshFilter:
@@ -146,6 +145,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3827577224385991917}
+  - {fileID: 4907707422390175691}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5089083255988922484
@@ -190,7 +190,19 @@ MonoBehaviour:
     m_ActionId: 351f2ccd-1f9f-44bf-9bec-d62ac5c5f408
     m_ActionName: 'Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1504843927972850186}
+        m_TargetAssemblyTypeName: InputReader, Assembly-CSharp
+        m_MethodName: OnAim
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 6b444451-8a00-4d00-a97e-f47457f736a8
     m_ActionName: 'Player/Next[/Mouse/delta,/Pen/delta]'
   - m_PersistentCalls:
@@ -282,8 +294,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4f2cee41e7594e4ea6f7adecf6fd528, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
-  playerSettings: {fileID: 11400000, guid: e065b414144dedb40ae9d84dfddde597, type: 2}
-  cannonMuzzleTransform: {fileID: 1164589862165957977}
+  _playerSettings: {fileID: 11400000, guid: e065b414144dedb40ae9d84dfddde597, type: 2}
+  _cannonMuzzleTransform: {fileID: 1164589862165957977}
+  _tankHeadTransform: {fileID: 4907707422390175691}
 --- !u!1 &5334351856758176455
 GameObject:
   m_ObjectHideFlags: 0
@@ -426,7 +439,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3167160556188940881}
-  - {fileID: 6961305935178894549}
   m_Father: {fileID: 1481235575191404068}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5662263827344164836
@@ -541,6 +553,39 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &5757570794491014167
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4907707422390175691}
+  m_Layer: 0
+  m_Name: Head
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4907707422390175691
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5757570794491014167}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.91, z: 0.965}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1517765638373598755}
+  - {fileID: 6961305935178894549}
+  m_Father: {fileID: 1481235575191404068}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5800553464572218822
 GameObject:
   m_ObjectHideFlags: 0
@@ -599,12 +644,12 @@ Transform:
   m_GameObject: {fileID: 6413067928315704234}
   serializedVersion: 2
   m_LocalRotation: {x: -0.70710665, y: -0, z: -0, w: 0.707107}
-  m_LocalPosition: {x: 0, y: 0.13908942, z: 0.9941168}
-  m_LocalScale: {x: 0.27974972, y: 0.5374717, z: 0.453337}
+  m_LocalPosition: {x: 0, y: -0.07199997, z: 1.3917}
+  m_LocalScale: {x: 0.3845999, y: 0.74431604, z: 0.38460004}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1164589862165957977}
-  m_Father: {fileID: 6961305935178894549}
+  m_Father: {fileID: 4907707422390175691}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &6453217623776968644
 MeshFilter:

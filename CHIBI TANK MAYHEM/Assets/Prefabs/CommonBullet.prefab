@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d416165fcaea3ca41aa1ab88e0db853d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CommonCannonBullet
-  speed: 1.52
+  speed: 100
   initialDamage: 1.05
   lifetime: 31.82
   bulletType: 0

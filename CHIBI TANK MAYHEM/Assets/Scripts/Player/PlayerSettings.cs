@@ -5,4 +5,5 @@ public class PlayerSettingsSO : ScriptableObject
 {
     public float rotationSpeed = 5f;
     public float movementSpeed = 5f;
+    public float aimRotationSpeed = 720f;
 }
