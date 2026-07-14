@@ -6,4 +6,20 @@ public class PlayerSettingsSO : ScriptableObject
     public float rotationSpeed = 5f;
     public float movementSpeed = 5f;
     public float aimRotationSpeed = 720f;
+
+    [Header("Camera Settings")]
+    public float orbitSensitivityX = 3f;
+    public float orbitSensitivityY = 2f;
+
+    [Tooltip("Minimum pitch angle for the camera orbit.")]
+    public float orbitMinPitch = -20f;
+
+    [Tooltip("Maximum pitch angle for the camera orbit.")]
+    public float orbitMaxPitch = 60f;
+    
+    [Tooltip("Distance from the orbit target for the camera.")]
+    public float orbitDistance = 10f;
+    
+    [Tooltip("Height offset for the camera's pivot point.")]
+    public float orbitPivotHeightOffset = 1.5f;
 }

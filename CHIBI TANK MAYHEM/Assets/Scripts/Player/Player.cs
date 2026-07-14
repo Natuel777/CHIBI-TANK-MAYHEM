@@ -27,7 +27,6 @@ public class Player : MonoBehaviour
         var inputReader = GetComponent<InputReader>();
         playerMovement.Initialize(inputReader);
         playerShoot.Initialize(inputReader);
-        playerAim.Initialize(inputReader);
     }
     #endregion
 

@@ -15,3 +15,9 @@ MonoBehaviour:
   rotationSpeed: 5
   movementSpeed: 5
   aimRotationSpeed: 10
+  orbitSensitivityX: 1.5
+  orbitSensitivityY: 1
+  orbitMinPitch: -20
+  orbitMaxPitch: 60
+  orbitDistance: 10
+  orbitPivotHeightOffset: 1.5

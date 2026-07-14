@@ -4,7 +4,6 @@ public class PlayerAim
 {
     private readonly Transform _tankHeadTransform;
     private readonly float _aimRotationSpeed;
-    private Vector2 _screenAimPosition;
     private readonly Camera _camera;
 
     public PlayerAim(Transform tankHeadTransform, float aimRotationSpeed, Camera camera)
@@ -14,19 +13,10 @@ public class PlayerAim
         _camera = camera;
     }
 
-    public void Initialize(InputReader inputReader)
-    {
-        inputReader.Aim += SetAimPosition;
-    }
-
-    private void SetAimPosition(Vector2 screenPosition)
-    {
-        _screenAimPosition = screenPosition;
-    }
-
     public void ArtificialUpdate()
     {
-        Ray ray = _camera.ScreenPointToRay(_screenAimPosition);
+        Vector2 screenCenter = new Vector2(_camera.pixelWidth / 2f, _camera.pixelHeight / 2f);
+        Ray ray = _camera.ScreenPointToRay(screenCenter);
         Vector3 targetPoint;
 
         //Si hay racast en la dirección del mouse, se toma el punto de impacto como objetivo
