@@ -5,6 +5,7 @@ public class Player : MonoBehaviour
     [SerializeField] private PlayerSettingsSO _playerSettings;
     [SerializeField] private Transform _cannonMuzzleTransform;
     [SerializeField] private Transform _tankHeadTransform;
+    [SerializeField] private LayerMask _crosshairRaycastMask = ~0;
 
     #region Model
     public PlayerMovement playerMovement;
@@ -19,7 +20,7 @@ public class Player : MonoBehaviour
                                             _playerSettings.rotationSpeed,
                                             _playerSettings.movementSpeed);
         playerShoot = new PlayerShoot(_cannonMuzzleTransform);
-        playerAim = new PlayerAim(_tankHeadTransform, _playerSettings.aimRotationSpeed, Camera.main);
+        playerAim = new PlayerAim(_tankHeadTransform, _playerSettings.aimRotationSpeed, Camera.main, _cannonMuzzleTransform, _crosshairRaycastMask);
     }
 
     private void Start()
@@ -34,5 +35,13 @@ public class Player : MonoBehaviour
     {
         playerMovement.ArtificialUpdate();
         playerAim.ArtificialUpdate();
+    }
+
+    private void OnDrawGizmos()
+    {
+        if(_cannonMuzzleTransform == null) return;
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(_cannonMuzzleTransform.position, _cannonMuzzleTransform.up * 20f);
     }
 }

@@ -297,6 +297,9 @@ MonoBehaviour:
   _playerSettings: {fileID: 11400000, guid: e065b414144dedb40ae9d84dfddde597, type: 2}
   _cannonMuzzleTransform: {fileID: 1164589862165957977}
   _tankHeadTransform: {fileID: 4907707422390175691}
+  _crosshairRaycastMask:
+    serializedVersion: 2
+    m_Bits: 55
 --- !u!1 &5334351856758176455
 GameObject:
   m_ObjectHideFlags: 0
