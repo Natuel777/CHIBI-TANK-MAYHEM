@@ -3,9 +3,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PlayerSettingsSO", menuName = "Scriptable Objects/PlayerSettingsSO")]
 public class PlayerSettingsSO : ScriptableObject
 {
+    [Header("Tank Settings")]
     public float rotationSpeed = 5f;
     public float movementSpeed = 5f;
     public float aimRotationSpeed = 720f;
+    public float minTankHeadPitch = -20f;
+    public float maxTankHeadPitch = 20f;
 
     [Header("Camera Settings")]
     public float orbitSensitivityX = 3f;

@@ -3,20 +3,28 @@ using UnityEngine;
 public class PlayerAim : IWeaponAimProvider
 {
     private readonly Transform _tankHeadTransform, _cannonMuzzleTransform;
-    private readonly float _aimRotationSpeed;
+    private readonly float _aimRotationSpeed, _minPitch, _maxPitch;
     private readonly Camera _camera;
     private readonly int _crosshairRaycastMask;
     private Vector3 _crosshairPoint;
     private const float _MaxDistance = 1000f;
     private const float _FallbackDistance = 50f;
 
-    public PlayerAim(Transform tankHeadTransform, float aimRotationSpeed, Camera camera, Transform cannonMuzzle, LayerMask crosshairRaycastMask)
+
+    public PlayerAim(Transform tankHeadTransform, float aimRotationSpeed, 
+                                                Camera camera, 
+                                                Transform cannonMuzzle, 
+                                                LayerMask crosshairRaycastMask,
+                                                float minPitch, 
+                                                float maxPitch)
     {
         _tankHeadTransform = tankHeadTransform;
         _cannonMuzzleTransform = cannonMuzzle;
         _aimRotationSpeed = aimRotationSpeed;
         _camera = camera;
         _crosshairRaycastMask = crosshairRaycastMask;
+        _minPitch = minPitch;
+        _maxPitch = maxPitch;
     }
 
     public void ArtificialUpdate()
@@ -35,7 +43,7 @@ public class PlayerAim : IWeaponAimProvider
             targetPoint = ray.origin + ray.direction * 500f;
 
         Vector3 direction = targetPoint - _tankHeadTransform.position;
-        direction.y = 0f;
+        direction.y = Mathf.Clamp(direction.y, _minPitch, _maxPitch);
 
         if(direction.sqrMagnitude > 0.001f)
         {

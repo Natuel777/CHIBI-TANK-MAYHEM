@@ -20,7 +20,12 @@ public class Player : MonoBehaviour
                                             _playerSettings.rotationSpeed,
                                             _playerSettings.movementSpeed);
         playerShoot = new PlayerShoot(_cannonMuzzleTransform);
-        playerAim = new PlayerAim(_tankHeadTransform, _playerSettings.aimRotationSpeed, Camera.main, _cannonMuzzleTransform, _crosshairRaycastMask);
+        playerAim = new PlayerAim(_tankHeadTransform, 
+                                _playerSettings.aimRotationSpeed, 
+                                Camera.main, _cannonMuzzleTransform, 
+                                _crosshairRaycastMask,
+                                _playerSettings.minTankHeadPitch,
+                                _playerSettings.maxTankHeadPitch);
     }
 
     private void Start()
