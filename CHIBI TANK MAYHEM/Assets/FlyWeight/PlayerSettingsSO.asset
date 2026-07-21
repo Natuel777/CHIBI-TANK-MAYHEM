@@ -15,8 +15,11 @@ MonoBehaviour:
   rotationSpeed: 5
   movementSpeed: 5
   aimRotationSpeed: 10
-  minTankHeadPitch: -20
-  maxTankHeadPitch: 20
+  minTankHeadPitch: -5
+  maxTankHeadPitch: 10
+  turretFireRate: 10
+  turretFireCooldown: 0.1
+  tankTurretFollowsCamera: 0
   orbitSensitivityX: 1.5
   orbitSensitivityY: 1
   orbitMinPitch: -20

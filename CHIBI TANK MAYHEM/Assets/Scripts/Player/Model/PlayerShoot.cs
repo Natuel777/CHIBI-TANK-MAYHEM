@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerShoot : IShootable
+public class PlayerShoot : IShootable, IInputInitialize
 {
     private bool _initialized = false;
     private Transform _cannonTransform;

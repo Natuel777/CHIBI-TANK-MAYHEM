@@ -3,14 +3,16 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] private PlayerSettingsSO _playerSettings;
-    [SerializeField] private Transform _cannonMuzzleTransform;
+    [SerializeField] private Transform _cannonMuzzleTransform, _turretMuzzleTransform;
     [SerializeField] private Transform _tankHeadTransform;
-    [SerializeField] private LayerMask _crosshairRaycastMask = ~0;
+    [SerializeField] private LayerMask _crosshairRaycastMask = ~0, _cameraRaycastMask = ~0;
 
     #region Model
     public PlayerMovement playerMovement;
     public PlayerShoot playerShoot;
     public PlayerAim playerAim;
+    public PlayerTurretShoot playerTurretShoot;
+    public PlayerTurretAim playerTurretAim;
     #endregion
 
     #region Initialization
@@ -24,8 +26,15 @@ public class Player : MonoBehaviour
                                 _playerSettings.aimRotationSpeed, 
                                 Camera.main, _cannonMuzzleTransform, 
                                 _crosshairRaycastMask,
+                                _cameraRaycastMask,
                                 _playerSettings.minTankHeadPitch,
                                 _playerSettings.maxTankHeadPitch);
+        playerTurretShoot = new PlayerTurretShoot(_turretMuzzleTransform, 
+                                                _playerSettings.turretFireRate, 
+                                                _playerSettings.turretFireCooldown);
+
+        if(_playerSettings.tankTurretFollowsCamera)
+            playerTurretAim = new PlayerTurretAim();  
     }
 
     private void Start()
@@ -33,6 +42,8 @@ public class Player : MonoBehaviour
         var inputReader = GetComponent<InputReader>();
         playerMovement.Initialize(inputReader);
         playerShoot.Initialize(inputReader);
+        playerTurretShoot.Initialize(inputReader);
+        //playerTurretAim?.Initialize(inputReader);
     }
     #endregion
 
@@ -40,6 +51,7 @@ public class Player : MonoBehaviour
     {
         playerMovement.ArtificialUpdate();
         playerAim.ArtificialUpdate();
+        playerTurretShoot.ArtificialUpdate();
     }
 
     private void OnDrawGizmos()
@@ -48,5 +60,10 @@ public class Player : MonoBehaviour
 
         Gizmos.color = Color.red;
         Gizmos.DrawRay(_cannonMuzzleTransform.position, _cannonMuzzleTransform.up * 20f);
+
+        if(_turretMuzzleTransform == null) return;
+
+        Gizmos.color = Color.orange;
+        Gizmos.DrawRay(_turretMuzzleTransform.position, _turretMuzzleTransform.up * 20f);
     }
 }

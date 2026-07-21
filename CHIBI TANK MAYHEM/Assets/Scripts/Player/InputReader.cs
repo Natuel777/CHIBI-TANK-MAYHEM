@@ -6,7 +6,7 @@ public class InputReader : MonoBehaviour
 {
     public event Action<Vector2> Move;
     public event Action ShootCannon;
-    public event Action ShootGun;
+    public event Action<bool> ShootGun;
     public event Action<Vector2> Aim;
 
     public void OnMove(InputAction.CallbackContext ctx)
@@ -23,5 +23,14 @@ public class InputReader : MonoBehaviour
     {
         if(ctx.performed)
             ShootCannon?.Invoke();
+    }
+
+    public void OnShootGun(InputAction.CallbackContext ctx)
+    {
+        if(ctx.started)
+            ShootGun?.Invoke(true);
+        
+        else if(ctx.canceled)
+            ShootGun?.Invoke(false);
     }
 }

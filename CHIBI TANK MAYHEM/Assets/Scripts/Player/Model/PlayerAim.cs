@@ -5,16 +5,16 @@ public class PlayerAim : IWeaponAimProvider
     private readonly Transform _tankHeadTransform, _cannonMuzzleTransform;
     private readonly float _aimRotationSpeed, _minPitch, _maxPitch;
     private readonly Camera _camera;
-    private readonly int _crosshairRaycastMask;
+    private readonly int _crosshairRaycastMask, _cameraRaycastMask;
     private Vector3 _crosshairPoint;
     private const float _MaxDistance = 1000f;
     private const float _FallbackDistance = 50f;
-
 
     public PlayerAim(Transform tankHeadTransform, float aimRotationSpeed, 
                                                 Camera camera, 
                                                 Transform cannonMuzzle, 
                                                 LayerMask crosshairRaycastMask,
+                                                LayerMask cameraRaycastMask,
                                                 float minPitch, 
                                                 float maxPitch)
     {
@@ -23,6 +23,7 @@ public class PlayerAim : IWeaponAimProvider
         _aimRotationSpeed = aimRotationSpeed;
         _camera = camera;
         _crosshairRaycastMask = crosshairRaycastMask;
+        _cameraRaycastMask = cameraRaycastMask;
         _minPitch = minPitch;
         _maxPitch = maxPitch;
     }
@@ -35,7 +36,7 @@ public class PlayerAim : IWeaponAimProvider
         Vector3 targetPoint;
 
         //Si hay racast en la dirección del mouse, se toma el punto de impacto como objetivo
-        if(Physics.Raycast(ray, out RaycastHit hit))
+        if(Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, _cameraRaycastMask))
             targetPoint = hit.point;
         
         //Si no hay impacto, se toma un punto lejano en la dirección del mouse
@@ -43,10 +44,24 @@ public class PlayerAim : IWeaponAimProvider
             targetPoint = ray.origin + ray.direction * 500f;
 
         Vector3 direction = targetPoint - _tankHeadTransform.position;
-        direction.y = Mathf.Clamp(direction.y, _minPitch, _maxPitch);
 
         if(direction.sqrMagnitude > 0.001f)
         {
+            //El clamp de pitch tiene que aplicarse sobre un ÁNGULO, no sobre direction.y directamente:
+            //direction.y es una distancia en unidades de mundo, y la misma altura absoluta representa
+            //ángulos de elevación distintos según qué tan lejos esté el punto apuntado (con o sin
+            //raycast exitoso) — por eso clampear la componente Y hacía que el límite de pitch pareciera
+            //cambiar según hubiera o no impacto.
+            Vector3 horizontalDirection = direction;
+            horizontalDirection.y = 0f;
+            float horizontalDistance = horizontalDirection.magnitude;
+
+            float pitchAngle = Mathf.Atan2(direction.y, horizontalDistance) * Mathf.Rad2Deg;
+            pitchAngle = Mathf.Clamp(pitchAngle, _minPitch, _maxPitch);
+            float pitchRad = pitchAngle * Mathf.Deg2Rad;
+            Vector3 horizontalDirNormalized = horizontalDistance > 0.0001f ? horizontalDirection / horizontalDistance : Vector3.forward;
+            direction = horizontalDirNormalized * Mathf.Cos(pitchRad) + Vector3.up * Mathf.Sin(pitchRad);
+
             //Convertimos la dirección objetivo en quaternion
             Quaternion targetRotation = Quaternion.LookRotation(direction);
             //Aplicamos la rotación en quaterniones suavemente hacia el objetivo

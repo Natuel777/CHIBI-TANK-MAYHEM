@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerMovement
+public class PlayerMovement : IInputInitialize
 {
     private Transform _transform;
     private float _rotationSpeed, _movementSpeed;

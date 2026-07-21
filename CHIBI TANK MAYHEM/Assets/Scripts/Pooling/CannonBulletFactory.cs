@@ -25,6 +25,9 @@ public class CannonBulletFactory : Factory<ShooteableObject, BulletType>
 
         foreach(var prefab in bulletPrefabs)
             _prefabsByName[prefab.BulletType] = prefab;
+
+        foreach(var type in _prefabsByName.Keys)
+            GetOrCreatePool(type);
     }
 
     public override ShooteableObject Create(BulletType type, Vector3 position, Quaternion rotation)

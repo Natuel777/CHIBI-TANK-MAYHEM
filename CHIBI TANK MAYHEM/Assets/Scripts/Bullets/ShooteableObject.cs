@@ -2,7 +2,8 @@ using UnityEngine;
 
 public enum BulletType
 {
-    CommonCannonBullet
+    CommonCannonBullet,
+    CommonTurretBullet
 }
 
 public abstract class ShooteableObject : MonoBehaviour
