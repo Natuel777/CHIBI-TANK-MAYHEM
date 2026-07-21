@@ -10,12 +10,17 @@ public class PlayerSettingsSO : ScriptableObject
     public float minTankHeadPitch = -20f;
     public float maxTankHeadPitch = 20f;
 
+    [Header("Turret Settings")]
+    public float turretRotationSpeed = 900f;
+    public float minTurretPitch = -20f;
+    public float maxTurretPitch = 20f;
+
     [Tooltip("The rate at which the turret can fire, in shots per second.")]
     public float turretFireRate = 10f;
 
     [Tooltip("The cooldown time between turret shots, in seconds.")]
     public float turretFireCooldown = 0.1f;
-    
+
     public bool tankTurretFollowsCamera = false;
 
     [Header("Camera Settings")]

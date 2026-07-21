@@ -4,15 +4,15 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private PlayerSettingsSO _playerSettings;
     [SerializeField] private Transform _cannonMuzzleTransform, _turretMuzzleTransform;
-    [SerializeField] private Transform _tankHeadTransform;
+    [SerializeField] private Transform _tankHeadTransform, _turretTransform;
     [SerializeField] private LayerMask _crosshairRaycastMask = ~0, _cameraRaycastMask = ~0;
 
     #region Model
     public PlayerMovement playerMovement;
     public PlayerShoot playerShoot;
     public PlayerAim playerAim;
-    public PlayerTurretShoot playerTurretShoot;
     public PlayerTurretAim playerTurretAim;
+    public PlayerTurretShoot playerTurretShoot;
     #endregion
 
     #region Initialization
@@ -22,19 +22,24 @@ public class Player : MonoBehaviour
                                             _playerSettings.rotationSpeed,
                                             _playerSettings.movementSpeed);
         playerShoot = new PlayerShoot(_cannonMuzzleTransform);
-        playerAim = new PlayerAim(_tankHeadTransform, 
-                                _playerSettings.aimRotationSpeed, 
-                                Camera.main, _cannonMuzzleTransform, 
+        playerAim = new PlayerAim(_tankHeadTransform,
+                                _playerSettings.aimRotationSpeed,
+                                Camera.main, _cannonMuzzleTransform,
                                 _crosshairRaycastMask,
                                 _cameraRaycastMask,
                                 _playerSettings.minTankHeadPitch,
                                 _playerSettings.maxTankHeadPitch);
-        playerTurretShoot = new PlayerTurretShoot(_turretMuzzleTransform, 
-                                                _playerSettings.turretFireRate, 
+        playerTurretShoot = new PlayerTurretShoot(_turretMuzzleTransform,
+                                                _playerSettings.turretFireRate,
                                                 _playerSettings.turretFireCooldown);
 
         if(_playerSettings.tankTurretFollowsCamera)
-            playerTurretAim = new PlayerTurretAim();  
+            playerTurretAim = new PlayerTurretAim(_turretTransform,
+                                                _turretMuzzleTransform,
+                                                _playerSettings.turretRotationSpeed,
+                                                _playerSettings.minTurretPitch,
+                                                _playerSettings.maxTurretPitch,
+                                                _crosshairRaycastMask);
     }
 
     private void Start()
@@ -43,7 +48,6 @@ public class Player : MonoBehaviour
         playerMovement.Initialize(inputReader);
         playerShoot.Initialize(inputReader);
         playerTurretShoot.Initialize(inputReader);
-        //playerTurretAim?.Initialize(inputReader);
     }
     #endregion
 
@@ -51,6 +55,7 @@ public class Player : MonoBehaviour
     {
         playerMovement.ArtificialUpdate();
         playerAim.ArtificialUpdate();
+        playerTurretAim?.ArtificialUpdate(playerAim.AimTargetPoint);
         playerTurretShoot.ArtificialUpdate();
     }
 

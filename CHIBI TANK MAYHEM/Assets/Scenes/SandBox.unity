@@ -249,6 +249,7 @@ RectTransform:
   m_Children:
   - {fileID: 1755186159}
   - {fileID: 269207820}
+  - {fileID: 1695888469}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -269,6 +270,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIManager
   _crosshair: {fileID: 269207820}
+  _turretCrosshair: {fileID: 1695888469}
 --- !u!1 &269207819
 GameObject:
   m_ObjectHideFlags: 0
@@ -296,8 +298,8 @@ RectTransform:
   m_GameObject: {fileID: 269207819}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.42, y: 1.42, z: 1.42}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 261403976}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1103,6 +1105,10 @@ PrefabInstance:
       propertyPath: _playerSettings
       value: 
       objectReference: {fileID: 11400000, guid: e065b414144dedb40ae9d84dfddde597, type: 2}
+    - target: {fileID: 8644007416478033252, guid: b6128fde209a5774795fd1ca4e0fa3e0, type: 3}
+      propertyPath: _turretTransform
+      value: 
+      objectReference: {fileID: 2044061071}
     m_RemovedComponents:
     - {fileID: 5839947565351290532, guid: b6128fde209a5774795fd1ca4e0fa3e0, type: 3}
     m_RemovedGameObjects: []
@@ -1707,6 +1713,81 @@ Mesh:
       - serializedVersion: 1
         m_IndexStart: 0
         m_IndexCount: 0
+--- !u!1 &1695888468
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1695888469}
+  - component: {fileID: 1695888471}
+  - component: {fileID: 1695888470}
+  m_Layer: 5
+  m_Name: TurretCrosshair
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1695888469
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1695888468}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 261403976}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1695888470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1695888468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 34b143af7fd986148bbb328e8f588c16, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1695888471
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1695888468}
+  m_CullTransparentMesh: 1
 --- !u!1 &1755186158
 GameObject:
   m_ObjectHideFlags: 0
@@ -1719,7 +1800,7 @@ GameObject:
   - component: {fileID: 1755186161}
   - component: {fileID: 1755186160}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Aim
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2004,6 +2085,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &2044061071 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8049975598524797303, guid: b6128fde209a5774795fd1ca4e0fa3e0, type: 3}
+  m_PrefabInstance: {fileID: 640719158}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2054502955
 GameObject:
   m_ObjectHideFlags: 0

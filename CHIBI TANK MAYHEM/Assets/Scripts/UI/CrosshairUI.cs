@@ -21,6 +21,10 @@ public class CrosshairUI
 
     public void ArtificialLateUpdate()
     {
+        //Si nunca se llamó Initialize (ej. la torreta está deshabilitada por PlayerSettingsSO),
+        //no hay provider del que leer el punto de apuntado — no hacemos nada ese frame.
+        if(_provider == null) return;
+
         Vector3 worldPoint = _provider.GetCrosshairPoint();
         Vector3 screen = _camera.WorldToScreenPoint(worldPoint);
         //Si el punto está detrás de la cámara, WorldToScreenPoint devuelve una proyección
