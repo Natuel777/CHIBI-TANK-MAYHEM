@@ -271,6 +271,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UIManager
   _crosshair: {fileID: 269207820}
   _turretCrosshair: {fileID: 1695888469}
+  _playerSettings: {fileID: 11400000, guid: e065b414144dedb40ae9d84dfddde597, type: 2}
+  _turretCrosshairImage: {fileID: 1695888470}
 --- !u!1 &269207819
 GameObject:
   m_ObjectHideFlags: 0

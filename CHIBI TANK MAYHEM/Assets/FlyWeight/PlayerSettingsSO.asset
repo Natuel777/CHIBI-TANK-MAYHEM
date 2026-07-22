@@ -22,7 +22,14 @@ MonoBehaviour:
   maxTurretPitch: 20
   turretFireRate: 10
   turretFireCooldown: 0.1
-  tankTurretFollowsCamera: 1
+  tankTurretFollowsCamera: 0
+  secondaryTurretFireRate: 5
+  secondaryTurretFireCooldown: 0.2
+  minSecondaryTurretPitch: -10
+  maxSecondaryTurretPitch: 10
+  minSecondaryTurretYaw: -30
+  maxSecondaryTurretYaw: 30
+  secondaryTurretsCanAim: 0
   orbitSensitivityX: 1.5
   orbitSensitivityY: 1
   orbitMinPitch: -20

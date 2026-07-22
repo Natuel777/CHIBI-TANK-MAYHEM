@@ -21,7 +21,27 @@ public class PlayerSettingsSO : ScriptableObject
     [Tooltip("The cooldown time between turret shots, in seconds.")]
     public float turretFireCooldown = 0.1f;
 
+    [Tooltip("If true, the tank's turret will follow the camera's aim direction. If false, it will not rotate with the camera.")]
     public bool tankTurretFollowsCamera = false;
+
+    [Header("Secondary Turrets Settings")]
+    
+    [Tooltip("The rate at which the secondary turrets can fire, in shots per second.")]
+    public float secondaryTurretFireRate = 5f;
+
+    [Tooltip("The cooldown time between secondary turret shots, in seconds.")]
+    public float secondaryTurretFireCooldown = 0.2f;
+
+    [Tooltip("Vertical (pitch) rotation limits for secondary turrets, relative to their fixed forward direction. Always applied.")]
+    public float minSecondaryTurretPitch = -10f;
+    public float maxSecondaryTurretPitch = 10f;
+
+    [Tooltip("Horizontal (yaw) rotation limits for secondary turrets, relative to their fixed forward direction. Only used when secondaryTurretsCanAim is true.")]
+    public float minSecondaryTurretYaw = -30f;
+    public float maxSecondaryTurretYaw = 30f;
+
+    [Tooltip("If true, secondary turrets also rotate horizontally (yaw) to aim at the target, clamped by minSecondaryTurretYaw/maxSecondaryTurretYaw. If false, they only pitch and fire straight along their fixed forward direction.")]
+    public bool secondaryTurretsCanAim = false;
 
     [Header("Camera Settings")]
     public float orbitSensitivityX = 3f;

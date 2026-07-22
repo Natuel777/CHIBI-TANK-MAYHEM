@@ -5,6 +5,7 @@ public class Player : MonoBehaviour
     [SerializeField] private PlayerSettingsSO _playerSettings;
     [SerializeField] private Transform _cannonMuzzleTransform, _turretMuzzleTransform;
     [SerializeField] private Transform _tankHeadTransform, _turretTransform;
+    [SerializeField] private Transform[] _secondaryTurretMuzzleTransforms;
     [SerializeField] private LayerMask _crosshairRaycastMask = ~0, _cameraRaycastMask = ~0;
 
     #region Model
@@ -30,8 +31,16 @@ public class Player : MonoBehaviour
                                 _playerSettings.minTankHeadPitch,
                                 _playerSettings.maxTankHeadPitch);
         playerTurretShoot = new PlayerTurretShoot(_turretMuzzleTransform,
+                                                transform,
                                                 _playerSettings.turretFireRate,
-                                                _playerSettings.turretFireCooldown);
+                                                _playerSettings.turretFireCooldown,
+                                                _playerSettings.secondaryTurretFireRate,
+                                                _playerSettings.secondaryTurretFireCooldown,
+                                                _playerSettings.minSecondaryTurretPitch,
+                                                _playerSettings.maxSecondaryTurretPitch,
+                                                _playerSettings.secondaryTurretsCanAim,
+                                                _playerSettings.minSecondaryTurretYaw,
+                                                _playerSettings.maxSecondaryTurretYaw);
 
         if(_playerSettings.tankTurretFollowsCamera)
             playerTurretAim = new PlayerTurretAim(_turretTransform,
@@ -48,6 +57,9 @@ public class Player : MonoBehaviour
         playerMovement.Initialize(inputReader);
         playerShoot.Initialize(inputReader);
         playerTurretShoot.Initialize(inputReader);
+
+        if(_secondaryTurretMuzzleTransforms.Length > 0)
+            playerTurretShoot.SetSecondaryMuzzleTransforms(_secondaryTurretMuzzleTransforms);
     }
     #endregion
 
@@ -56,7 +68,7 @@ public class Player : MonoBehaviour
         playerMovement.ArtificialUpdate();
         playerAim.ArtificialUpdate();
         playerTurretAim?.ArtificialUpdate(playerAim.AimTargetPoint);
-        playerTurretShoot.ArtificialUpdate();
+        playerTurretShoot.ArtificialUpdate(playerAim.AimTargetPoint);
     }
 
     private void OnDrawGizmos()
