@@ -29,8 +29,16 @@ public class InputReader : MonoBehaviour
     {
         if(ctx.started)
             ShootGun?.Invoke(true);
-        
+
         else if(ctx.canceled)
             ShootGun?.Invoke(false);
+    }
+
+    //Permite disparar el evento ShootGun desde fuera del Input System (ej. un stick táctil en pantalla
+    //que además de panear la cámara debe disparar mientras se lo mantiene tocado). Mismo contrato que
+    //OnShootGun: true al empezar a tocar, false al soltar.
+    public void SetShootGun(bool isShooting)
+    {
+        ShootGun?.Invoke(isShooting);
     }
 }

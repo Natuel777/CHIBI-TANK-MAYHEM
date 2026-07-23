@@ -1,0 +1,10 @@
+# ninja log v5
+49	1841	8064793939481909	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	26c8ed2939cf2d8e
+61	1857	8064793939651589	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	aa3647e3f0f79204
+1	1865	8064793939758232	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	c782937acc80f17c
+71	1870	8064793939768321	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	eefe09a360ab4c05
+30	1936	8064793940487225	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	9a38ff791cf84f50
+39	2121	8064793942295073	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	dabf3f23dd7d281b
+85	2131	8064793942418905	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	3a400208f0af00dd
+10	2212	8064793943228664	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	e319a509b9af9ff5
+2212	2346	8064793944585013	C:/Users/nahue/Documents/CHIBI-TANK-MAYHEM/CHIBI TANK MAYHEM/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/5r69jt34/obj/arm64-v8a/libgame.so	973ebaff2908b2a7

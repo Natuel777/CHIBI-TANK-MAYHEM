@@ -29,7 +29,7 @@ MonoBehaviour:
   maxSecondaryTurretPitch: 10
   minSecondaryTurretYaw: -30
   maxSecondaryTurretYaw: 30
-  secondaryTurretsCanAim: 0
+  secondaryTurretsCanAim: 1
   orbitSensitivityX: 1.5
   orbitSensitivityY: 1
   orbitMinPitch: -20

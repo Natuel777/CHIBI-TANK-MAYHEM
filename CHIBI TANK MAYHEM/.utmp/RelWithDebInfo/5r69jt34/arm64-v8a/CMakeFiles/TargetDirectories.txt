@@ -1,0 +1,5 @@
+C:/Users/nahue/Documents/CHIBI-TANK-MAYHEM/CHIBI TANK MAYHEM/.utmp/RelWithDebInfo/5r69jt34/arm64-v8a/CMakeFiles/edit_cache.dir
+C:/Users/nahue/Documents/CHIBI-TANK-MAYHEM/CHIBI TANK MAYHEM/.utmp/RelWithDebInfo/5r69jt34/arm64-v8a/CMakeFiles/rebuild_cache.dir
+C:/Users/nahue/Documents/CHIBI-TANK-MAYHEM/CHIBI TANK MAYHEM/.utmp/RelWithDebInfo/5r69jt34/arm64-v8a/GameActivity/CMakeFiles/game.dir
+C:/Users/nahue/Documents/CHIBI-TANK-MAYHEM/CHIBI TANK MAYHEM/.utmp/RelWithDebInfo/5r69jt34/arm64-v8a/GameActivity/CMakeFiles/edit_cache.dir
+C:/Users/nahue/Documents/CHIBI-TANK-MAYHEM/CHIBI TANK MAYHEM/.utmp/RelWithDebInfo/5r69jt34/arm64-v8a/GameActivity/CMakeFiles/rebuild_cache.dir
