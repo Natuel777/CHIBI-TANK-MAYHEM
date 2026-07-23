@@ -21,8 +21,8 @@ public class CameraController : MonoBehaviour
             _playerSettings.orbitMaxPitch,
             _playerSettings.orbitDistance,
             _playerSettings.orbitPivotHeightOffset);
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
     }
 
     private void Start()
