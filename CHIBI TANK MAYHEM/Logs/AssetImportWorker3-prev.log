@@ -1,11 +1,11 @@
 [Licensing::Module] Trying to connect to existing licensing client channel...
 Built from '6000.4/staging' branch; Version is '6000.4.9f1 (f7258d6eebbe) revision 16197005'; Using compiler version '194234433'; Build Type 'Release'
-[Licensing::IpcConnector] Successfully connected to: "LicenseClient-nahue" at "2026-07-22T01:29:20.3689099Z"
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-nahue" at "2026-07-22T22:38:51.522855Z"
 OS: 'Windows 11  (10.0.26200) Core' Language: 'es' Physical Memory: 16004 MB
 BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1
 System  architecture: x64
 Process architecture: x64
-Date: 2026-07-22T01:29:20Z
+Date: 2026-07-22T22:38:51Z
 
 COMMAND LINE ARGUMENTS:
 C:\Program Files\Unity\Hub\Editor\6000.4.9f1\Editor\Unity.exe
@@ -19,7 +19,7 @@ C:/Users/nahue/Documents/CHIBI-TANK-MAYHEM/CHIBI TANK MAYHEM
 -logFile
 Logs/AssetImportWorker3.log
 -srvPort
-64163
+56073
 -licensingIpc
 LicenseClient-nahue
 -force-d3d12
@@ -68,14 +68,14 @@ C:/Users/nahue/Documents/CHIBI-TANK-MAYHEM/CHIBI TANK MAYHEM
     "memorysetup-job-temp-allocator-block-size=2097152"
     "memorysetup-job-temp-allocator-block-size-background=1048576"
     "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
-Player connection [9672]  Target information:
+Player connection [25676]  Target information:
 
-Player connection [9672]  * "[IP] 172.30.208.1 [Port] 0 [Flags] 2 [Guid] 1596364017 [EditorId] 1596364017 [Version] 1048832 [Id] WindowsEditor(7,Nahuel) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+Player connection [25676]  * "[IP] 172.30.208.1 [Port] 0 [Flags] 2 [Guid] 4101397153 [EditorId] 4101397153 [Version] 1048832 [Id] WindowsEditor(7,Nahuel) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
 
-Player connection [9672]  * "[IP] 192.168.0.6 [Port] 0 [Flags] 2 [Guid] 1596364017 [EditorId] 1596364017 [Version] 1048832 [Id] WindowsEditor(7,Nahuel) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+Player connection [25676]  * "[IP] 192.168.0.6 [Port] 0 [Flags] 2 [Guid] 4101397153 [EditorId] 4101397153 [Version] 1048832 [Id] WindowsEditor(7,Nahuel) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
 
-Player connection [9672] Host joined multi-casting on [225.0.0.222:54997]...
-Player connection [9672] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [25676] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [25676] Host joined alternative multi-casting on [225.0.0.222:34997]...
 JobSystem: Creating JobQueue using job-worker-count value 9
 Input System module state changed to: Initialized.
 [Physics::Module] Initialized fallback backend.
@@ -87,7 +87,7 @@ Library Redirect Path: Library/
 [Physics::Module] SDK Version: 4.1.2
 [Physics::Module] Integration Version: 1.0.0
 [Physics::Module] Threading Mode: Multi-Threaded
-Refreshing native plugins compatible for Editor in 7.14 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 5.02 ms, found 4 plugins.
 Initialize engine version: 6000.4.9f1 (f7258d6eebbe)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/6000.4.9f1/Editor/Data/Resources/UnitySubsystems
 [Subsystems] Discovering subsystems at path C:/Users/nahue/Documents/CHIBI-TANK-MAYHEM/CHIBI TANK MAYHEM/Assets
@@ -105,28 +105,30 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/6000.4.9f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/6000.4.9f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/6000.4.9f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56272
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56988
 CodeReloadManager initialized
 Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.4.9f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+[Licensing::Module] Licensing is not yet initialized.
 [Licensing::Client] Error: HandshakeResponse reported an error:
 	ResponseCode: 505
 	ResponseStatus: Unsupported protocol version '1.18.1'.
 [Licensing::Module] Error: Failed to handshake to channel: "LicenseClient-nahue"
 [Licensing::IpcConnector] LicenseClient-nahue channel disconnected successfully.
-[Licensing::IpcConnector] Successfully connected to: "LicenseClient-nahue-6000.4.9" at "2026-07-22T01:29:21.681494Z"
-[Licensing::Client] Code 10 while verifying Licensing Client signature (process Id: 24364, path: "C:/Program Files/Unity/Hub/Editor/6000.4.9f1/Editor/Data/Resources/Licensing/Client/Unity.Licensing.Client.exe")
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-nahue-6000.4.9" at "2026-07-22T22:38:53.5402364Z"
+[Licensing::Client] Code 10 while verifying Licensing Client signature (process Id: 25376, path: "C:/Program Files/Unity/Hub/Editor/6000.4.9f1/Editor/Data/Resources/Licensing/Client/Unity.Licensing.Client.exe")
 [Licensing::Module] LicensingClient has failed validation; ignoring
 [Licensing::Client] Handshaking with LicensingClient:
   Version:                 1.18.1+9fbee8e
-  Session Id:              66af7d9a9bf542a39cf1e35499ed670e
-  Correlation Id:          17913ee61798729c7548bd7cbd53f44f
-  External correlation Id: 1763881744519080921
+  Session Id:              1d8cd244cd914ebfba3ad4f46a97f133
+  Correlation Id:          f601952795a5c947a2f0d18bd043eb6d
+  External correlation Id: 5814127769875665386
   Machine Id:              d3wIjImyigoZ2yiH37n7ItByCpM=
 [Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-nahue-6000.4.9" (connect: 0.00s, validation: 0.00s, handshake: 0.01s)
-[Licensing::IpcConnector] Successfully connected to: "LicenseClient-nahue-6000.4.9-notifications" at "2026-07-22T01:29:21.6920682Z"
-[Licensing::Module] Licensing Background thread has ended after 1.32s
-Registering precompiled unity dll's ...
-Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.4.9f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-nahue-6000.4.9-notifications" at "2026-07-22T22:38:53.5527524Z"
+[Licensing::Module] Licensing Background thread has ended after 2.03s
+[Licensing::Module] Licensing is initialized (took 0.65s).
 [Licensing::Client] Successfully resolved entitlement details
 [Licensing::Module] License group:
   Id: F4-ZF4W-JG7U-QS5D-T52E-XXXX
@@ -152,7 +154,7 @@ Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.4.9f1/E
   Expiration: Unlimited
 Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.4.9f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll
 Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.4.9f1/Editor/Data/PlaybackEngines/LinuxStandaloneSupport/UnityEditor.LinuxStandalone.Extensions.dll
-Registered in 0.010136 seconds.
+Registered in 0.655304 seconds.
 Native extension for LinuxStandalone target not found
 [usbmuxd] Start listen thread
 [usbmuxd] Listen thread started
@@ -168,23 +170,23 @@ Package Manager log level set to [2]
 [Package Manager] Cannot connect to Unity Package Manager local server
 ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:True
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.450 seconds
-Domain Reload Profiling: 990ms
-	BeginReloadAssembly (175ms)
-	RebuildCommonClasses (36ms)
-	RebuildNativeTypeToScriptingClass (17ms)
-	initialDomainReloadingComplete (75ms)
-	LoadAllAssembliesAndSetupDomain (237ms)
-		LoadAssemblies (167ms)
-		AnalyzeDomain (224ms)
-			TypeCache.Refresh (224ms)
-				TypeCache.ScanAssembly (208ms)
-	FinalizeReload (450ms)
+- Finished resetting the current domain, in  0.391 seconds
+Domain Reload Profiling: 1509ms
+	BeginReloadAssembly (138ms)
+	RebuildCommonClasses (42ms)
+	RebuildNativeTypeToScriptingClass (12ms)
+	initialDomainReloadingComplete (719ms)
+	LoadAllAssembliesAndSetupDomain (207ms)
+		LoadAssemblies (134ms)
+		AnalyzeDomain (197ms)
+			TypeCache.Refresh (196ms)
+				TypeCache.ScanAssembly (180ms)
+	FinalizeReload (391ms)
 		SetupLoadedEditorAssemblies (0ms)
-			InitializePlatformSupportModulesInManaged (115ms)
-			BeforeProcessingInitializeOnLoad (89ms)
-			ProcessInitializeOnLoadAttributes (116ms)
-			ProcessInitializeOnLoadMethodAttributes (66ms)
+			InitializePlatformSupportModulesInManaged (108ms)
+			BeforeProcessingInitializeOnLoad (81ms)
+			ProcessInitializeOnLoadAttributes (96ms)
+			ProcessInitializeOnLoadMethodAttributes (49ms)
 ========================================================================
 Worker process is ready to serve import requests
 Import Worker Mode flag is 0x00
@@ -231,7 +233,6 @@ Assembly Unity.UnifiedRayTracing.Editor.Tests.dll at Library/ScriptAssemblies/Un
 Assembly UnityEditor.UI.Common.Tests.dll at Library/ScriptAssemblies/UnityEditor.UI.Common.Tests.dll not valid. Loading of assembly skipped.
 Assembly UnityEditor.UI.EditorTests.dll at Library/ScriptAssemblies/UnityEditor.UI.EditorTests.dll not valid. Loading of assembly skipped.
 Assembly UnityEngine.UI.Tests.dll at Library/ScriptAssemblies/UnityEngine.UI.Tests.dll not valid. Loading of assembly skipped.
-Refreshing native plugins compatible for Editor in 2.04 ms, found 4 plugins.
 Native extension for LinuxStandalone target not found
 Native extension for iOS target not found
 Native extension for Android target not found
@@ -239,7 +240,6 @@ Native extension for WindowsStandalone target not found
 [Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
 [Package Manager] Unable to send message (not connected to server process).
 [Package Manager] Cannot connect to Unity Package Manager local server
-Refreshing native plugins compatible for Editor in 2.44 ms, found 4 plugins.
 [Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
 [Package Manager] Unable to send message (not connected to server process).
 [Package Manager] Cannot connect to Unity Package Manager local server
@@ -248,58 +248,49 @@ Refreshing native plugins compatible for Editor in 2.44 ms, found 4 plugins.
 [MODES] Loading mode Default (0) for mode-current-id-CHIBI TANK MAYHEM
 ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:True
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.994 seconds
-Domain Reload Profiling: 2579ms
-	BeginReloadAssembly (210ms)
+- Finished resetting the current domain, in  0.874 seconds
+Domain Reload Profiling: 1773ms
+	BeginReloadAssembly (165ms)
 		DisableScriptedObjects (4ms)
-		CreateAndSetChildDomain (29ms)
-	RebuildCommonClasses (39ms)
-	RebuildNativeTypeToScriptingClass (11ms)
-	initialDomainReloadingComplete (265ms)
-	LoadAllAssembliesAndSetupDomain (1060ms)
-		LoadAssemblies (747ms)
-		AnalyzeDomain (433ms)
-			TypeCache.Refresh (343ms)
-				TypeCache.ScanAssembly (321ms)
-			BuildScriptInfoCaches (80ms)
-			ResolveRequiredComponents (9ms)
-	FinalizeReload (994ms)
+		CreateAndSetChildDomain (27ms)
+	RebuildCommonClasses (35ms)
+	RebuildNativeTypeToScriptingClass (17ms)
+	initialDomainReloadingComplete (74ms)
+	LoadAllAssembliesAndSetupDomain (608ms)
+		LoadAssemblies (421ms)
+		AnalyzeDomain (274ms)
+			TypeCache.Refresh (192ms)
+				TypeCache.ScanAssembly (173ms)
+			BuildScriptInfoCaches (69ms)
+			ResolveRequiredComponents (11ms)
+	FinalizeReload (875ms)
 		SetupLoadedEditorAssemblies (0ms)
-			InitializePlatformSupportModulesInManaged (27ms)
-			BeforeProcessingInitializeOnLoad (136ms)
-			ProcessInitializeOnLoadAttributes (484ms)
-			ProcessInitializeOnLoadMethodAttributes (115ms)
-			AfterProcessingInitializeOnLoad (14ms)
-		AwakeInstancesAfterBackupRestoration (6ms)
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.02 seconds
-Refreshing native plugins compatible for Editor in 7.02 ms, found 4 plugins.
+			InitializePlatformSupportModulesInManaged (19ms)
+			BeforeProcessingInitializeOnLoad (139ms)
+			ProcessInitializeOnLoadAttributes (409ms)
+			ProcessInitializeOnLoadMethodAttributes (105ms)
+			AfterProcessingInitializeOnLoad (6ms)
+		AwakeInstancesAfterBackupRestoration (5ms)
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.01 seconds
 Unloading 25 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 6985 unused Assets / (6.1 MB). Loaded Objects now: 7830.
-Memory consumption went from 169.6 MB to 163.5 MB.
-Total: 12.289300 ms (FindLiveObjects: 1.424200 ms CreateObjectMapping: 0.798600 ms MarkObjects: 6.820800 ms  DeleteObjects: 3.243000 ms)
+Unloading 6985 unused Assets / (6.2 MB). Loaded Objects now: 7830.
+Memory consumption went from 165.5 MB to 159.3 MB.
+Total: 10.659200 ms (FindLiveObjects: 1.726200 ms CreateObjectMapping: 1.108300 ms MarkObjects: 5.344500 ms  DeleteObjects: 2.477900 ms)
 
 ========================================================================
 Received Import Request.
-  Time since last request: 38280.122870 seconds.
-  path: Assets/Scripts/Player/Player.cs
-  importAddress: Guid(d4f2cee41e7594e4ea6f7adecf6fd528) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Scripts/Player/Player.cs using Guid(d4f2cee41e7594e4ea6f7adecf6fd528) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '8c47be5ed337a28dd7479c3d75b31690') in 0.0990886 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=d950c9199bf9d12b17f3c77ff602c6d6 DependenciesID=4071debc88dd87cb9064a6f86e613d0e StaticDependenciesID=e233dcb762bf97027a892ac52ea039e5 
+  Time since last request: 114455.032149 seconds.
+  path: Assets/Scripts/Player/Model/PlayerTurretShoot.cs
+  importAddress: Guid(6135b3a63d4a9d64eaafb197b00963db) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Scripts/Player/Model/PlayerTurretShoot.cs using Guid(6135b3a63d4a9d64eaafb197b00963db) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '83d1eb36519759be69e14bd6aa047478') in 0.0812829 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=5e338de94e87023d22fc61a1fe6735ef DependenciesID=3dbd7c97a3c691bdc338ae60db7190b3 StaticDependenciesID=21e20679cf7802a3594791cb0d912f83 
 Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000035 seconds.
-  path: Assets/Art/UI/Prototyping/turretCrosshair.png
-  importAddress: Guid(34b143af7fd986148bbb328e8f588c16) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Art/UI/Prototyping/turretCrosshair.png using Guid(34b143af7fd986148bbb328e8f588c16) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '42ce027c3f2a0e0cd54b1d89e1c2d741') in 0.0738451 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=511d4d4879348c709400394d5706356e DependenciesID=96d135b1b3c239a3d3a64601bf70647d StaticDependenciesID=6fb6d7aa8ae6682dd01d67ce06630045 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000015 seconds.
+  Time since last request: 0.000023 seconds.
   path: Assets/Scripts/Player/PlayerSettings.cs
   importAddress: Guid(2c73ca89a9841c44c89907d8116ae380) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Scripts/Player/PlayerSettings.cs using Guid(2c73ca89a9841c44c89907d8116ae380) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '0689958dfae3bb45994884bc570c0b9e') in 0.0106095 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=f5c6d5f3adcb3e9b24015a88ce2b62d6 DependenciesID=6c3e3dace70075be19a4167548d46f4c StaticDependenciesID=8b8f2df492bc2778f091c1306f008f3c 
+Start importing Assets/Scripts/Player/PlayerSettings.cs using Guid(2c73ca89a9841c44c89907d8116ae380) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'df9078a6af7af11adf783a14825ec20b') in 0.0128313 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=ff60276ea70dbbb007ce57ec1e68aeb0 DependenciesID=67bb7d479888f7e38129b10c1a20aa21 StaticDependenciesID=30502332a0fd2613f184b2980628aff9 
 Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
 
 Editor requested this worker to shutdown with reason: Scaling down because of idle timeout

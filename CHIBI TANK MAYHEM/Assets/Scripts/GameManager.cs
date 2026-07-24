@@ -1,8 +1,18 @@
 using UnityEngine;
 
+public enum PlatformType
+{
+    PC,
+    Mobile,
+    Console
+}
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+    public PlatformType CurrentPlatform => _currentPlatform;
+
+    private PlatformType _currentPlatform;
 
     private void Awake()
     {
@@ -10,6 +20,23 @@ public class GameManager : MonoBehaviour
             Destroy(this.gameObject);
         
         else Instance = this;
+
+        #if UNITY_ANDROID || UNITY_IOS 
+            _currentPlatform = PlatformType.Mobile;
+
+        #elif UNITY_STANDALONE || UNITY_EDITOR
+            _currentPlatform = PlatformType.PC;
+        #endif
+    }
+
+    private void Start()
+    {
+        if(_currentPlatform == PlatformType.PC)
+        {
+            var mobileInput = FindAnyObjectByType<MobileInputUIManager>();
+
+            if(mobileInput.gameObject.activeSelf) mobileInput.gameObject.SetActive(false);
+        }
     }
 
     public void DestroyObject(GameObject obj)
