@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public PlatformType CurrentPlatform => _currentPlatform;
 
     private PlatformType _currentPlatform;
+    [SerializeField] private bool _testingMobile;
 
     private void Awake()
     {
@@ -31,7 +32,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        if(_currentPlatform == PlatformType.PC)
+        if(_currentPlatform == PlatformType.PC && !_testingMobile)
         {
             var mobileInput = FindAnyObjectByType<MobileInputUIManager>();
 

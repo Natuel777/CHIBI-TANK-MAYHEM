@@ -48,6 +48,7 @@ public class PlayerAim : IWeaponAimProvider
 
         if(direction.sqrMagnitude > 0.001f)
         {
+            //Limitamos el eje y para no generar un comportamiento erroneo para el tanque
             direction = AimMath.ClampPitch(direction, _minPitch, _maxPitch);
 
             //Convertimos la dirección objetivo en quaternion

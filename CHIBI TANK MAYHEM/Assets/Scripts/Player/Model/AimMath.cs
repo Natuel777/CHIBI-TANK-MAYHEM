@@ -11,11 +11,9 @@ public static class AimMath
         Vector3 horizontalDirection = direction;
         horizontalDirection.y = 0f;
         float horizontalDistance = horizontalDirection.magnitude;
-
         float pitchAngle = Mathf.Atan2(direction.y, horizontalDistance) * Mathf.Rad2Deg;
         pitchAngle = Mathf.Clamp(pitchAngle, minPitch, maxPitch);
         float pitchRad = pitchAngle * Mathf.Deg2Rad;
-
         Vector3 horizontalDirNormalized = horizontalDistance > 0.0001f ? horizontalDirection / horizontalDistance : Vector3.forward;
         return horizontalDirNormalized * Mathf.Cos(pitchRad) + Vector3.up * Mathf.Sin(pitchRad);
     }
@@ -36,7 +34,9 @@ public static class AimMath
         //Base ortonormal centrada en restAxis: 'forward' = restAxis proyectado al plano horizontal,
         //'right' = perpendicular en ese plano. Yaw 0 y pitch 0 corresponden exactamente a restAxis.
         Vector3 restHorizontal = Vector3.ProjectOnPlane(restAxis, rotationUp).normalized;
+        
         if(restHorizontal.sqrMagnitude < 0.0001f) restHorizontal = restAxis; //restAxis casi vertical: degenerado, no clampeamos yaw
+        
         Vector3 rightAxis = Vector3.Cross(rotationUp, restHorizontal).normalized;
 
         //Descomponer la dirección deseada en yaw (alrededor de rotationUp) y pitch (elevación).

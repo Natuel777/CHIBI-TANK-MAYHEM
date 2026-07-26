@@ -1154,6 +1154,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2055085380231624002, guid: b6128fde209a5774795fd1ca4e0fa3e0, type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4577264216309163476, guid: b6128fde209a5774795fd1ca4e0fa3e0, type: 3}
       propertyPath: m_Name
       value: Tank
@@ -1162,6 +1166,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: -0.413
       objectReference: {fileID: 0}
+    - target: {fileID: 5606842492193920418, guid: b6128fde209a5774795fd1ca4e0fa3e0, type: 3}
+      propertyPath: m_Name
+      value: Body
+      objectReference: {fileID: 0}
+    - target: {fileID: 8644007416478033252, guid: b6128fde209a5774795fd1ca4e0fa3e0, type: 3}
+      propertyPath: _meshTransform
+      value: 
+      objectReference: {fileID: 1619555854}
     - target: {fileID: 8644007416478033252, guid: b6128fde209a5774795fd1ca4e0fa3e0, type: 3}
       propertyPath: _playerSettings
       value: 
@@ -1186,6 +1198,10 @@ PrefabInstance:
       propertyPath: '_secondaryTurretMuzzleTransforms.Array.data[2]'
       value: 
       objectReference: {fileID: 1547186268}
+    - target: {fileID: 8652856940594241775, guid: b6128fde209a5774795fd1ca4e0fa3e0, type: 3}
+      propertyPath: m_Name
+      value: Core
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5839947565351290532, guid: b6128fde209a5774795fd1ca4e0fa3e0, type: 3}
     m_RemovedGameObjects: []
@@ -1709,6 +1725,11 @@ Transform:
 --- !u!4 &1547186268 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4978420062986315913, guid: b6128fde209a5774795fd1ca4e0fa3e0, type: 3}
+  m_PrefabInstance: {fileID: 640719158}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1619555854 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3443224637225274614, guid: b6128fde209a5774795fd1ca4e0fa3e0, type: 3}
   m_PrefabInstance: {fileID: 640719158}
   m_PrefabAsset: {fileID: 0}
 --- !u!43 &1643131430

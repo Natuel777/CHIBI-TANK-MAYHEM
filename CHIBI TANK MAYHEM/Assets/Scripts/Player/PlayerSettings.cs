@@ -4,9 +4,42 @@ using UnityEngine;
 public class PlayerSettingsSO : ScriptableObject
 {
     [Header("Tank Settings")]
-    public float rotationSpeed = 5f;
-    public float movementSpeed = 5f;
+    #region Cinematic Movement
     public float aimRotationSpeed = 720f;
+    #endregion
+    
+    #region Physic Movement
+    //Modelo de velocidad-objetivo (estándar de vehicle controllers): el input define una velocidad
+    //deseada y el tanque acelera/desacelera hacia ella. Es estable por diseño — la velocidad nunca
+    //puede dispararse porque el objetivo mismo está acotado, a diferencia de aplicar fuerzas brutas.
+    [Tooltip("Velocidad máxima de avance/retroceso, en m/s. Con una oruga dañada este límite baja a menos de la mitad.")]
+    public float maxSpeed = 8f;
+
+    [Tooltip("Aceleración al presionar avance, en m/s². Cuán rápido llega a maxSpeed.")]
+    public float acceleration = 12f;
+
+    [Tooltip("Desaceleración al soltar (o al frenar/invertir), en m/s². Cuán rápido se detiene. Más alto = frena más seco.")]
+    public float deceleration = 18f;
+
+    [Tooltip("Velocidad máxima de giro, en grados/s. Aplica tanto girando parado como en movimiento.")]
+    public float maxTurnRate = 90f;
+
+    [Tooltip("Aceleración de giro, en grados/s². Cuán rápido alcanza maxTurnRate. Más alto = giro más inmediato.")]
+    public float turnAcceleration = 360f;
+
+    [Tooltip("Cuánto cabecea el tanque (tilt visual en X) al acelerar/frenar. 0 = nada. Escala con la aceleración instantánea; valores chicos (~0.1-0.3) dan un balanceo sutil. Es puramente visual (sobre el mesh), no afecta el avance ni puede volcar el tanque.")]
+    public float pitchTiltAmount = 0.15f;
+
+    [Tooltip("Tiempo de suavizado del cabeceo, en segundos (aprox. cuánto tarda en llegar al ángulo objetivo). Más alto = balanceo más lento y amortiguado; más bajo = más reactivo. ~0.2-0.4 se siente natural.")]
+    public float pitchTiltSmoothTime = 0.25f;
+
+    [Tooltip("Zona muerta: aceleraciones (m/s²) por debajo de este valor NO producen cabeceo. Evita que micro-cambios de velocidad (ej. al girar en movimiento) disparen el balanceo. ~3-6 suele filtrar el ruido sin perder el efecto en arranques/frenados reales.")]
+    public float pitchTiltDeadzone = 4f;
+
+    [Tooltip("Centro de masa del tanque, en espacio local del root. Ajustalo a la posición real del centro geométrico para que el tanque se asiente natural.")]
+    public Vector3 centerOfMassOffset = new Vector3(0f, -0.3f, 0f);
+    #endregion
+
     public float minTankHeadPitch = -20f;
     public float maxTankHeadPitch = 20f;
 

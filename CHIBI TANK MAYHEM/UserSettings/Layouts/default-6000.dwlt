@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1536
     height: 820.8
   m_ShowMode: 4
-  m_Title: Scene
+  m_Title: Hierarchy
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 388}
   m_MaxSize: {x: 10000, y: 10000}
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 112}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 22635
+  controlID: 2271
   draggingID: 0
 --- !u!114 &6
 MonoBehaviour:
@@ -145,7 +145,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 112}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 22636
+  controlID: 2272
   draggingID: 0
 --- !u!114 &7
 MonoBehaviour:
@@ -171,7 +171,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 56}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 22637
+  controlID: 2273
   draggingID: 0
 --- !u!114 &8
 MonoBehaviour:
@@ -236,7 +236,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ProjectBrowser
+  m_Name: ConsoleWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -245,14 +245,14 @@ MonoBehaviour:
     y: 505.6
     width: 1230.4
     height: 259.19998
-  m_MinSize: {x: 231, y: 276}
-  m_MaxSize: {x: 10001, y: 10026}
-  m_ActualView: {fileID: 16}
+  m_MinSize: {x: 51, y: 76}
+  m_MaxSize: {x: 4001, y: 4026}
+  m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 16}
   - {fileID: 17}
-  m_Selected: 0
-  m_LastSelected: 1
+  m_Selected: 1
+  m_LastSelected: 0
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -709,27 +709,7 @@ MonoBehaviour:
       m_LastClickedID:
         m_Data: 0
       m_ExpandedIDs:
-      - m_Data: -73522
-      - m_Data: -73168
-      - m_Data: -72906
-      - m_Data: -15870
-      - m_Data: -15280
-      - m_Data: -15272
-      - m_Data: -15260
-      - m_Data: -15252
-      - m_Data: -15240
-      - m_Data: -15232
-      - m_Data: -15198
-      - m_Data: -15192
-      - m_Data: -15164
-      - m_Data: -12968
-      - m_Data: -12508
-      - m_Data: -11832
-      - m_Data: -11214
-      - m_Data: -8204
-      - m_Data: -4422
-      - m_Data: -1366
-      - m_Data: 53186
+      - m_Data: -1378
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1616,9 +1596,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 529.6
+    y: 584.8
     width: 1229.4
-    height: 233.20001
+    height: 233.19998
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -1643,7 +1623,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Art/UI/Prototyping
+    - Assets/Scripts
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -1653,24 +1633,24 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Art/UI/Prototyping
+  - Assets/Scripts
   m_LastFoldersGridSize: 16
   m_LastProjectPath: C:\Users\nahue\Documents\CHIBI-TANK-MAYHEM\CHIBI TANK MAYHEM
   m_LockTracker:
     m_IsLocked: 0
   m_LastLocalAssetsSearchArea: 1
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 0}
+    scrollPos: {x: 0, y: 90.80002}
     m_SelectedIDs:
-    - m_Data: 56642
+    - m_Data: 50522
     m_LastClickedID:
-      m_Data: 56642
+      m_Data: 50522
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 50522
-    - m_Data: 50524
-    - m_Data: 50526
-    - m_Data: 50528
+    - m_Data: 50766
+    - m_Data: 50768
+    - m_Data: 50770
+    - m_Data: 50772
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1704,10 +1684,10 @@ MonoBehaviour:
       m_Data: 0
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 50522
-    - m_Data: 50524
-    - m_Data: 50526
-    - m_Data: 50528
+    - m_Data: 50766
+    - m_Data: 50768
+    - m_Data: 50770
+    - m_Data: 50772
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1735,10 +1715,11 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: []
+    m_SelectedInstanceIDs:
+    - m_Data: 50086
     m_LastClickedEntityId:
-      m_Data: 0
-    m_HadKeyboardFocusLastEvent: 0
+      m_Data: 50086
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs:
     - m_Data: 194198
     - m_Data: 238396
@@ -1778,7 +1759,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 0}
+    m_ScrollPosition: {x: 0, y: 18.90001}
     m_GridSize: 16
   m_SkipHiddenPackages: 0
   m_DirectoriesAreaWidth: 207
@@ -1804,9 +1785,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 584.8
+    y: 529.6
     width: 1229.4
-    height: 233.19998
+    height: 233.20001
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
