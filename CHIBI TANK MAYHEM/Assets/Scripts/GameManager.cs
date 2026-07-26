@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement; 
 
 public enum PlatformType
 {
@@ -39,6 +40,13 @@ public class GameManager : MonoBehaviour
             if(mobileInput.gameObject.activeSelf) mobileInput.gameObject.SetActive(false);
         }
     }
+
+    #if UNITY_EDITOR
+    public void RestartCurrentLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    #endif
 
     public void DestroyObject(GameObject obj)
     {

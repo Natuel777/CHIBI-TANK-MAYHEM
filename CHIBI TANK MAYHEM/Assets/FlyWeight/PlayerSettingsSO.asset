@@ -18,9 +18,8 @@ MonoBehaviour:
   deceleration: 18
   maxTurnRate: 90
   turnAcceleration: 360
-  pitchTiltAmount: 0.25
-  pitchTiltSmoothTime: 0.17
-  pitchTiltDeadzone: 6
+  pitchTiltAmount: 0.68
+  pitchTiltSmoothTime: 0.25
   centerOfMassOffset: {x: 0, y: -0.3, z: 0}
   minTankHeadPitch: -5
   maxTankHeadPitch: 10

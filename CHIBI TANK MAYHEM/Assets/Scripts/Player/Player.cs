@@ -31,7 +31,6 @@ public class Player : MonoBehaviour
                                             _playerSettings.turnAcceleration,
                                             _playerSettings.pitchTiltAmount,
                                             _playerSettings.pitchTiltSmoothTime,
-                                            _playerSettings.pitchTiltDeadzone,
                                             _playerSettings.centerOfMassOffset);
         playerShoot = new PlayerShoot(_cannonMuzzleTransform);
         playerAim = new PlayerAim(_tankHeadTransform,

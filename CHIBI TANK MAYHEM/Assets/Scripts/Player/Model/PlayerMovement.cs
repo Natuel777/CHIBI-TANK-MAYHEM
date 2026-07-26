@@ -15,14 +15,15 @@ public class PlayerMovement : IInputInitialize
 
     private float _maxSpeed, _acceleration, _deceleration;
     private float _maxTurnRate, _turnAcceleration;
-    private float _pitchTiltAmount, _pitchTiltSmoothTime, _pitchTiltDeadzone;
+    private float _pitchTiltAmount, _pitchTiltSmoothTime;
     private Rigidbody _rb;
 
     private float _currentSpeed;
     private float _currentTurnRate;
-    private float _previousSpeed;    //_currentSpeed del frame anterior, se usa solo para calcular cuánto cambió la velocidad (aceleración instantánea) y así animar el cabeceo
-    private float _currentTiltAngle; //ángulo de cabeceo visual ACTUAL del mesh (grados), se desliza suavemente hacia un objetivo y de vuelta a 0
-    private float _tiltVelocity;     //velocidad interna que usa SmoothDamp para suavizar _currentTiltAngle (la mantiene entre frames, no la tocamos a mano)
+    private bool _isDeceleratingThisStep;  //true si este frame el avance está frenando/invirtiendo (no acelerando) — lo calcula UpdateForwardSpeed y lo lee ApplyPitchTilt
+    private bool _isChangingSpeedThisStep; //true si _currentSpeed todavía no llegó a targetSpeed (sigue en rampa). Falso en velocidad crucero constante, aunque haya input
+    private float _currentTiltAngle;      //ángulo de cabeceo visual ACTUAL del mesh (grados), se desliza suavemente hacia un objetivo y de vuelta a 0
+    private float _tiltVelocity;          //velocidad interna que usa SmoothDamp para suavizar _currentTiltAngle (la mantiene entre frames, no la tocamos a mano)
 
     public PlayerMovement(Transform playerTransform, Transform meshTransform,
                                                     Rigidbody rb,
@@ -33,7 +34,6 @@ public class PlayerMovement : IInputInitialize
                                                     float turnAcceleration,
                                                     float pitchTiltAmount,
                                                     float pitchTiltSmoothTime,
-                                                    float pitchTiltDeadzone,
                                                     Vector3 centerOfMassOffset)
     {
         _transform = playerTransform;
@@ -44,9 +44,8 @@ public class PlayerMovement : IInputInitialize
         _deceleration = deceleration;
         _maxTurnRate = maxTurnRate;
         _turnAcceleration = turnAcceleration;
-        _pitchTiltAmount = pitchTiltAmount;         //cuántos grados de cabeceo se generan por cada (m/s²) de aceleración instantánea
+        _pitchTiltAmount = pitchTiltAmount;         //ángulo (grados) del cabeceo mientras dura una rampa de arranque/frenado
         _pitchTiltSmoothTime = pitchTiltSmoothTime; //tiempo aproximado (s) que tarda el cabeceo en llegar a su objetivo, vía SmoothDamp
-        _pitchTiltDeadzone = pitchTiltDeadzone;     //aceleraciones menores a esto (m/s²) se ignoran para el cabeceo (filtra micro-cambios al girar)
 
         //centerOfMass define alrededor de qué punto rota físicamente el Rigidbody (por ejemplo, al
         //chocar). No es el pivote del giro por input, que se hace con MoveRotation sobre el transform
@@ -76,7 +75,7 @@ public class PlayerMovement : IInputInitialize
         UpdateForwardSpeed(); //1. decide hacia qué velocidad de avance ir
         UpdateTurnRate();     //2. decide hacia qué velocidad de giro ir
         ApplyVelocity();      //3. mueve y rota el Rigidbody según esos dos valores
-        ApplyPitchTilt();     //4. anima el balanceo visual del mesh según cuánto cambió la velocidad
+        ApplyPitchTilt();     //4. anima el balanceo visual del mesh si hay una rampa de arranque/frenado en curso
     }
 
     //PASO 1 — Avance.
@@ -90,11 +89,19 @@ public class PlayerMovement : IInputInitialize
         float targetSpeed = _moveInput.y * _maxSpeed;
 
         //decelerating = true si el objetivo pide MENOS velocidad en la misma dirección, o si pide
-        //la dirección contraria a la actual (ej. iba adelante y ahora se pide atrás).
+        //la dirección contraria a la actual (ej. iba adelante y ahora se pide atrás). Se guarda en
+        //_isDeceleratingThisStep porque ApplyPitchTilt necesita el mismo criterio (no uno propio
+        //basado en el delta de velocidad, que también se movería al girar por otras razones).
         bool decelerating = Mathf.Abs(targetSpeed) < Mathf.Abs(_currentSpeed) ||
                             !Mathf.Approximately(Mathf.Sign(targetSpeed), Mathf.Sign(_currentSpeed));
-        float rate = decelerating ? _deceleration : _acceleration;
+        _isDeceleratingThisStep = decelerating;
 
+        //_isChangingSpeedThisStep: true solo mientras _currentSpeed TODAVÍA no llegó al objetivo (está
+        //en plena rampa de aceleración/frenado). Una vez alcanzado targetSpeed (velocidad crucero
+        //constante), pasa a false — así el cabeceo no queda "pegado" mientras avanzás sostenido.
+        _isChangingSpeedThisStep = !Mathf.Approximately(_currentSpeed, targetSpeed);
+
+        float rate = decelerating ? _deceleration : _acceleration;
         _currentSpeed = Mathf.MoveTowards(_currentSpeed, targetSpeed, rate * Time.fixedDeltaTime);
     }
 
@@ -130,30 +137,32 @@ public class PlayerMovement : IInputInitialize
     //Esto es pura estética, no física real: rota el MESH (no el Rigidbody) en X para simular que el
     //tanque "siente" la aceleración. Como es visual, nunca puede desestabilizar ni volcar el tanque
     //real (que ya está protegido por FreezeRotationX/Z).
+    //
+    //El cabeceo debe darse SOLO en tres casos: arrancar desde parado, invertir la dirección de avance,
+    //o frenar — nunca por girar en movimiento (_moveInput.x no participa acá para nada) ni mientras se
+    //avanza sostenido a velocidad crucero. Por eso NO se infiere a partir de "cuánto cambió _currentSpeed
+    //este frame puntual" (ese delta puede tener ruido ajeno al avance en sí, como el desfasaje de un
+    //frame entre MoveRotation y la reescritura de linearVelocity durante un giro). En cambio, se usan
+    //dos flags que ya calculó UpdateForwardSpeed en base pura al input/estado de avance, sin que el
+    //giro participe para nada:
+    //  _isChangingSpeedThisStep → hay una rampa de aceleración/frenado en curso (no velocidad crucero)
+    //  _isDeceleratingThisStep  → esa rampa es de frenado/inversión (no de arranque)
     private void ApplyPitchTilt()
     {
         if(_meshTransform == null) return;
 
-        //Aceleración instantánea REAL en m/s²: cuánto cambió _currentSpeed desde el frame anterior,
-        //dividido el tiempo. Es lo que efectivamente está pasando ahora (arrancar, frenar), que puede
-        //diferir de la aceleración configurada.
-        float accelerationThisStep = (_currentSpeed - _previousSpeed) / Time.fixedDeltaTime;
-        _previousSpeed = _currentSpeed;
-
-        //Zona muerta: si la aceleración es chica (ej. la velocidad target bajó un poquito al girar en
-        //movimiento), la tratamos como 0 para que esos micro-cambios NO disparen el cabeceo. Solo los
-        //arranques/frenados reales (aceleración fuerte) superan el umbral y producen balanceo.
-        if(Mathf.Abs(accelerationThisStep) < _pitchTiltDeadzone)
-            accelerationThisStep = 0f;
-
-        //Ángulo deseado del cabeceo, proporcional a la aceleración. El signo negativo hace que ACELERAR
-        //levante el morro (nariz arriba) y FRENAR lo hunda
-        float targetTilt = -accelerationThisStep * _pitchTiltAmount;
+        //Magnitud del cabeceo: constante mientras dure la rampa (no depende de cuánto cambió la
+        //velocidad en este frame puntual, evitando que el ruido de un frame la module). Se apaga
+        //(vuelve a 0) apenas _currentSpeed alcanza targetSpeed, aunque el input siga sostenido.
+        //Signo: arrancando (no decelerating) el morro sube; frenando/invirtiendo, el morro baja.
+        float targetTilt = 0f;
+        if(_isChangingSpeedThisStep)
+            targetTilt = _isDeceleratingThisStep ? _pitchTiltAmount : -_pitchTiltAmount;
 
         //SmoothDamp en vez de MoveTowards: MoveTowards avanza a velocidad constante y "clava" en el
         //objetivo con una esquina dura; SmoothDamp interpola tipo resorte amortiguado — arranca y
         //frena suave, sin sobresaltos. _tiltVelocity es su estado interno (lo mantiene entre frames).
-        //Cuando targetTilt vuelve a 0 (sin aceleración), el mesh se asienta suavemente solo.
+        //Cuando targetTilt vuelve a 0 (velocidad estable, sin input), el mesh se asienta solo.
         _currentTiltAngle = Mathf.SmoothDamp(_currentTiltAngle, targetTilt, ref _tiltVelocity, _pitchTiltSmoothTime, Mathf.Infinity, Time.fixedDeltaTime);
 
         _meshTransform.localRotation = Quaternion.Euler(_currentTiltAngle, 0f, 0f);
