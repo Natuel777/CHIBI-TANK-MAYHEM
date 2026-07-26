@@ -115,7 +115,7 @@ public class Player : MonoBehaviour
         Vector3 origin = (rb != null ? rb.worldCenterOfMass : transform.position) + Vector3.up * 0.1f;
 
         Gizmos.color = Color.cyan;
-        Gizmos.DrawRay(origin, Vector3.down * (_playerSettings.groundCheckDistance + 0.1f));
+        Gizmos.DrawRay(origin, -_meshTransform.up * (_playerSettings.groundCheckDistance + 0.1f));
     }
     #endif
 }

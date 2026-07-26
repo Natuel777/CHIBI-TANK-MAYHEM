@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c73ca89a9841c44c89907d8116ae380, type: 3}
   m_Name: PlayerSettingsSO
   m_EditorClassIdentifier: Assembly-CSharp::PlayerSettingsSO
-  aimRotationSpeed: 10
   maxSpeed: 8
   acceleration: 12
   deceleration: 18
@@ -21,6 +20,8 @@ MonoBehaviour:
   pitchTiltAmount: 0.68
   pitchTiltSmoothTime: 0.25
   centerOfMassOffset: {x: 0, y: -0.3, z: 0}
+  groundCheckDistance: 1.5
+  aimRotationSpeed: 10
   minTankHeadPitch: -5
   maxTankHeadPitch: 10
   turretRotationSpeed: 20

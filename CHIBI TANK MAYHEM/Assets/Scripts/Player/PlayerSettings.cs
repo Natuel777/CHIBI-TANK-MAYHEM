@@ -4,11 +4,7 @@ using UnityEngine;
 public class PlayerSettingsSO : ScriptableObject
 {
     [Header("Tank Settings")]
-    #region Cinematic Movement
-    public float aimRotationSpeed = 720f;
-    #endregion
     
-    #region Physic Movement
     //Modelo de velocidad-objetivo (estándar de vehicle controllers): el input define una velocidad
     //deseada y el tanque acelera/desacelera hacia ella. Es estable por diseño — la velocidad nunca
     //puede dispararse porque el objetivo mismo está acotado, a diferencia de aplicar fuerzas brutas.
@@ -38,8 +34,9 @@ public class PlayerSettingsSO : ScriptableObject
 
     [Tooltip("Distancia (m) del raycast hacia abajo para detectar si el tanque está apoyado en el suelo. Aprox. la mitad de la altura del tanque + un margen. Si está más lejos del suelo que esto, se considera 'en el aire' (cayendo) y el control de avance se suelta para que la gravedad maneje la caída.")]
     public float groundCheckDistance = 1f;
-    #endregion
 
+    [Header("Tank Head Settings")]
+    public float aimRotationSpeed = 720f;
     public float minTankHeadPitch = -20f;
     public float maxTankHeadPitch = 20f;
 

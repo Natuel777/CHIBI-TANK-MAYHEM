@@ -109,7 +109,7 @@ public class PlayerMovement : IInputInitialize
         //El origen se levanta un poco (0.1) para no arrancar el ray justo en el borde del collider.
         Vector3 origin = _rb.worldCenterOfMass + Vector3.up * 0.1f;
 
-        if(Physics.Raycast(origin, Vector3.down, out RaycastHit hit, _groundCheckDistance + 0.1f, _groundMask, QueryTriggerInteraction.Ignore))
+        if(Physics.Raycast(origin, -_meshTransform.up, out RaycastHit hit, _groundCheckDistance + 0.1f, _groundMask, QueryTriggerInteraction.Ignore))
         {
             _isGrounded = true;
             _groundNormal = hit.normal;
