@@ -261,6 +261,7 @@ Transform:
   m_Children:
   - {fileID: 486292417}
   - {fileID: 1152261599}
+  - {fileID: 1824130273}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &205255354
@@ -528,7 +529,7 @@ GameObject:
   - component: {fileID: 486292414}
   - component: {fileID: 486292413}
   - component: {fileID: 486292412}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1963,7 +1964,7 @@ GameObject:
   - component: {fileID: 1824130270}
   - component: {fileID: 1824130269}
   - component: {fileID: 1824130268}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2298,12 +2299,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1824130267}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -24.11572, y: 3.5819626, z: -9.42}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -22.046373, y: 3.2935882, z: -5.740835}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 182807379}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &1947126791
 Mesh:
@@ -3039,4 +3040,3 @@ SceneRoots:
   - {fileID: 7578269452976286982}
   - {fileID: 2054502958}
   - {fileID: 205255358}
-  - {fileID: 1824130273}

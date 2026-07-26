@@ -35,6 +35,9 @@ public class PlayerSettingsSO : ScriptableObject
 
     [Tooltip("Centro de masa del tanque, en espacio local del root. Ajustalo a la posición real del centro geométrico para que el tanque se asiente natural.")]
     public Vector3 centerOfMassOffset = new Vector3(0f, -0.3f, 0f);
+
+    [Tooltip("Distancia (m) del raycast hacia abajo para detectar si el tanque está apoyado en el suelo. Aprox. la mitad de la altura del tanque + un margen. Si está más lejos del suelo que esto, se considera 'en el aire' (cayendo) y el control de avance se suelta para que la gravedad maneje la caída.")]
+    public float groundCheckDistance = 1f;
     #endregion
 
     public float minTankHeadPitch = -20f;

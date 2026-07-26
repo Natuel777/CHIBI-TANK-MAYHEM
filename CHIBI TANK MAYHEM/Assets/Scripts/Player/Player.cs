@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform[] _secondaryTurretMuzzleTransforms;
     [SerializeField] private Transform _meshTransform;
     [SerializeField] private LayerMask _crosshairRaycastMask = ~0, _cameraRaycastMask = ~0;
+    [SerializeField] private LayerMask _groundMask = ~0;
 
     #region Model
     public PlayerMovement playerMovement;
@@ -31,6 +32,8 @@ public class Player : MonoBehaviour
                                             _playerSettings.turnAcceleration,
                                             _playerSettings.pitchTiltAmount,
                                             _playerSettings.pitchTiltSmoothTime,
+                                            _playerSettings.groundCheckDistance,
+                                            _groundMask,
                                             _playerSettings.centerOfMassOffset);
         playerShoot = new PlayerShoot(_cannonMuzzleTransform);
         playerAim = new PlayerAim(_tankHeadTransform,
@@ -88,6 +91,8 @@ public class Player : MonoBehaviour
     #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
+        DrawGroundCheckGizmo();
+
         if(_cannonMuzzleTransform == null) return;
 
         Gizmos.color = Color.red;
@@ -97,6 +102,20 @@ public class Player : MonoBehaviour
 
         Gizmos.color = Color.orange;
         Gizmos.DrawRay(_turretMuzzleTransform.position, _turretMuzzleTransform.up * 20f);
+    }
+
+    private void DrawGroundCheckGizmo()
+    {
+        if(_playerSettings == null) return;
+
+        //Mismo origen que CheckGrounded() en PlayerMovement: centro de masa del Rigidbody (o el
+        //origen del transform si todavía no hay Rigidbody, ej. en Edit Mode) más un pequeño offset
+        //hacia arriba para no arrancar el ray justo en el borde del collider.
+        Rigidbody rb = GetComponent<Rigidbody>();
+        Vector3 origin = (rb != null ? rb.worldCenterOfMass : transform.position) + Vector3.up * 0.1f;
+
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawRay(origin, Vector3.down * (_playerSettings.groundCheckDistance + 0.1f));
     }
     #endif
 }
