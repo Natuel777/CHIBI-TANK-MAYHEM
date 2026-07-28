@@ -32,11 +32,26 @@ public class PlayerSettingsSO : ScriptableObject
     [Tooltip("Centro de masa del tanque, en espacio local del root. Ajustalo a la posición real del centro geométrico para que el tanque se asiente natural.")]
     public Vector3 centerOfMassOffset = new Vector3(0f, -0.3f, 0f);
 
-    [Tooltip("Distancia (m) del raycast hacia abajo para detectar si el tanque está apoyado en el suelo. Aprox. la mitad de la altura del tanque + un margen. Si está más lejos del suelo que esto, se considera 'en el aire' (cayendo) y el control de avance se suelta para que la gravedad maneje la caída.")]
-    public float groundCheckDistance = 1f;
-
     [Tooltip("Qué tan rápido se interpola la normal del suelo hacia la detectada, en 1/s. Suaviza el paso piso→rampa para que el tanque no tropiece/vuelque en el quiebre. Más alto = transición más brusca (más fiel pero más propenso a tropezar); más bajo = más suave. ~5-10 suele andar bien.")]
     public float groundNormalSmoothing = 8f;
+
+    [Header("Suspension Settings")]
+
+    //El chasis NO se apoya sobre su collider: flota sostenido por resortes virtuales (raycast + ley de
+    //Hooke) en las esquinas de las orugas. Eso es lo que hace al tanque todoterreno — un obstáculo
+    //chico pasa por DEBAJO del collider sin generar colisión, y solo comprime un resorte.
+    //
+    //La altura de reposo sale de: despeje = suspensionRestLength * (1 - 1 / suspensionStrength).
+    //Con 0.5 y 2 => 0.25 m de despeje y 50% de recorrido disponible en cada sentido.
+
+    [Tooltip("Recorrido total del resorte, en metros: hasta dónde 'alcanza' cada rueda a buscar el suelo hacia abajo. Junto con Suspension Strength define la altura a la que flota el tanque.")]
+    public float suspensionRestLength = 0.5f;
+
+    [Tooltip("Fuerza máxima del resorte, en múltiplos del peso que le toca sostener a esa rueda. DEBE ser mayor a 1 (si no, los resortes no alcanzan a sostener el tanque y toca fondo). 2 = el tanque queda a media compresión en reposo, con igual margen para comprimir que para extender.")]
+    public float suspensionStrength = 2f;
+
+    [Tooltip("Amortiguación del resorte relativa a la crítica. 0 = rebota eternamente como un resorte ideal; 1 = se asienta sin rebotar nada; ~0.5 deja un rebote breve y natural.")]
+    public float suspensionDampingRatio = 0.5f;
 
     [Header("Tank Head Settings")]
     public float aimRotationSpeed = 720f;

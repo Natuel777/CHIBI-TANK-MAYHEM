@@ -24,7 +24,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 112}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 1133
+  controlID: 8916
   draggingID: 0
 --- !u!114 &2
 MonoBehaviour:
@@ -69,7 +69,7 @@ MonoBehaviour:
   m_SerializedViewValues:
   - C:\Users\nahue\Documents\NAVALCONQUESTDS\Library\PlayModeViewStates\2134a91df3c1fb3448d6de8b1506e6e9
   m_PlayModeViewName: GameView
-  m_ShowGizmos: 0
+  m_ShowGizmos: 1
   m_TargetDisplay: 0
   m_ClearColor: {r: 0, g: 0, b: 0, a: 0}
   m_TargetSize: {x: 1920, y: 1080}
@@ -79,7 +79,7 @@ MonoBehaviour:
   m_EnterPlayModeBehavior: 1
   m_UseMipMap: 0
   m_VSyncEnabled: 0
-  m_Gizmos: 0
+  m_Gizmos: 1
   m_Stats: 0
   m_SelectedSizes: 03000000000000000000000010000000000000000000000000000000000000000000000000000000
   m_ZoomArea:
@@ -155,7 +155,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 112}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 1145
+  controlID: 8906
   draggingID: 0
 --- !u!114 &4
 MonoBehaviour:
@@ -181,7 +181,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 56}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 1081
+  controlID: 8907
   draggingID: 0
 --- !u!114 &5
 MonoBehaviour:
@@ -202,8 +202,8 @@ MonoBehaviour:
     y: 0
     width: 360
     height: 500
-  m_MinSize: {x: 201, y: 226}
-  m_MaxSize: {x: 4001, y: 4026}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 6}
   m_Panes:
   - {fileID: 6}
@@ -254,6 +254,7 @@ MonoBehaviour:
       m_LastClickedID:
         m_Data: 0
       m_ExpandedIDs:
+      - m_Data: -39824
       - m_Data: -1830
       - m_Data: -1622
       - m_Data: 50284
@@ -303,8 +304,8 @@ MonoBehaviour:
     y: 0
     width: 724.80005
     height: 500
-  m_MinSize: {x: 52, y: 76}
-  m_MaxSize: {x: 4002, y: 4026}
+  m_MinSize: {x: 50, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 2}
   m_Panes:
   - {fileID: 8}
@@ -1060,9 +1061,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: 25.021612, y: -4.343373, z: -3.0219188}
+    m_Target: {x: 4.1817536, y: 0.10003945, z: -16.930973}
     speed: 2
-    m_Value: {x: 25.021612, y: -4.343373, z: -3.0219188}
+    m_Value: {x: 4.1817536, y: 0.10003945, z: -16.930973}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1109,13 +1110,13 @@ MonoBehaviour:
     m_gridOpacity: 0.5
     m_NearestPlaneToHandleMode: 0
   m_Rotation:
-    m_Target: {x: 0.27304932, y: -0.22895804, z: 0.06708531, w: 0.9319568}
+    m_Target: {x: 0.15452763, y: -0.4822575, z: 0.08686625, w: 0.8579191}
     speed: 2
-    m_Value: {x: 0.27304637, y: -0.22895555, z: 0.06708458, w: 0.9319467}
+    m_Value: {x: 0.15452594, y: -0.4822522, z: 0.0868653, w: 0.8579097}
   m_Size:
-    m_Target: 9.641084
+    m_Target: 8.6164665
     speed: 2
-    m_Value: 9.641084
+    m_Value: 8.6164665
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1319,10 +1320,10 @@ MonoBehaviour:
       m_ResourceFile: 
   m_ListAreaState:
     m_SelectedInstanceIDs:
-    - m_Data: -18598
+    - m_Data: -77944
     m_LastClickedEntityId:
-      m_Data: -18598
-    m_HadKeyboardFocusLastEvent: 1
+      m_Data: -77944
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs:
     - m_Data: 194198
     - m_Data: 238396
@@ -1475,8 +1476,8 @@ MonoBehaviour:
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectEntityId:
-    m_Data: -18598
-  m_LastVerticalScrollValue: 408
+    m_Data: -77944
+  m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0
   m_LockTracker:

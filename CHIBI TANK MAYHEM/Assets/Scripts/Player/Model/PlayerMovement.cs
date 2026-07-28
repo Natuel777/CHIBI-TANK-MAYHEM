@@ -11,17 +11,28 @@ using UnityEngine;
 //terreno — sube rampas, baja pendientes, se inclina y cae de precipicios de forma realista. El
 //control por input (avance y giro) se aplica RELATIVO a esa orientación física actual, no en ejes
 //del mundo, para que todo conviva bien en terreno inclinado.
+//
+//SUSPENSIÓN: el chasis NO se apoya sobre su collider — FLOTA unos centímetros sobre el terreno,
+//sostenido por resortes virtuales (raycasts + ley de Hooke) en las esquinas de las orugas. Esto es
+//lo que hace al tanque todoterreno: un obstáculo chico (banquina, lomo de burro) pasa por DEBAJO del
+//box collider sin generar colisión física, y solo comprime uno o dos resortes, que levantan esa
+//esquina progresivamente. Antes, ese mismo obstáculo golpeaba una arista del box lejos del centro de
+//masa y la física lo resolvía como un impulso puntual → torque enorme → el tanque volcaba o volaba.
+//El collider sigue estando y sigue chocando normal contra paredes y objetos grandes; simplemente
+//dejó de ser la pieza que toca el piso.
 public class PlayerMovement : IInputInitialize
 {
     private Transform _transform;
     private Transform _meshTransform;
+    private Transform[] _suspensionPoints;
     private bool _initialized = false;
     private Vector2 _moveInput;
 
     private float _maxSpeed, _acceleration, _deceleration;
     private float _maxTurnRate, _turnAcceleration;
     private float _pitchTiltAmount, _pitchTiltSmoothTime;
-    private float _groundCheckDistance, _groundNormalSmoothing;
+    private float _suspensionRestLength, _suspensionStrength, _suspensionDampingRatio;
+    private float _groundNormalSmoothing;
     private LayerMask _groundMask;
     private Rigidbody _rb;
 
@@ -29,13 +40,13 @@ public class PlayerMovement : IInputInitialize
     private float _currentTurnRate;
     private bool _isDeceleratingThisStep;  //true si este frame el avance está frenando/invirtiendo (no acelerando) — lo calcula UpdateForwardSpeed y lo lee ApplyPitchTilt
     private bool _isChangingSpeedThisStep; //true si _currentSpeed todavía no llegó a targetSpeed (sigue en rampa). Falso en velocidad crucero constante, aunque haya input
-    private bool _isGrounded;              //true si el tanque está apoyado en el suelo (último resultado del raycast). En el aire, no forzamos la velocidad — la gravedad manda
-    private Vector3 _groundNormal = Vector3.up; //normal del suelo bajo el tanque (suavizada): define el plano sobre el que avanzar en rampas
-    private Vector3 _lastCheckedPosition;  //posición del tanque la última vez que se hizo el raycast de suelo — para no repetirlo si no se movió (ver CheckGrounded)
+    private bool _isGrounded;              //true si AL MENOS un resorte de la suspensión está tocando suelo. En el aire, no forzamos la velocidad — la gravedad manda
+    private Vector3 _groundNormal = Vector3.up; //normal PROMEDIO del suelo bajo las orugas (suavizada): define el plano sobre el que avanzar en rampas
     private float _currentTiltAngle;       //ángulo de cabeceo visual ACTUAL del mesh (grados), se desliza suavemente hacia un objetivo y de vuelta a 0
     private float _tiltVelocity;           //velocidad interna que usa SmoothDamp para suavizar _currentTiltAngle (la mantiene entre frames, no la tocamos a mano)
 
     public PlayerMovement(Transform playerTransform, Transform meshTransform,
+                                                    Transform[] suspensionPoints,
                                                     Rigidbody rb,
                                                     float maxSpeed,
                                                     float acceleration,
@@ -44,13 +55,16 @@ public class PlayerMovement : IInputInitialize
                                                     float turnAcceleration,
                                                     float pitchTiltAmount,
                                                     float pitchTiltSmoothTime,
-                                                    float groundCheckDistance,
+                                                    float suspensionRestLength,
+                                                    float suspensionStrength,
+                                                    float suspensionDampingRatio,
                                                     float groundNormalSmoothing,
                                                     LayerMask groundMask,
                                                     Vector3 centerOfMassOffset)
     {
         _transform = playerTransform;
         _meshTransform = meshTransform;
+        _suspensionPoints = suspensionPoints;           //anclajes de los resortes: 6 puntos (frente/medio/atrás x izq/der) en el fondo del chasis, sobre las orugas
         _rb = rb;
         _maxSpeed = maxSpeed;
         _acceleration = acceleration;
@@ -59,7 +73,9 @@ public class PlayerMovement : IInputInitialize
         _turnAcceleration = turnAcceleration;
         _pitchTiltAmount = pitchTiltAmount;             //ángulo (grados) del cabeceo mientras dura una rampa de arranque/frenado
         _pitchTiltSmoothTime = pitchTiltSmoothTime;     //tiempo aproximado (s) que tarda el cabeceo en llegar a su objetivo, vía SmoothDamp
-        _groundCheckDistance = groundCheckDistance;     //hasta qué distancia hacia abajo se considera que el tanque está "apoyado" en el suelo
+        _suspensionRestLength = suspensionRestLength;   //recorrido total del resorte (m): hasta dónde "alcanza" cada rueda a buscar el suelo
+        _suspensionStrength = suspensionStrength;       //fuerza máxima del resorte, en múltiplos del peso que le toca sostener a esa rueda
+        _suspensionDampingRatio = suspensionDampingRatio; //amortiguación relativa a la crítica: 0 = rebota eterno, 1 = sin rebote
         _groundNormalSmoothing = groundNormalSmoothing; //qué tan rápido la normal del suelo se interpola hacia la nueva (más alto = transición más brusca)
         _groundMask = groundMask;                       //qué capas cuentan como suelo para el raycast (evita detectarse a sí mismo)
 
@@ -68,8 +84,8 @@ public class PlayerMovement : IInputInitialize
         _rb.centerOfMass = centerOfMassOffset;
 
         //NO congelamos ninguna rotación: la física es libre de inclinar el tanque según el terreno.
-        //El giro por input se aplica sobre el eje propio del tanque (ver ApplyVelocity), así convive
-        //con esa inclinación en vez de pelearse con ella.
+        //El giro por input controla SOLO la guiñada y deja el cabeceo/alabeo en manos de la suspensión
+        //(ver ApplyVelocity), así convive con esa inclinación en vez de pelearse con ella.
         _rb.constraints = RigidbodyConstraints.None;
     }
 
@@ -85,46 +101,116 @@ public class PlayerMovement : IInputInitialize
     {
         if(!_initialized) return;
 
-        CheckGrounded();      //0. ¿está apoyado en el suelo? define si controlamos el avance o lo maneja la gravedad
+        ApplySuspension();    //0. los resortes sostienen el chasis, lo inclinan con el terreno y calculan _isGrounded/_groundNormal
         UpdateForwardSpeed(); //1. decide hacia qué velocidad de avance ir
         UpdateTurnRate();     //2. decide hacia qué velocidad de giro ir
         ApplyVelocity();      //3. mueve y rota el Rigidbody según esos dos valores y el estado del suelo
         ApplyPitchTilt();     //4. anima el balanceo visual del mesh si hay una rampa de arranque/frenado en curso
     }
 
-    //PASO 0 — Ground check.
-    //Un raycast corto hacia abajo desde el centro del tanque: si golpea suelo dentro de la distancia,
-    //el tanque está "apoyado" (_isGrounded) y guardamos la normal de esa superficie (_groundNormal),
-    //que usamos para avanzar SIGUIENDO la pendiente. Si no golpea nada, el tanque está en el aire
-    //(cayó de un precipicio, saltó una rampa) y dejamos que la gravedad/física manejen la caída sola.
+    //PASO 0 — Suspensión.
+    //Cada punto de anclaje tira un raycast corto hacia abajo. Si encuentra suelo dentro del recorrido
+    //del resorte, empuja el chasis hacia arriba con una fuerza proporcional a cuánto está comprimido.
+    //Esto cumple tres funciones a la vez:
+    //  1. SOSTIENE el tanque flotando sobre el terreno, para que su collider no toque el piso.
+    //  2. Lo INCLINA solo con el terreno: al aplicar fuerzas distintas en puntos distintos
+    //     (AddForceAtPosition), la rueda más comprimida empuja más fuerte y eso GENERA el torque que
+    //     cabecea o alabea el chasis. No hay que rotar nada a mano.
+    //  3. Calcula _isGrounded y la normal promedio del suelo bajo las orugas.
     //
-    //Optimización: el raycast solo se relanza si el tanque efectivamente cambió de posición desde el
-    //último chequeo. Si no se movió (input suelto y ya en reposo, por ejemplo), _isGrounded/_groundNormal
-    //de la última vez siguen siendo válidos y no hace falta gastar un Physics.Raycast por gusto.
-    private void CheckGrounded()
+    //Nota: acá no se puede aplicar la optimización de "no relanzar el raycast si el tanque no se movió".
+    //Los resortes tienen que aplicar fuerza en TODOS los pasos de física o el tanque se cae. De todas
+    //formas, un puñado de raycasts por FixedUpdate es un costo despreciable.
+    private void ApplySuspension()
     {
-        Vector3 currentPosition = _rb.position;
+        //Si todavía no asignaste los 6 puntos en el Inspector, no hay nada que sostenga al tanque:
+        //cortamos acá para no dividir por cero más abajo (Length == 0).
+        if(_suspensionPoints == null || _suspensionPoints.Length == 0) return;
 
-        if(currentPosition == _lastCheckedPosition) return;
-        _lastCheckedPosition = currentPosition;
+        //Arrancamos el frame asumiendo que el tanque está en el aire. Si al menos UN resorte
+        //toca el piso más abajo, se pone en true de nuevo.
+        _isGrounded = false;
+        Vector3 normalSum = Vector3.zero; //vamos sumando la normal de cada resorte que tocó suelo, para promediarla al final
+        int hitCount = 0;                 //cuántos resortes tocaron suelo este frame (para el promedio de arriba)
 
-        //El origen se levanta un poco (0.1) para no arrancar el ray justo en el borde del collider.
-        Vector3 origin = _rb.worldCenterOfMass + Vector3.up * 0.1f;
+        //--- CUÁNTA FUERZA MÁXIMA puede dar CADA resorte ---
+        //Peso total del tanque (mass * gravedad) repartido en partes iguales entre los N puntos.
+        //Ej: tanque de 1000kg con 6 puntos → cada uno "le toca sostener" 1000/6 kg de peso.
+        float weightPerPoint = _rb.mass * Physics.gravity.magnitude / _suspensionPoints.Length;
+        //La fuerza máxima que puede dar el resorte es un MÚLTIPLO de ese peso (suspensionStrength).
+        //Con strength=2, cada resorte puede empujar hasta el DOBLE de lo que necesita para
+        //sostener su parte del peso → sobra fuerza para además frenar baches, no solo sostenerse quieto.
+        float maxSpringForce = weightPerPoint * _suspensionStrength;
 
-        if(Physics.Raycast(origin, -_meshTransform.up, out RaycastHit hit, _groundCheckDistance + 0.1f, _groundMask, QueryTriggerInteraction.Ignore))
+        //--- CUÁNTO FRENAR EL REBOTE (amortiguación) ---
+        //Un resorte SOLO (sin amortiguador) rebotaría para siempre, como un colchón sin fricción.
+        //El amortiguador le saca energía en cada rebote hasta que se queda quieto.
+        //k = "dureza" del resorte, calculada a partir de la fuerza máxima y el recorrido.
+        float springConstant = maxSpringForce / _suspensionRestLength;
+        //La "amortiguación crítica" es el punto exacto donde el resorte se asienta SIN rebotar
+        //ni una sola vez (fórmula estándar de física: 2 * raíz(dureza * masa)).
+        float criticalDamping = 2f * Mathf.Sqrt(springConstant * (_rb.mass / _suspensionPoints.Length));
+        //suspensionDampingRatio es un porcentaje de esa amortiguación crítica: 0 = nada de freno
+        //(rebota siempre), 1 = freno total (se asienta sin rebotar), 0.5 = un rebotecito y listo.
+        float damping = criticalDamping * _suspensionDampingRatio;
+
+        //Repetimos este cálculo para CADA uno de los 6 puntos de suspensión (uno por rueda/oruga).
+        for(int i = 0; i < _suspensionPoints.Length; i++)
         {
+            if(_suspensionPoints[i] == null) continue; //por si falta asignar alguno en el Inspector, no rompe
+
+            Vector3 origin = _suspensionPoints[i].position; //desde dónde sale el "rayo" de este resorte
+
+            //Tiramos un rayo hacia abajo desde este punto, hasta suspensionRestLength de largo.
+            //Si NO encuentra suelo en ese rango, este resorte está "en el aire" (estirado del todo,
+            //sin tocar nada) y no aplica ninguna fuerza: pasamos al siguiente punto.
+            if(!Physics.Raycast(origin, -_transform.up, out RaycastHit hit,
+                                _suspensionRestLength, _groundMask, QueryTriggerInteraction.Ignore))
+                continue;
+
+            //Si llegamos acá, ESTE resorte sí tocó suelo.
             _isGrounded = true;
-            //La normal se suaviza (Lerp) en vez de saltar de golpe: en el quiebre entre piso y rampa
-            //la normal cambia bruscamente, y ese salto es lo que hace que la velocidad proyectada
-            //apunte de repente "hacia el aire" o "hacia el piso" y el tanque tropiece/vuelque. Al
-            //interpolar, la dirección de avance se reorienta gradualmente y el paso a la rampa es suave.
-            _groundNormal = Vector3.Slerp(_groundNormal, hit.normal, _groundNormalSmoothing * Time.fixedDeltaTime);
+            hitCount++;
+            normalSum += hit.normal; //sumamos su normal para el promedio de más abajo
+
+            //hit.distance es qué tan lejos está el suelo (0 = pegado al punto, restLength = al límite).
+            //compression es lo contrario, "qué tan aplastado" está el resorte: 0 = nada aplastado
+            //(el suelo está lejos, casi al límite del rayo), 1 = totalmente aplastado (suelo pegado al punto).
+            float compression = 1f - (hit.distance / _suspensionRestLength);
+
+            //LEY DE HOOKE: la fuerza de un resorte es proporcional a cuánto está comprimido.
+            //Un resorte muy aplastado empuja fuerte para volver a su largo natural; uno casi
+            //estirado empuja poco. Por eso multiplicamos compression * la fuerza máxima posible.
+            float springForce = compression * maxSpringForce;
+
+            //Ahora medimos qué tan rápido se está moviendo el chasis VERTICALMENTE en este punto
+            //(subiendo o bajando). GetPointVelocity da la velocidad real de ese punto del cuerpo
+            //rígido (no solo el centro), y Dot con "arriba" nos deja solo la parte vertical.
+            float verticalVelocity = Vector3.Dot(_rb.GetPointVelocity(origin), _transform.up);
+            //Fuerza del amortiguador: siempre en sentido CONTRARIO al movimiento (por eso el signo
+            //negativo). Si el punto está subiendo rápido, esta fuerza empuja hacia abajo para
+            //frenarlo, y viceversa. "damping" (calculado arriba) es cuán fuerte frena.
+            float damperForce = -verticalVelocity * damping;
+
+            //Sumamos resorte + amortiguador para tener la fuerza final de este punto.
+            //Mathf.Max(0f, ...) es importante: en la vida real un resorte solo puede EMPUJAR
+            //(nunca puede "tirar" del chasis hacia el suelo). Sin este límite, si el tanque cae
+            //rápido el amortiguador daría un número negativo enorme que lo mandaría volando.
+            float totalForce = Mathf.Max(0f, springForce + damperForce);
+
+            //Aplicamos esa fuerza hacia ARRIBA (_transform.up), justo en este punto del chasis
+            //(no en el centro). Aplicar la fuerza EN EL PUNTO es lo que genera el giro/inclinación:
+            //si un solo resorte empuja fuerte y los demás no, esa esquina se levanta más que las otras.
+            _rb.AddForceAtPosition(_transform.up * totalForce, origin);
         }
-        else
-        {
-            _isGrounded = false;
-            _groundNormal = Vector3.Slerp(_groundNormal, Vector3.up, _groundNormalSmoothing * Time.fixedDeltaTime);
-        }
+
+        //Terminado el loop: promediamos las normales de todos los resortes que tocaron suelo (si
+        //ninguno tocó, usamos "arriba" por defecto). Esa normal es hacia dónde "mira" el suelo en
+        //promedio bajo el tanque, y se usa después para hacerlo avanzar siguiendo la pendiente.
+        Vector3 targetNormal = hitCount > 0 ? (normalSum / hitCount).normalized : Vector3.up;
+        //Slerp en vez de asignar directo: suaviza el cambio de normal a lo largo de varios frames,
+        //para que el paso de piso plano a rampa sea gradual y no un salto brusco.
+        _groundNormal = Vector3.Slerp(_groundNormal, targetNormal, _groundNormalSmoothing * Time.fixedDeltaTime);
     }
 
     //PASO 1 — Avance.
@@ -167,30 +253,31 @@ public class PlayerMovement : IInputInitialize
     //PASO 3 — Aplicar al Rigidbody.
     private void ApplyVelocity()
     {
-        //GIRO: se rota sobre el eje "arriba" PROPIO del tanque (_transform.up), no el del mundo. En
-        //terreno plano son iguales, pero en una rampa el eje propio está inclinado con la pendiente,
-        //así que el tanque gira "sobre el plano de la rampa" en vez de atravesar el suelo. MoveRotation
-        //le avisa a la física del giro (para que las colisiones se resuelvan bien).
-        float turnThisStep = _currentTurnRate * Time.fixedDeltaTime;
-        _rb.MoveRotation(_rb.rotation * Quaternion.AngleAxis(turnThisStep, Vector3.up));
+        //GIRO: antes era MoveRotation, que TELETRANSPORTA la rotación entera del cuerpo y por eso
+        //peleaba contra la inclinación que le impone la suspensión (cada frame le borraba lo que los
+        //resortes acababan de hacer). Ahora seteamos la velocidad angular en dos partes:
+        //  - la componente de GUIÑADA (alrededor del eje vertical del MUNDO) la manda el input;
+        //  - la de cabeceo/alabeo queda INTACTA, para que los resortes inclinen libremente el chasis.
+        Vector3 angularVelocity = _rb.angularVelocity;
+        Vector3 tiltAngularVelocity = angularVelocity - Vector3.Project(angularVelocity, Vector3.up);
+        _rb.angularVelocity = tiltAngularVelocity + Vector3.up * (_currentTurnRate * Mathf.Deg2Rad);
 
-        //AVANCE:
-        if(_isGrounded)
-        {
-            //En el suelo: avanzamos siguiendo la PENDIENTE. Proyectar el forward del tanque sobre el
-            //plano del terreno (usando su normal) da una dirección que sube/baja rampas correctamente,
-            //sin "clavarse" contra la cuesta ni despegarse en las bajadas.
-            Vector3 slopeForward = Vector3.ProjectOnPlane(_transform.forward, _groundNormal).normalized;
-            Vector3 desiredVelocity = slopeForward * _currentSpeed;
+        //En el AIRE no hay tracción: mandan la gravedad y el momento que el tanque ya traía (nada de
+        //empuje horizontal artificial mientras cae de un precipicio).
+        if(!_isGrounded) return;
 
-            //Se preserva la componente de la velocidad ALINEADA con la normal del suelo (normalmente
-            //casi 0 estando apoyado), para no pisar micro-ajustes verticales de la física de contacto.
-            Vector3 currentVelocity = _rb.linearVelocity;
-            Vector3 velocityAlongNormal = Vector3.Project(currentVelocity, _groundNormal);
-            _rb.linearVelocity = desiredVelocity + velocityAlongNormal;
-        }
-        //En el AIRE: no tocamos linearVelocity. La gravedad y el momento que ya llevaba manejan la
-        //caída de forma natural (nada de empuje horizontal artificial mientras cae de un precipicio).
+        //Dirección de avance proyectada sobre el plano del terreno: en una cuesta la velocidad
+        //horizontal baja por el coseno de la pendiente (subir cuesta arriba avanza menos), como
+        //corresponde. Lo que sube o baja al tanque son los resortes, no esta velocidad.
+        Vector3 slopeForward = Vector3.ProjectOnPlane(_transform.forward, _groundNormal).normalized;
+        Vector3 desiredVelocity = slopeForward * _currentSpeed;
+
+        //CLAVE: solo escribimos el plano horizontal (X y Z). La componente VERTICAL queda 100% en manos
+        //de la gravedad y de los resortes. Como el código nunca inyecta velocidad hacia arriba, el
+        //tanque NO PUEDE salir volando por un obstáculo: lo peor que pasa es que un resorte lo levante
+        //suavemente. Antes se escribía el vector completo, y esa Y positiva era literalmente un
+        //empujón hacia arriba al entrar en una rampa.
+        _rb.linearVelocity = new Vector3(desiredVelocity.x, _rb.linearVelocity.y, desiredVelocity.z);
     }
 
     //PASO 4 — Balanceo (cabeceo) visual.

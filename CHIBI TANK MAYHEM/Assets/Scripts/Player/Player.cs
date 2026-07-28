@@ -7,6 +7,10 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform _tankHeadTransform, _turretTransform;
     [SerializeField] private Transform[] _secondaryTurretMuzzleTransforms;
     [SerializeField] private Transform _meshTransform;
+
+    [Tooltip("Anclajes de la suspensión: 6 empties en el fondo del chasis, sobre las orugas (frente/medio/atrás x izquierda/derecha). Desde cada uno sale un raycast hacia abajo que sostiene esa esquina del tanque.")]
+    [SerializeField] private Transform[] _suspensionPoints;
+
     [SerializeField] private LayerMask _crosshairRaycastMask = ~0, _cameraRaycastMask = ~0;
     [SerializeField] private LayerMask _groundMask = ~0;
 
@@ -24,6 +28,7 @@ public class Player : MonoBehaviour
         Rigidbody rb = GetComponent<Rigidbody>();
         playerMovement = new PlayerMovement(transform,
                                             _meshTransform,
+                                            _suspensionPoints,
                                             rb,
                                             _playerSettings.maxSpeed,
                                             _playerSettings.acceleration,
@@ -32,7 +37,9 @@ public class Player : MonoBehaviour
                                             _playerSettings.turnAcceleration,
                                             _playerSettings.pitchTiltAmount,
                                             _playerSettings.pitchTiltSmoothTime,
-                                            _playerSettings.groundCheckDistance,
+                                            _playerSettings.suspensionRestLength,
+                                            _playerSettings.suspensionStrength,
+                                            _playerSettings.suspensionDampingRatio,
                                             _playerSettings.groundNormalSmoothing,
                                             _groundMask,
                                             _playerSettings.centerOfMassOffset);
@@ -92,7 +99,7 @@ public class Player : MonoBehaviour
     #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
-        DrawGroundCheckGizmo();
+        DrawSuspensionGizmo();
 
         if(_cannonMuzzleTransform == null) return;
 
@@ -105,18 +112,22 @@ public class Player : MonoBehaviour
         Gizmos.DrawRay(_turretMuzzleTransform.position, _turretMuzzleTransform.up * 20f);
     }
 
-    private void DrawGroundCheckGizmo()
+    //Dibuja el recorrido de cada resorte de la suspensión, igual que los raycasts reales de
+    //ApplySuspension() en PlayerMovement. En Play Mode sirve para ver a qué altura flota el tanque:
+    //en reposo el suelo debería quedar más o menos a la mitad de cada línea.
+    private void DrawSuspensionGizmo()
     {
-        if(_playerSettings == null) return;
-
-        //Mismo origen que CheckGrounded() en PlayerMovement: centro de masa del Rigidbody (o el
-        //origen del transform si todavía no hay Rigidbody, ej. en Edit Mode) más un pequeño offset
-        //hacia arriba para no arrancar el ray justo en el borde del collider.
-        Rigidbody rb = GetComponent<Rigidbody>();
-        Vector3 origin = (rb != null ? rb.worldCenterOfMass : transform.position) + Vector3.up * 0.1f;
+        if(_playerSettings == null || _suspensionPoints == null) return;
 
         Gizmos.color = Color.cyan;
-        Gizmos.DrawRay(origin, -_meshTransform.up * (_playerSettings.groundCheckDistance + 0.1f));
+
+        foreach(Transform point in _suspensionPoints)
+        {
+            if(point == null) continue;
+
+            Gizmos.DrawRay(point.position, -transform.up * _playerSettings.suspensionRestLength);
+            Gizmos.DrawWireSphere(point.position, 0.05f);
+        }
     }
     #endif
 }
