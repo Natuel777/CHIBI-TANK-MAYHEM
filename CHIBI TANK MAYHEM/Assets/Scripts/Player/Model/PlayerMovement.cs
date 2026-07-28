@@ -21,7 +21,7 @@ public class PlayerMovement : IInputInitialize
     private float _maxSpeed, _acceleration, _deceleration;
     private float _maxTurnRate, _turnAcceleration;
     private float _pitchTiltAmount, _pitchTiltSmoothTime;
-    private float _groundCheckDistance;
+    private float _groundCheckDistance, _groundNormalSmoothing;
     private LayerMask _groundMask;
     private Rigidbody _rb;
 
@@ -30,7 +30,7 @@ public class PlayerMovement : IInputInitialize
     private bool _isDeceleratingThisStep;  //true si este frame el avance está frenando/invirtiendo (no acelerando) — lo calcula UpdateForwardSpeed y lo lee ApplyPitchTilt
     private bool _isChangingSpeedThisStep; //true si _currentSpeed todavía no llegó a targetSpeed (sigue en rampa). Falso en velocidad crucero constante, aunque haya input
     private bool _isGrounded;              //true si el tanque está apoyado en el suelo (último resultado del raycast). En el aire, no forzamos la velocidad — la gravedad manda
-    private Vector3 _groundNormal;         //normal del suelo bajo el tanque: define el plano sobre el que avanzar en rampas
+    private Vector3 _groundNormal = Vector3.up; //normal del suelo bajo el tanque (suavizada): define el plano sobre el que avanzar en rampas
     private Vector3 _lastCheckedPosition;  //posición del tanque la última vez que se hizo el raycast de suelo — para no repetirlo si no se movió (ver CheckGrounded)
     private float _currentTiltAngle;       //ángulo de cabeceo visual ACTUAL del mesh (grados), se desliza suavemente hacia un objetivo y de vuelta a 0
     private float _tiltVelocity;           //velocidad interna que usa SmoothDamp para suavizar _currentTiltAngle (la mantiene entre frames, no la tocamos a mano)
@@ -45,6 +45,7 @@ public class PlayerMovement : IInputInitialize
                                                     float pitchTiltAmount,
                                                     float pitchTiltSmoothTime,
                                                     float groundCheckDistance,
+                                                    float groundNormalSmoothing,
                                                     LayerMask groundMask,
                                                     Vector3 centerOfMassOffset)
     {
@@ -59,6 +60,7 @@ public class PlayerMovement : IInputInitialize
         _pitchTiltAmount = pitchTiltAmount;             //ángulo (grados) del cabeceo mientras dura una rampa de arranque/frenado
         _pitchTiltSmoothTime = pitchTiltSmoothTime;     //tiempo aproximado (s) que tarda el cabeceo en llegar a su objetivo, vía SmoothDamp
         _groundCheckDistance = groundCheckDistance;     //hasta qué distancia hacia abajo se considera que el tanque está "apoyado" en el suelo
+        _groundNormalSmoothing = groundNormalSmoothing; //qué tan rápido la normal del suelo se interpola hacia la nueva (más alto = transición más brusca)
         _groundMask = groundMask;                       //qué capas cuentan como suelo para el raycast (evita detectarse a sí mismo)
 
         //centerOfMass define alrededor de qué punto rota físicamente el Rigidbody (choques, vuelco en
@@ -112,12 +114,16 @@ public class PlayerMovement : IInputInitialize
         if(Physics.Raycast(origin, -_meshTransform.up, out RaycastHit hit, _groundCheckDistance + 0.1f, _groundMask, QueryTriggerInteraction.Ignore))
         {
             _isGrounded = true;
-            _groundNormal = hit.normal;
+            //La normal se suaviza (Lerp) en vez de saltar de golpe: en el quiebre entre piso y rampa
+            //la normal cambia bruscamente, y ese salto es lo que hace que la velocidad proyectada
+            //apunte de repente "hacia el aire" o "hacia el piso" y el tanque tropiece/vuelque. Al
+            //interpolar, la dirección de avance se reorienta gradualmente y el paso a la rampa es suave.
+            _groundNormal = Vector3.Slerp(_groundNormal, hit.normal, _groundNormalSmoothing * Time.fixedDeltaTime);
         }
         else
         {
             _isGrounded = false;
-            _groundNormal = Vector3.up;
+            _groundNormal = Vector3.Slerp(_groundNormal, Vector3.up, _groundNormalSmoothing * Time.fixedDeltaTime);
         }
     }
 

@@ -33,6 +33,7 @@ public class Player : MonoBehaviour
                                             _playerSettings.pitchTiltAmount,
                                             _playerSettings.pitchTiltSmoothTime,
                                             _playerSettings.groundCheckDistance,
+                                            _playerSettings.groundNormalSmoothing,
                                             _groundMask,
                                             _playerSettings.centerOfMassOffset);
         playerShoot = new PlayerShoot(_cannonMuzzleTransform);

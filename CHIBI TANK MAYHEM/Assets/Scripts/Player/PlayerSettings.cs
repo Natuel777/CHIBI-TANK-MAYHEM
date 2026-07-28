@@ -35,6 +35,9 @@ public class PlayerSettingsSO : ScriptableObject
     [Tooltip("Distancia (m) del raycast hacia abajo para detectar si el tanque está apoyado en el suelo. Aprox. la mitad de la altura del tanque + un margen. Si está más lejos del suelo que esto, se considera 'en el aire' (cayendo) y el control de avance se suelta para que la gravedad maneje la caída.")]
     public float groundCheckDistance = 1f;
 
+    [Tooltip("Qué tan rápido se interpola la normal del suelo hacia la detectada, en 1/s. Suaviza el paso piso→rampa para que el tanque no tropiece/vuelque en el quiebre. Más alto = transición más brusca (más fiel pero más propenso a tropezar); más bajo = más suave. ~5-10 suele andar bien.")]
+    public float groundNormalSmoothing = 8f;
+
     [Header("Tank Head Settings")]
     public float aimRotationSpeed = 720f;
     public float minTankHeadPitch = -20f;

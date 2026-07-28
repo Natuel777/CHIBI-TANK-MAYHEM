@@ -1157,7 +1157,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2055085380231624002, guid: b6128fde209a5774795fd1ca4e0fa3e0, type: 3}
       propertyPath: m_Mass
-      value: 1
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 4577264216309163476, guid: b6128fde209a5774795fd1ca4e0fa3e0, type: 3}
       propertyPath: m_Name
@@ -1211,6 +1211,10 @@ PrefabInstance:
       propertyPath: _turretTransform
       value: 
       objectReference: {fileID: 2044061071}
+    - target: {fileID: 8644007416478033252, guid: b6128fde209a5774795fd1ca4e0fa3e0, type: 3}
+      propertyPath: _groundMask.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
     - target: {fileID: 8644007416478033252, guid: b6128fde209a5774795fd1ca4e0fa3e0, type: 3}
       propertyPath: _secondaryTurretMuzzleTransforms.Array.size
       value: 3
@@ -2142,7 +2146,7 @@ GameObject:
   - component: {fileID: 1741851643}
   - component: {fileID: 1741851642}
   - component: {fileID: 1741851641}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
