@@ -1,6 +1,5 @@
-using UnityEngine;
-
-public class IScreen
+public interface IScreen
 {
-    
+    void Activate();
+    void Deactivate();
 }
