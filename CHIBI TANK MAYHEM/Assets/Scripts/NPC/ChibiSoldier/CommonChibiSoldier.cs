@@ -2,11 +2,9 @@ using UnityEngine;
 
 public class CommonChibiSoldier : ChibiSoldier
 {
-    private FiniteSateMachine _stateMachine;
-
     private void Awake()
     {
-        _stateMachine = new FiniteSateMachine();
+        stateMachine = new FiniteSateMachine();
 
         //State Initialization
         idleState = new IdleState(this);
@@ -14,7 +12,7 @@ public class CommonChibiSoldier : ChibiSoldier
 
         //Behaviour Initialization
         idleBehaviour = new IdleBehaviour(StartCoroutine, settings.idleSearchTimer);
-        runningBehaviour = new RunningBehaviour();
+        runningBehaviour = new RunningBehaviour(transform);
     }
 
     private void Start()
@@ -24,14 +22,6 @@ public class CommonChibiSoldier : ChibiSoldier
 
     private void Update()
     {
-        _stateMachine.UpdateState();
+        stateMachine.UpdateState();
     }
-
-    private void SetState(IState state)
-	{
-        _stateMachine.SetState(state);
-    }
-
-	public void SendEvent(NPCEvents evt, object data = null) {_stateMachine.SendEvent(evt, data);}
-
 }

@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     private PlatformType _currentPlatform;
     [SerializeField] private bool _testingMobile;
 
+    public LevelManager levelManager;
+
     private void Awake()
     {
         if(Instance != null && Instance != this)
@@ -29,6 +31,8 @@ public class GameManager : MonoBehaviour
         #elif UNITY_STANDALONE || UNITY_EDITOR
             _currentPlatform = PlatformType.PC;
         #endif
+
+        levelManager = new LevelManager();
     }
 
     private void Start()

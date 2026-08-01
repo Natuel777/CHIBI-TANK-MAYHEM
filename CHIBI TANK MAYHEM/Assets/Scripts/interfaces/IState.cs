@@ -9,5 +9,5 @@ public interface IState
 
 public enum NPCEvents
 {
-    Example
+    ChibiSoldierFoundTarget
 }

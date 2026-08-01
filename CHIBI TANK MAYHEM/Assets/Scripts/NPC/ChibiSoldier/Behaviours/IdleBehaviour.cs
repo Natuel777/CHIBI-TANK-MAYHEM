@@ -5,6 +5,7 @@ using System;
 public class IdleBehaviour : IBehaviours
 {
     private bool _active, _corroutineStarted;
+    public bool searchDone;
     private float _searchTimer;
     private Func<IEnumerator, Coroutine> _startCoroutine;
 
@@ -27,5 +28,6 @@ public class IdleBehaviour : IBehaviours
     {
         _corroutineStarted = true;
         yield return new WaitForSeconds(_searchTimer);
+        searchDone = true;
     }
 }
