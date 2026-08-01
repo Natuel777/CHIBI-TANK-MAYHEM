@@ -4,12 +4,15 @@ using System.Collections.Generic;
 [System.Serializable]
 public class LevelManager
 {
+    [Header("Chibi Soldier Targets")]
     [SerializeField] private Transform[] _chibiSoldierTargets;
+    [SerializeField] private float _targetCaptureDistance = 4f;
 
     private Dictionary<Transform, bool> _capturedTargets = new Dictionary<Transform, bool>();
 
     #region Getters
     public Dictionary<Transform, bool> ChibiSoldierTargets => _capturedTargets;
+    public float TargetCaptureDistance => _targetCaptureDistance;
     #endregion
 
     public void Initialize()

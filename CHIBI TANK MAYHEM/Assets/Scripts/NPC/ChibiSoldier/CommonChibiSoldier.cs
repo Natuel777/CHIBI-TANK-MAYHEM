@@ -12,7 +12,7 @@ public class CommonChibiSoldier : ChibiSoldier
 
         //Behaviour Initialization
         idleBehaviour = new IdleBehaviour(StartCoroutine, settings.idleSearchTimer);
-        runningBehaviour = new RunningBehaviour(transform);
+        runningBehaviour = new RunningBehaviour(transform, settings.moveSpeed, settings.rotationSpeed);
     }
 
     private void Start()

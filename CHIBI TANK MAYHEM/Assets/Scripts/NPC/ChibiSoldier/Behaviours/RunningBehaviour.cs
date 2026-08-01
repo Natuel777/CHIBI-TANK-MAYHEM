@@ -2,12 +2,16 @@ using UnityEngine;
 
 public class RunningBehaviour : IBehaviours
 {
-    private bool _active, _targetFound;
+    private bool _active, _targetFound = false;
     private Transform _transform, _closestTarget;
+    private float _speed, _rotationSpeed;
+    public bool hasReachedTarget = false;
 
-    public RunningBehaviour(Transform t)
+    public RunningBehaviour(Transform t, float speed, float rotationSpeed)
     {
         _transform = t;
+        _speed = speed;
+        _rotationSpeed = rotationSpeed;
     }
 
     public void Active(bool value) {_active = value;}
@@ -18,7 +22,13 @@ public class RunningBehaviour : IBehaviours
 
         if(!_targetFound) FindClosestTarget();
 
-        if(_closestTarget != null) MoveToTarget();
+        if(_closestTarget != null)
+        {
+            Vector3 direction = VectorMinusVector(_closestTarget.position, _transform.position).normalized;
+            RotateToTarget(direction);
+            MoveToTarget(direction);
+            CheckDistanceToTarget();
+        }
     }
 
     private void FindClosestTarget()
@@ -29,13 +39,9 @@ public class RunningBehaviour : IBehaviours
 
         foreach(var target in targetDic)
         {
-            if(target.Value)
-            {
-                targetDic.Remove(target.Key);
-                continue;
-            }
+            if(target.Value) continue;      
 
-            float sqrDistance = (target.Key.position - _transform.position).sqrMagnitude;
+            float sqrDistance = VectorMinusVector(target.Key.position, _transform.position).sqrMagnitude;
 
             if(sqrDistance < closestDistance)
             {
@@ -51,5 +57,33 @@ public class RunningBehaviour : IBehaviours
         }
     }
 
-    private void MoveToTarget(){}
+    private void MoveToTarget(Vector3 direction)
+    {
+        direction.y = 0f;
+        _transform.position += direction * _speed * Time.deltaTime;
+    }
+
+    private void RotateToTarget(Vector3 direction)
+    {
+        if(direction != Vector3.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            _transform.rotation = Quaternion.Slerp(_transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
+        }
+    }
+
+    private void CheckDistanceToTarget()
+    {
+        float distance = VectorMinusVector(_closestTarget.position, _transform.position).magnitude;
+
+        if(distance <= GameManager.Instance.levelManager.TargetCaptureDistance)
+        {
+            GameManager.Instance.levelManager.UpdateTargetStatus(_closestTarget, true);
+            _targetFound = false;
+            _closestTarget = null;
+            hasReachedTarget = true;
+        }
+    }
+
+    private Vector3 VectorMinusVector(Vector3 pos1, Vector3 pos2) => (pos1 - pos2);
 }

@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
             _currentPlatform = PlatformType.PC;
         #endif
 
-        levelManager = new LevelManager();
+        levelManager.Initialize();
     }
 
     private void Start()
