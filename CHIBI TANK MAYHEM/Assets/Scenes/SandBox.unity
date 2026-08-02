@@ -119,134 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &135727649
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 135727654}
-  - component: {fileID: 135727653}
-  - component: {fileID: 135727652}
-  - component: {fileID: 135727651}
-  - component: {fileID: 135727650}
-  m_Layer: 0
-  m_Name: CommonChibiSoldier
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &135727650
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 135727649}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d77c50547a5b40941b96eaf7d657d7b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CommonChibiSoldier
-  settings: {fileID: 11400000, guid: e533d75a8b90b6d409b10bb30d60e0d6, type: 2}
---- !u!136 &135727651
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 135727649}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &135727652
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 135727649}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_ForceMeshLod: -1
-  m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_MaskInteraction: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &135727653
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 135727649}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &135727654
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 135727649}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.7903, y: 0.94, z: -13.06392}
-  m_LocalScale: {x: 0.3307101, y: 0.3307101, z: 0.3307101}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &182807378
 GameObject:
   m_ObjectHideFlags: 0
@@ -494,6 +366,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1136478149}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &319547513
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6.0989723
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.907459
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -16.55086
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4028923186453338826, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_Name
+      value: CommonChibiSoldier (3)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
 --- !u!1 &397874049
 GameObject:
   m_ObjectHideFlags: 0
@@ -850,6 +779,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 182807379}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &407897066
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -15.62202
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.907459
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -18.31108
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4028923186453338826, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_Name
+      value: CommonChibiSoldier (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -2360,6 +2346,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4971001485431521395, guid: b6128fde209a5774795fd1ca4e0fa3e0, type: 3}
   m_PrefabInstance: {fileID: 640719158}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1301438320
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8.428385
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.9074591
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -18.509577
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4028923186453338826, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_Name
+      value: CommonChibiSoldier (4)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
 --- !u!1 &1408819724
 GameObject:
   m_ObjectHideFlags: 0
@@ -2716,6 +2759,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 182807379}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1487547791
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -12.009318
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.907459
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -16.437262
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4028923186453338826, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_Name
+      value: CommonChibiSoldier (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
 --- !u!4 &1547186268 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4978420062986315913, guid: b6128fde209a5774795fd1ca4e0fa3e0, type: 3}
@@ -4034,6 +4134,63 @@ Mesh:
       - serializedVersion: 1
         m_IndexStart: 0
         m_IndexCount: 0
+--- !u!1001 &1778735096
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -11.420032
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.9074591
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -18.045555
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4028923186453338826, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_Name
+      value: CommonChibiSoldier (5)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
 --- !u!1 &1824130267
 GameObject:
   m_ObjectHideFlags: 0
@@ -4952,6 +5109,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 127d54daaf5edf24d9f021a565d52e8a, type: 3}
+--- !u!1001 &5568863946604227937
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8.7903
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.94
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -13.06392
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639396045093019775, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4028923186453338826, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
+      propertyPath: m_Name
+      value: CommonChibiSoldier
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 508097d9f760037438401c162a2d6ef6, type: 3}
 --- !u!1001 &5975306939106656871
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5246,4 +5460,9 @@ SceneRoots:
   - {fileID: 2054502958}
   - {fileID: 5975306939106656871}
   - {fileID: 1136478149}
-  - {fileID: 135727654}
+  - {fileID: 5568863946604227937}
+  - {fileID: 1487547791}
+  - {fileID: 407897066}
+  - {fileID: 319547513}
+  - {fileID: 1301438320}
+  - {fileID: 1778735096}

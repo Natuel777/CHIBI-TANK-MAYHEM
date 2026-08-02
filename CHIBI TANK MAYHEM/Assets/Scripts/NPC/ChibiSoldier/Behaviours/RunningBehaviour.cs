@@ -4,14 +4,19 @@ public class RunningBehaviour : IBehaviours
 {
     private bool _active, _targetFound = false;
     private Transform _transform, _closestTarget;
-    private float _speed, _rotationSpeed;
+    private float _speed, _rotationSpeed, _neighborDetectionRadius;
+    private LayerMask _neighborLayerMask;
+    //private int _neighborCount = 0;
+    private Vector3 _separationForce;
     public bool hasReachedTarget = false;
 
-    public RunningBehaviour(Transform t, float speed, float rotationSpeed)
+    public RunningBehaviour(Transform t, float speed, float rotationSpeed, LayerMask neighborLayerMask, float neighborDetectionRadius)
     {
         _transform = t;
+        _neighborLayerMask = neighborLayerMask;
         _speed = speed;
         _rotationSpeed = rotationSpeed;
+        _neighborDetectionRadius = neighborDetectionRadius;
     }
 
     public void Active(bool value) {_active = value;}
@@ -22,11 +27,24 @@ public class RunningBehaviour : IBehaviours
 
         if(!_targetFound) FindClosestTarget();
 
+        #region Flocking Loop
+        _separationForce = Vector3.zero;
+        Collider[] neighborgs = GetNeighbors();
+        //_neighborCount = neighborgs.Length;
+
+        if(neighborgs.Length > 0)
+        {
+            CalculateSeparationForce(neighborgs);
+            ApplyAlignment(neighborgs);
+        }
+        #endregion
+
         if(_closestTarget != null)
         {
             Vector3 direction = VectorMinusVector(_closestTarget.position, _transform.position).normalized;
+            Vector3 combinedDirection = (direction + _separationForce).normalized;
             RotateToTarget(direction);
-            MoveToTarget(direction);
+            MoveToTarget(combinedDirection);
             CheckDistanceToTarget();
         }
     }
@@ -83,6 +101,37 @@ public class RunningBehaviour : IBehaviours
             _closestTarget = null;
             hasReachedTarget = true;
         }
+    }
+
+    private Collider[] GetNeighbors()
+    {
+        return Physics.OverlapSphere(_transform.position, 10f, _neighborLayerMask);
+    }
+
+    private void CalculateSeparationForce(Collider[] neighborgs)
+    {
+        foreach(Collider n in neighborgs)
+        {
+            Vector3 direction = VectorMinusVector(n.transform.position, _transform.position);
+            float distance = direction.magnitude;
+            Vector3 away = -direction.normalized;
+
+            if(distance > 0)
+                _separationForce += away / distance;
+        }
+    }
+
+    private void ApplyAlignment(Collider[] neighborgs)
+    {
+        Vector3 neighborForward = Vector3.zero;
+
+        foreach(Collider n in neighborgs)
+            neighborForward += n.transform.forward;
+
+        if(neighborForward != Vector3.zero)
+            neighborForward.Normalize();
+
+        _separationForce += neighborForward;
     }
 
     private Vector3 VectorMinusVector(Vector3 pos1, Vector3 pos2) => (pos1 - pos2);

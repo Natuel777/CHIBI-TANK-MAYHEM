@@ -8,4 +8,7 @@ public class NPCSettingsSO : ScriptableObject
 
     [Header("Idle Behaviour Settings")]
     public float idleSearchTimer = 5f;
+
+    [Header("Running Behaviour Settings")]
+    public float neighborDetectionRadius = 10f;
 }

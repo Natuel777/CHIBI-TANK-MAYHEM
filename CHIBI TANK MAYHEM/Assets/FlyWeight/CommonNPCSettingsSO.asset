@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fdba8af92d55a04493d775f384a249c, type: 3}
   m_Name: CommonNPCSettingsSO
   m_EditorClassIdentifier: Assembly-CSharp::NPCSettingsSO
-  moveSpeed: 10
+  moveSpeed: 4
   rotationSpeed: 5
   idleSearchTimer: 1
+  neighborDetectionRadius: 1

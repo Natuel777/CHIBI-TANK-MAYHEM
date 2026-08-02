@@ -3,6 +3,7 @@ using UnityEngine;
 public abstract class ChibiSoldier : MonoBehaviour
 {
     [SerializeField] protected NPCSettingsSO settings;
+    [SerializeField] protected LayerMask neighborLayerMask;
     protected FiniteSateMachine stateMachine;
 
     #region States
