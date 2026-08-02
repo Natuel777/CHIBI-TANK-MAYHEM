@@ -14,6 +14,7 @@ public abstract class ChibiSoldier : MonoBehaviour
     #region Behaviours
     public IdleBehaviour idleBehaviour;
     public RunningBehaviour runningBehaviour;
+    public ChibiSoldierHealthModel healthModel;
     #endregion
 
     public virtual void SendEvent(NPCEvents evt, object data = null) {stateMachine.SendEvent(evt, data);}

@@ -17,6 +17,7 @@ public class CommonChibiSoldier : ChibiSoldier
                                                         settings.rotationSpeed,
                                                         neighborLayerMask, 
                                                         settings.neighborDetectionRadius);
+        healthModel = new ChibiSoldierHealthModel(settings.maxHealth);
     }
 
     private void Start()
@@ -29,4 +30,16 @@ public class CommonChibiSoldier : ChibiSoldier
     {
         stateMachine.UpdateState();
     }
+
+    #if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        if(settings == null) return;
+
+        //Visualiza el radio que usa RunningBehaviour.GetNeighbors() (Physics.OverlapSphere) para
+        //detectar vecinos cercanos y calcular separación/alineación (flocking).
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, settings.neighborDetectionRadius);
+    }
+    #endif
 }

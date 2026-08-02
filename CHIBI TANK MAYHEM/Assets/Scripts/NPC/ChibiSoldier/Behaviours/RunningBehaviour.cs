@@ -36,6 +36,7 @@ public class RunningBehaviour : IBehaviours
         {
             CalculateSeparationForce(neighborgs);
             ApplyAlignment(neighborgs);
+            ApplyCohesion(neighborgs);
         }
         #endregion
 
@@ -105,7 +106,7 @@ public class RunningBehaviour : IBehaviours
 
     private Collider[] GetNeighbors()
     {
-        return Physics.OverlapSphere(_transform.position, 10f, _neighborLayerMask);
+        return Physics.OverlapSphere(_transform.position, _neighborDetectionRadius, _neighborLayerMask);
     }
 
     private void CalculateSeparationForce(Collider[] neighborgs)
@@ -132,6 +133,18 @@ public class RunningBehaviour : IBehaviours
             neighborForward.Normalize();
 
         _separationForce += neighborForward;
+    }
+
+    private void ApplyCohesion(Collider[] neighborgs)
+    {
+        Vector3 neighborCenter = Vector3.zero;
+
+        foreach(Collider n in neighborgs)
+            neighborCenter += n.transform.position;
+        
+        neighborCenter /= neighborgs.Length;
+        Vector3 cohesionDirection = VectorMinusVector(neighborCenter, _transform.position).normalized;
+        _separationForce += cohesionDirection;
     }
 
     private Vector3 VectorMinusVector(Vector3 pos1, Vector3 pos2) => (pos1 - pos2);
