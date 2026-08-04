@@ -9,6 +9,7 @@ public abstract class ChibiSoldier : MonoBehaviour
     #region States
     public IdleState idleState;
     public RunningState runningState;
+    public CapturingState capturingState;
     #endregion
 
     #region Behaviours

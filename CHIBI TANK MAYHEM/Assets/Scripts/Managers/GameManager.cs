@@ -45,6 +45,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        levelManager.ArtificialUpdate();
+    }
+
     #if UNITY_EDITOR
     public void RestartCurrentLevel()
     {

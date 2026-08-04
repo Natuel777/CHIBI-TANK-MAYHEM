@@ -3,12 +3,14 @@ using UnityEngine;
 public class RunningBehaviour : IBehaviours
 {
     private bool _active, _targetFound = false;
-    private Transform _transform, _closestTarget;
+    private Transform _transform;
+    private ChibiSoldierCaptureTarget _closestTarget;
     private float _speed, _rotationSpeed, _neighborDetectionRadius;
     private LayerMask _neighborLayerMask;
     //private int _neighborCount = 0;
     private Vector3 _separationForce;
     public bool hasReachedTarget = false;
+    public ChibiSoldierCaptureTarget ClosestTarget => _closestTarget;
 
     public RunningBehaviour(Transform t, float speed, float rotationSpeed, LayerMask neighborLayerMask, float neighborDetectionRadius)
     {
@@ -42,7 +44,7 @@ public class RunningBehaviour : IBehaviours
 
         if(_closestTarget != null)
         {
-            Vector3 direction = VectorMinusVector(_closestTarget.position, _transform.position).normalized;
+            Vector3 direction = VectorMinusVector(_closestTarget.transform.position, _transform.position).normalized;
             Vector3 combinedDirection = (direction + _separationForce).normalized;
             RotateToTarget(direction);
             MoveToTarget(combinedDirection);
@@ -54,13 +56,13 @@ public class RunningBehaviour : IBehaviours
     {
         var targetDic = GameManager.Instance.levelManager.ChibiSoldierTargets;
         float closestDistance = Mathf.Infinity;
-        Transform closestTarget = null;
+        ChibiSoldierCaptureTarget closestTarget = null;
 
         foreach(var target in targetDic)
         {
-            if(target.Value) continue;      
+            if(target.Value) continue;
 
-            float sqrDistance = VectorMinusVector(target.Key.position, _transform.position).sqrMagnitude;
+            float sqrDistance = VectorMinusVector(target.Key.transform.position, _transform.position).sqrMagnitude;
 
             if(sqrDistance < closestDistance)
             {
@@ -86,6 +88,7 @@ public class RunningBehaviour : IBehaviours
     {
         if(direction != Vector3.zero)
         {
+            direction.y = 0f;
             Quaternion targetRotation = Quaternion.LookRotation(direction);
             _transform.rotation = Quaternion.Slerp(_transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
         }
@@ -93,13 +96,11 @@ public class RunningBehaviour : IBehaviours
 
     private void CheckDistanceToTarget()
     {
-        float distance = VectorMinusVector(_closestTarget.position, _transform.position).magnitude;
+        float distance = VectorMinusVector(_closestTarget.transform.position, _transform.position).magnitude;
 
         if(distance <= GameManager.Instance.levelManager.TargetCaptureDistance)
         {
-            GameManager.Instance.levelManager.UpdateTargetStatus(_closestTarget, true);
-            _targetFound = false;
-            _closestTarget = null;
+            //GameManager.Instance.levelManager.UpdateTargetStatus(_closestTarget, true);
             hasReachedTarget = true;
         }
     }
@@ -148,4 +149,12 @@ public class RunningBehaviour : IBehaviours
     }
 
     private Vector3 VectorMinusVector(Vector3 pos1, Vector3 pos2) => (pos1 - pos2);
+
+    public void Reset()
+    {
+        _active = false;
+        _targetFound = false;
+        _closestTarget = null;
+        hasReachedTarget = false;
+    }
 }

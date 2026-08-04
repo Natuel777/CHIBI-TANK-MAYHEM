@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NPCSettingsSO
   moveSpeed: 4
   rotationSpeed: 5
+  maxHealth: 100
   idleSearchTimer: 1
   neighborDetectionRadius: 1

@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class IdleState : IState
 {
     private ChibiSoldier _parent;

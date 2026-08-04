@@ -10,5 +10,6 @@ public interface IState
 public enum NPCEvents
 {
     ChibiSoldierFoundTarget,
-	ChibiSoldierHasReachedTarget
+	ChibiSoldierHasReachedTarget,
+	ChibiSoldierCapturingTarget
 }

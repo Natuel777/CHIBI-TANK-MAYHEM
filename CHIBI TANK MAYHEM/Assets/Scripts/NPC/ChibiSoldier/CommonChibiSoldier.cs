@@ -10,6 +10,7 @@ public class CommonChibiSoldier : ChibiSoldier
         //State Initialization
         idleState = new IdleState(this);
         runningState = new RunningState(this);
+        capturingState = new CapturingState(this);
 
         //Behaviour Initialization
         idleBehaviour = new IdleBehaviour(StartCoroutine, settings.idleSearchTimer);
