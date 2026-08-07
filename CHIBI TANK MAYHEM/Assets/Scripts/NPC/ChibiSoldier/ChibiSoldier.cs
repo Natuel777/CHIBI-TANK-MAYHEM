@@ -4,12 +4,14 @@ public abstract class ChibiSoldier : MonoBehaviour
 {
     [SerializeField] protected NPCSettingsSO settings;
     [SerializeField] protected LayerMask neighborLayerMask;
+    [SerializeField] protected Transform gunMuzzleTransform;
     protected FiniteSateMachine stateMachine;
 
     #region States
     public IdleState idleState;
     public RunningState runningState;
     public CapturingState capturingState;
+    public ShootAtPlayerBehaviour shootAtPlayerBehaviour;
     #endregion
 
     #region Behaviours

@@ -17,3 +17,4 @@ MonoBehaviour:
   maxHealth: 100
   idleSearchTimer: 1
   neighborDetectionRadius: 1
+  gunFireCooldown: 0.3

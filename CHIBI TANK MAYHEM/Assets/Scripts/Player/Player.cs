@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] private LayerMask _crosshairRaycastMask = ~0, _cameraRaycastMask = ~0;
     [SerializeField] private LayerMask _groundMask = ~0;
+    [SerializeField] private Transform[] _tankDamageablePoints;
 
     #region Model
     public PlayerMovement playerMovement;
@@ -22,6 +23,9 @@ public class Player : MonoBehaviour
     public PlayerTurretShoot playerTurretShoot;
     #endregion
 
+    #region Getters
+    public Transform[] TankDamageablePoints => _tankDamageablePoints;
+    #endregion
     #region Initialization
     private void Awake()
     {

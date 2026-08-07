@@ -15,11 +15,12 @@ public class CapturingState : IState
     public void Enter()
     {
         GameManager.Instance.levelManager.AddChibiSoldierToCapturedList(_target);
+        _parent.shootAtPlayerBehaviour.Active(true);
     }
 
 	public void Update()
     {
-
+        _parent.shootAtPlayerBehaviour.ArtificialUpdate();
     }
 
 	public void Exit()

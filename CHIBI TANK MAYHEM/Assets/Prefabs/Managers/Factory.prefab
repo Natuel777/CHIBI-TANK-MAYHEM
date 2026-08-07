@@ -62,4 +62,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TurretBulletFactory
   _turretBulletPrefabs:
   - {fileID: 7782160229020289089, guid: 3d16f0f4739709b45b5eb9b7ee355e5a, type: 3}
+  - {fileID: 7782160229020289089, guid: efe5222e360b1c04d903f71d1344e1ff, type: 3}
   _initialStockPerType: 30

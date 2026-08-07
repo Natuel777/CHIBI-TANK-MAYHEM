@@ -19,10 +19,21 @@ public class CommonChibiSoldier : ChibiSoldier
                                                         neighborLayerMask, 
                                                         settings.neighborDetectionRadius);
         healthModel = new ChibiSoldierHealthModel(settings.maxHealth);
+        shootAtPlayerBehaviour = new ShootAtPlayerBehaviour(settings.gunFireCooldown, gunMuzzleTransform, 
+                                                        transform, neighborLayerMask, 
+                                                        settings.neighborDetectionRadius,
+                                                        settings.moveSpeed, settings.rotationSpeed);
     }
 
     private void Start()
     {
+        //Dsp se va a expandir con el main menu a multiplayer
+        if(GameManager.Instance.CurrentGameMode == GameMode.SinglePlayer)
+        {
+            Transform[] damageablePoints = FindAnyObjectByType<Player>().TankDamageablePoints;
+            shootAtPlayerBehaviour.GetDamageablePoints(damageablePoints);
+        }
+
         SetState(idleState);
     }
     #endregion

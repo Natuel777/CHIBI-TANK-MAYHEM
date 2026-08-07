@@ -8,12 +8,27 @@ public enum PlatformType
     Console
 }
 
+public enum GameMode
+{
+    SinglePlayer,
+    Multiplayer
+}
+
+public enum MatchMode
+{
+    DeathMatch,
+    Domination,
+    BattleRoyale
+}
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     public PlatformType CurrentPlatform => _currentPlatform;
+    public GameMode CurrentGameMode => _currentGameMode;
 
     private PlatformType _currentPlatform;
+    private GameMode _currentGameMode;
     [SerializeField] private bool _testingMobile;
 
     public LevelManager levelManager;
@@ -43,6 +58,9 @@ public class GameManager : MonoBehaviour
 
             if(mobileInput.gameObject.activeSelf) mobileInput.gameObject.SetActive(false);
         }
+
+        //Dsp se va a expandir con el main menu
+        _currentGameMode = GameMode.SinglePlayer;
     }
 
     private void Update()

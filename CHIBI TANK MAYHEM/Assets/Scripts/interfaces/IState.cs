@@ -11,5 +11,5 @@ public enum NPCEvents
 {
     ChibiSoldierFoundTarget,
 	ChibiSoldierHasReachedTarget,
-	ChibiSoldierCapturingTarget
+	ChibiSoldierCapturingTarget,
 }

@@ -5,20 +5,14 @@ public class RunningBehaviour : IBehaviours
     private bool _active, _targetFound = false;
     private Transform _transform;
     private ChibiSoldierCaptureTarget _closestTarget;
-    private float _speed, _rotationSpeed, _neighborDetectionRadius;
-    private LayerMask _neighborLayerMask;
-    //private int _neighborCount = 0;
-    private Vector3 _separationForce;
+    private FlockingSteering _flocking;
     public bool hasReachedTarget = false;
     public ChibiSoldierCaptureTarget ClosestTarget => _closestTarget;
 
     public RunningBehaviour(Transform t, float speed, float rotationSpeed, LayerMask neighborLayerMask, float neighborDetectionRadius)
     {
         _transform = t;
-        _neighborLayerMask = neighborLayerMask;
-        _speed = speed;
-        _rotationSpeed = rotationSpeed;
-        _neighborDetectionRadius = neighborDetectionRadius;
+        _flocking = new FlockingSteering(t, neighborLayerMask, neighborDetectionRadius, speed, rotationSpeed);
     }
 
     public void Active(bool value) {_active = value;}
@@ -28,28 +22,14 @@ public class RunningBehaviour : IBehaviours
         if(!_active) return;
 
         if(!_targetFound) FindClosestTarget();
+        if(_closestTarget == null) return;
 
-        #region Flocking Loop
-        _separationForce = Vector3.zero;
-        Collider[] neighborgs = GetNeighbors();
-        //_neighborCount = neighborgs.Length;
+        Vector3 direction = VectorMinusVector(_closestTarget.transform.position, _transform.position).normalized;
+        Vector3 combinedDirection = (direction + _flocking.CalculateFlockingForce()).normalized;
 
-        if(neighborgs.Length > 0)
-        {
-            CalculateSeparationForce(neighborgs);
-            ApplyAlignment(neighborgs);
-            ApplyCohesion(neighborgs);
-        }
-        #endregion
-
-        if(_closestTarget != null)
-        {
-            Vector3 direction = VectorMinusVector(_closestTarget.transform.position, _transform.position).normalized;
-            Vector3 combinedDirection = (direction + _separationForce).normalized;
-            RotateToTarget(direction);
-            MoveToTarget(combinedDirection);
-            CheckDistanceToTarget();
-        }
+        _flocking.RotateTowards(direction);
+        _flocking.Move(combinedDirection);
+        CheckDistanceToTarget();
     }
 
     private void FindClosestTarget()
@@ -78,74 +58,14 @@ public class RunningBehaviour : IBehaviours
         }
     }
 
-    private void MoveToTarget(Vector3 direction)
-    {
-        direction.y = 0f;
-        _transform.position += direction * _speed * Time.deltaTime;
-    }
-
-    private void RotateToTarget(Vector3 direction)
-    {
-        if(direction != Vector3.zero)
-        {
-            direction.y = 0f;
-            Quaternion targetRotation = Quaternion.LookRotation(direction);
-            _transform.rotation = Quaternion.Slerp(_transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
-        }
-    }
-
     private void CheckDistanceToTarget()
     {
         float distance = VectorMinusVector(_closestTarget.transform.position, _transform.position).magnitude;
 
         if(distance <= GameManager.Instance.levelManager.TargetCaptureDistance)
         {
-            //GameManager.Instance.levelManager.UpdateTargetStatus(_closestTarget, true);
             hasReachedTarget = true;
         }
-    }
-
-    private Collider[] GetNeighbors()
-    {
-        return Physics.OverlapSphere(_transform.position, _neighborDetectionRadius, _neighborLayerMask);
-    }
-
-    private void CalculateSeparationForce(Collider[] neighborgs)
-    {
-        foreach(Collider n in neighborgs)
-        {
-            Vector3 direction = VectorMinusVector(n.transform.position, _transform.position);
-            float distance = direction.magnitude;
-            Vector3 away = -direction.normalized;
-
-            if(distance > 0)
-                _separationForce += away / distance;
-        }
-    }
-
-    private void ApplyAlignment(Collider[] neighborgs)
-    {
-        Vector3 neighborForward = Vector3.zero;
-
-        foreach(Collider n in neighborgs)
-            neighborForward += n.transform.forward;
-
-        if(neighborForward != Vector3.zero)
-            neighborForward.Normalize();
-
-        _separationForce += neighborForward;
-    }
-
-    private void ApplyCohesion(Collider[] neighborgs)
-    {
-        Vector3 neighborCenter = Vector3.zero;
-
-        foreach(Collider n in neighborgs)
-            neighborCenter += n.transform.position;
-        
-        neighborCenter /= neighborgs.Length;
-        Vector3 cohesionDirection = VectorMinusVector(neighborCenter, _transform.position).normalized;
-        _separationForce += cohesionDirection;
     }
 
     private Vector3 VectorMinusVector(Vector3 pos1, Vector3 pos2) => (pos1 - pos2);

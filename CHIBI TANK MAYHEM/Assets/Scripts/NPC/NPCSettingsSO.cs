@@ -10,6 +10,10 @@ public class NPCSettingsSO : ScriptableObject
     [Header("Idle Behaviour Settings")]
     public float idleSearchTimer = 5f;
 
-    [Header("Running Behaviour Settings")]
+    [Header("Flocking Settings")]
     public float neighborDetectionRadius = 10f;
+
+    [Header("Shooting Settings")]
+    public float gunFireCooldown = 0.1f;
+
 }
