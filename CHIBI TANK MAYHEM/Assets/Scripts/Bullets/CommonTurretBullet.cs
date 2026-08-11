@@ -17,4 +17,24 @@ public class CommonTurretBullet : ShooteableObject
         if(currentLifetime <= 0)
             TurretBulletFactory.Instance.Return(this);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.CompareTag("TankBody"))
+        {
+            Debug.Log("A");
+        }
+
+        else if(other.gameObject.CompareTag("TankHead"))
+        {
+            Debug.Log("C");
+        }
+
+        else
+        {
+            Debug.Log("b");
+        }
+
+        TurretBulletFactory.Instance.Return(this);
+    }
 }

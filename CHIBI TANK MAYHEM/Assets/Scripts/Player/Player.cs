@@ -21,6 +21,14 @@ public class Player : MonoBehaviour
     public PlayerAim playerAim;
     public PlayerTurretAim playerTurretAim;
     public PlayerTurretShoot playerTurretShoot;
+
+    #region Health Models
+    public ParticularHealthModel bodyHealth;
+    public ParticularHealthModel headHealth;
+    public ParticularHealthModel turretHealth;
+    public ParticularHealthModel trailLFTHealth;
+    public ParticularHealthModel trailRGTHealth;
+    #endregion
     #endregion
 
     #region Getters
@@ -74,6 +82,12 @@ public class Player : MonoBehaviour
                                                 _playerSettings.minTurretPitch,
                                                 _playerSettings.maxTurretPitch,
                                                 _crosshairRaycastMask);
+
+        bodyHealth = new ParticularHealthModel(_playerSettings.bodyMaxHealth);
+        headHealth = new ParticularHealthModel(_playerSettings.headMaxHealth);
+        turretHealth = new ParticularHealthModel(_playerSettings.turretMaxHealth);
+        trailLFTHealth = new ParticularHealthModel(_playerSettings.trailLFTMaxHealth);
+        trailRGTHealth = new ParticularHealthModel(_playerSettings.trailRGTMaxHealth);
     }
 
     private void Start()

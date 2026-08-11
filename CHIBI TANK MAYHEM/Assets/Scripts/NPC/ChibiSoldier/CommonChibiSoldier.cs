@@ -18,7 +18,7 @@ public class CommonChibiSoldier : ChibiSoldier
                                                         settings.rotationSpeed,
                                                         neighborLayerMask, 
                                                         settings.neighborDetectionRadius);
-        healthModel = new ChibiSoldierHealthModel(settings.maxHealth);
+        healthModel = new ParticularHealthModel(settings.maxHealth);
         shootAtPlayerBehaviour = new ShootAtPlayerBehaviour(settings.gunFireCooldown, gunMuzzleTransform, 
                                                         transform, neighborLayerMask, 
                                                         settings.neighborDetectionRadius,

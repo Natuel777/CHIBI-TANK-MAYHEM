@@ -3,7 +3,15 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PlayerSettingsSO", menuName = "Scriptable Objects/PlayerSettingsSO")]
 public class PlayerSettingsSO : ScriptableObject
 {
-    [Header("Tank Settings")]
+    [Header("Tank Health Settings")]
+
+    public float bodyMaxHealth;
+    public float headMaxHealth;
+    public float turretMaxHealth;
+    public float trailLFTMaxHealth;
+    public float trailRGTMaxHealth;
+
+    [Header("Tank Movement Settings")]
     
     //Modelo de velocidad-objetivo (estándar de vehicle controllers): el input define una velocidad
     //deseada y el tanque acelera/desacelera hacia ella. Es estable por diseño — la velocidad nunca
