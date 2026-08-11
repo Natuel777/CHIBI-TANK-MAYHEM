@@ -22,7 +22,13 @@ public class FlockingSteering
     //Separación + alineación + cohesión con los vecinos detectados este frame. Vector3.zero si no
     //hay ninguno. Quien llama decide qué hacer con esta fuerza (combinarla con una dirección hacia
     //un target, usarla sola para simplemente mantenerse agrupado, etc.).
-    public Vector3 CalculateFlockingForce()
+    //
+    //includeAlignment: la alineación asume que transform.forward de cada vecino ES su dirección de
+    //movimiento (así es en RunningBehaviour, que rota hacia donde se mueve). Si quien llama rota el
+    //transform hacia otra cosa (ej. apuntar a un target sin perseguirlo), esa asunción se rompe: el
+    //forward de todos termina apuntando al mismo lugar por una razón ajena al movimiento, y la
+    //alineación arrastra al grupo entero hacia ahí. En esos casos, pasar false.
+    public Vector3 CalculateFlockingForce(bool includeAlignment = true)
     {
         _separationForce = Vector3.zero;
         Collider[] neighbors = GetNeighbors();
@@ -30,7 +36,9 @@ public class FlockingSteering
         if(neighbors.Length > 0)
         {
             CalculateSeparationForce(neighbors);
-            ApplyAlignment(neighbors);
+
+            if(includeAlignment) ApplyAlignment(neighbors);
+            
             ApplyCohesion(neighbors);
         }
 

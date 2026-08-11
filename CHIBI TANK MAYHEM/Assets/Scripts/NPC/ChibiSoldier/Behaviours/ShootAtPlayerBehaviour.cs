@@ -36,7 +36,7 @@ public class ShootAtPlayerBehaviour : IBehaviours
         if(_target == null) ChooseTarget();
 
         Vector3 aimDirection = (_target.position - _transform.position).normalized;
-        Vector3 moveDirection = _flocking.CalculateFlockingForce().normalized;
+        Vector3 moveDirection = _flocking.CalculateFlockingForce(includeAlignment: false).normalized;
         _flocking.RotateTowards(aimDirection);
         _flocking.Move(moveDirection);
         ShootToTarget();

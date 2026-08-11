@@ -301,7 +301,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 43.2
+    y: 0
     width: 1536
     height: 36
   m_SerializedDataModeController:
@@ -641,23 +641,23 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 21
-      width: 1536
-      height: 719.8
-    m_Scale: {x: 0.8331018, y: 0.8331018}
-    m_Translation: {x: 768, y: 359.9}
+      width: 753.2
+      height: 458.6
+    m_Scale: {x: 0.49036458, y: 0.49036458}
+    m_Translation: {x: 376.6, y: 229.3}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -921.85614
-      y: -432
-      width: 1843.7123
-      height: 864
+      x: -768
+      y: -467.61127
+      width: 1536
+      height: 935.22253
     m_MinimalGUI: 1
-  m_defaultScale: 0.8331018
-  m_LastWindowPixelSize: {x: 1920, y: 926}
+  m_defaultScale: 0.49036458
+  m_LastWindowPixelSize: {x: 753.2, y: 479.6}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 00000000000000000000
@@ -686,7 +686,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 79.200005
+    y: 24
     width: 202.2
     height: 479.6
   m_SerializedDataModeController:
@@ -758,8 +758,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Scene\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 203.2
-    y: 79.200005
+    x: 204.2
+    y: 24
     width: 753.2
     height: 479.6
   m_SerializedDataModeController:
@@ -1597,9 +1597,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 584.8
+    y: 529.6
     width: 957.4
-    height: 233.19998
+    height: 233.20001
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -1648,18 +1648,17 @@ MonoBehaviour:
       m_Data: 51292
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 50938
-    - m_Data: 50940
-    - m_Data: 50942
-    - m_Data: 50944
-    - m_Data: 50946
-    - m_Data: 50948
-    - m_Data: 50950
-    - m_Data: 50952
     - m_Data: 50954
     - m_Data: 50956
     - m_Data: 50958
-    - m_Data: 51282
+    - m_Data: 50960
+    - m_Data: 50962
+    - m_Data: 50964
+    - m_Data: 50966
+    - m_Data: 50968
+    - m_Data: 50970
+    - m_Data: 50972
+    - m_Data: 50974
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1693,17 +1692,17 @@ MonoBehaviour:
       m_Data: 0
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 50938
-    - m_Data: 50940
-    - m_Data: 50942
-    - m_Data: 50944
-    - m_Data: 50946
-    - m_Data: 50948
-    - m_Data: 50950
-    - m_Data: 50952
     - m_Data: 50954
     - m_Data: 50956
     - m_Data: 50958
+    - m_Data: 50960
+    - m_Data: 50962
+    - m_Data: 50964
+    - m_Data: 50966
+    - m_Data: 50968
+    - m_Data: 50970
+    - m_Data: 50972
+    - m_Data: 50974
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1837,8 +1836,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Inspector\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 958.4
-    y: 79.200005
+    x: 959.4
+    y: 24
     width: 576.6
     height: 738.8
   m_SerializedDataModeController:
