@@ -22,8 +22,16 @@ public class ParticularHealthModel : IDamageable
         if(_currentHealth <= 0)
         {
             _currentHealth = 0;
-            
+
             if(_DeathSequence != null) _DeathSequence.Invoke();
         }
+    }
+
+    public void Heal(float amount)
+    {
+        _currentHealth += amount;
+
+        if(_currentHealth > _maxHealth)
+            _currentHealth = _maxHealth;
     }
 }

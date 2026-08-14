@@ -12,6 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c73ca89a9841c44c89907d8116ae380, type: 3}
   m_Name: PlayerSettingsSO
   m_EditorClassIdentifier: Assembly-CSharp::PlayerSettingsSO
+  bodyMaxHealth: 100
+  headMaxHealth: 100
+  turretMaxHealth: 100
+  trailLFTMaxHealth: 100
+  trailRGTMaxHealth: 100
   maxSpeed: 8
   acceleration: 12
   deceleration: 18
@@ -24,7 +29,6 @@ MonoBehaviour:
   suspensionRestLength: 0.5
   suspensionStrength: 2
   suspensionDampingRatio: 0.5
-  groundNormalSmoothing: 8
   aimRotationSpeed: 10
   minTankHeadPitch: -5
   maxTankHeadPitch: 10

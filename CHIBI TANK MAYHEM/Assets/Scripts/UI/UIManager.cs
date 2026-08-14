@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private RectTransform _crosshair;
     [SerializeField] private RectTransform _turretCrosshair;
     [SerializeField] private PlayerSettingsSO _playerSettings;
+    [SerializeField] private PlayerHealthBar healthBar;
 
     [Header("UI Components")]
     [SerializeField] private Image _turretCrosshairImage;
@@ -21,7 +22,7 @@ public class UIManager : MonoBehaviour
         _camera = Camera.main;
         crosshairUI = new CrosshairUI(_camera, _crosshair);
 
-        if(_turretCrosshair != null && _playerSettings.tankTurretFollowsCamera) 
+        if(_turretCrosshair != null && _playerSettings.tankTurretFollowsCamera)
             turretCrosshairUI = new CrosshairUI(_camera, _turretCrosshair);
 
         else _turretCrosshairImage.enabled = false;
@@ -34,6 +35,13 @@ public class UIManager : MonoBehaviour
 
         if(turretCrosshairUI != null && player.playerTurretAim != null)
             turretCrosshairUI.Initialize(player, player.playerTurretAim);
+
+        healthBar.Initialize(_playerSettings.bodyMaxHealth, _playerSettings.headMaxHealth, _playerSettings.turretMaxHealth);
+    }
+
+    private void Update()
+    {
+        healthBar.ArtificialUpdate();
     }
 
     private void LateUpdate()
