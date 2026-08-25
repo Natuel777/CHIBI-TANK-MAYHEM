@@ -15,5 +15,4 @@ public class NPCSettingsSO : ScriptableObject
 
     [Header("Shooting Settings")]
     public float gunFireCooldown = 0.1f;
-
 }

@@ -7,6 +7,7 @@ public class ShootAtPlayerBehaviour : IBehaviours
     private bool _active;
     private readonly float _initialShootInterval;
     private float _shootInterval;
+    private const float _flockingDeadzone = 0.05f;
     private BulletType _currentBulletType = BulletType.CommonChibiSoldierBullet;
     private FlockingSteering _flocking;
 
@@ -34,11 +35,20 @@ public class ShootAtPlayerBehaviour : IBehaviours
         if(!_active) return;
 
         if(_target == null) ChooseTarget();
-
+        
+        Vector3 flockingForce = _flocking.CalculateFlockingForce(includeAlignment: false);
         Vector3 aimDirection = (_target.position - _transform.position).normalized;
-        Vector3 moveDirection = _flocking.CalculateFlockingForce(includeAlignment: false).normalized;
         _flocking.RotateTowards(aimDirection);
-        _flocking.Move(moveDirection);
+
+        //La fuerza de separación/cohesión casi nunca da EXACTAMENTE cero aunque los vecinos ya estén
+        //bien acomodados, siempre queda un resto mínimo. Antes se usaba .normalized, así que ese resto
+        //(por chico que sea) se convertía en un paso a velocidad MÁXIMA cada frame, y como su dirección
+        //cambia un poco de frame a frame, el bot vibraba en el lugar. Acá: si la fuerza es menor al
+        //umbral, no se mueve; si no, se limita a magnitud 1 (en vez de normalizar) para que el paso sea
+        //proporcional a cuánta corrección hace falta, no siempre a fondo.
+        if(flockingForce.sqrMagnitude > _flockingDeadzone * _flockingDeadzone)
+            _flocking.Move(Vector3.ClampMagnitude(flockingForce, 1f));
+
         ShootToTarget();
     }
 

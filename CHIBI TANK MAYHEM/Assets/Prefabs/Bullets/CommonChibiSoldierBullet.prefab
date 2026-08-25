@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2972947b161be924bb9bad79873be70a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CommonTurretBullet
-  speed: 76.4
+  speed: 40
   initialDamage: 0
   lifetime: 4
   bulletType: 2
