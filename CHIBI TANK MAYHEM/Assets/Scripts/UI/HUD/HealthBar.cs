@@ -11,10 +11,10 @@ public class HealthBar
     [SerializeField] private Color _damageColor = Color.red;
     [SerializeField] private Color _healColor = Color.green;
 
-    [Tooltip("A qué Value del Slider corresponde vida llena. Depende de cómo esté configurado su Direction (ej: con Right To Left, vida llena suele ser 0, no 1).")]
-    [SerializeField] private float _fullHealthValue = 1f;
+    [Tooltip("A qué Value del Slider corresponde vida llena. Depende de cómo esté configurado su Direction (con Right To Left, vida llena es 0, no 1).")]
+    [SerializeField] private float _fullHealthValue = 0f;
     [Tooltip("A qué Value del Slider corresponde vida vacía.")]
-    [SerializeField] private float _emptyHealthValue = 0f;
+    [SerializeField] private float _emptyHealthValue = 1f;
 
     private float _maxHealth, _currentDisplayValue = 1f, _targetValue = 1f, _colorPulseTimer = 0f;
     private Color _fillBaseColor;

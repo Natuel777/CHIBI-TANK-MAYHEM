@@ -2333,8 +2333,8 @@ MonoBehaviour:
       _colorPulseDuration: 1
       _damageColor: {r: 0.6301887, g: 0, b: 0, a: 1}
       _healColor: {r: 0, g: 1, b: 0, a: 1}
-      _fullHealthValue: 1
-      _emptyHealthValue: 0
+      _fullHealthValue: 0
+      _emptyHealthValue: 1
     _headHealthBar:
       _healthBar: {fileID: 7202590595349302228}
       _fillImage: {fileID: 4394656068718997304}
@@ -2342,8 +2342,8 @@ MonoBehaviour:
       _colorPulseDuration: 1
       _damageColor: {r: 0.6313726, g: 0, b: 0, a: 1}
       _healColor: {r: 0, g: 1, b: 0, a: 1}
-      _fullHealthValue: 1
-      _emptyHealthValue: 0
+      _fullHealthValue: 0
+      _emptyHealthValue: 1
     _turretHealthBar:
       _healthBar: {fileID: 8431105685115276986}
       _fillImage: {fileID: 2331600146390947929}
@@ -2351,8 +2351,8 @@ MonoBehaviour:
       _colorPulseDuration: 1
       _damageColor: {r: 0.6313726, g: 0, b: 0, a: 1}
       _healColor: {r: 0, g: 1, b: 0, a: 1}
-      _fullHealthValue: 1
-      _emptyHealthValue: 0
+      _fullHealthValue: 0
+      _emptyHealthValue: 1
     _trailLFTHealthBar:
       _healthBar: {fileID: 8905585348617686608}
       _fillImage: {fileID: 4096726434280246827}
@@ -2360,8 +2360,8 @@ MonoBehaviour:
       _colorPulseDuration: 1
       _damageColor: {r: 1, g: 0, b: 0, a: 1}
       _healColor: {r: 0, g: 1, b: 0, a: 1}
-      _fullHealthValue: 1
-      _emptyHealthValue: 0
+      _fullHealthValue: 0
+      _emptyHealthValue: 1
     _trailRGTHealthBar:
       _healthBar: {fileID: 7789716715658695503}
       _fillImage: {fileID: 3491187707801869117}
@@ -2369,8 +2369,8 @@ MonoBehaviour:
       _colorPulseDuration: 1
       _damageColor: {r: 1, g: 0, b: 0, a: 1}
       _healColor: {r: 0, g: 1, b: 0, a: 1}
-      _fullHealthValue: 1
-      _emptyHealthValue: 0
+      _fullHealthValue: 0
+      _emptyHealthValue: 1
   _turretCrosshairImage: {fileID: 6376562618081453870}
 --- !u!1 &6473147581454860583
 GameObject:
