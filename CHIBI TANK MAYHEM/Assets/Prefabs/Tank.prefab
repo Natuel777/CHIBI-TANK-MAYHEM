@@ -1173,7 +1173,7 @@ GameObject:
   - component: {fileID: 4716992082702160577}
   m_Layer: 6
   m_Name: Wheel 2
-  m_TagString: TankTrail
+  m_TagString: TankTrailRGT
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1320,7 +1320,7 @@ GameObject:
   - component: {fileID: 217793592741397627}
   m_Layer: 6
   m_Name: Wheel 1
-  m_TagString: TankTrail
+  m_TagString: TankTrailLFT
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

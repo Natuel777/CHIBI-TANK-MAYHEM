@@ -75,6 +75,8 @@ public class Player : MonoBehaviour
                                                 _playerSettings.minTurretPitch,
                                                 _playerSettings.maxTurretPitch,
                                                 _crosshairRaycastMask);
+        
+        TargetSelection.Initialize(TankDamageablePoints);
     }
 
     private void Start()

@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class ShootAtPlayerBehaviour : IBehaviours
 {
-    private Transform[] _damageablePoints;
     private Transform _target = null, _gunMuzzleTransform, _transform;
     private bool _active;
     private readonly float _initialShootInterval;
@@ -24,17 +23,16 @@ public class ShootAtPlayerBehaviour : IBehaviours
 
     public void Active(bool value) {_active = value;}
 
-    public ShootAtPlayerBehaviour GetDamageablePoints(Transform[] damageablePoints)
-    {
-        _damageablePoints = damageablePoints;
-        return this;
-    }
-
     public void ArtificialUpdate()
     {
         if(!_active) return;
 
-        if(_target == null) ChooseTarget();
+        if(_target == null)
+        {
+            if(TargetSelection.target == null) TargetSelection.ChooseTarget();
+
+            _target = TargetSelection.target;
+        } 
         
         Vector3 flockingForce = _flocking.CalculateFlockingForce(includeAlignment: false);
         Vector3 aimDirection = (_target.position - _transform.position).normalized;
@@ -50,14 +48,6 @@ public class ShootAtPlayerBehaviour : IBehaviours
             _flocking.Move(Vector3.ClampMagnitude(flockingForce, 1f));
 
         ShootToTarget();
-    }
-
-    private void ChooseTarget()
-    {
-        if(_target != null || _damageablePoints == null) return;
-
-        int randomIndex = Random.Range(0, _damageablePoints.Length);
-        _target = _damageablePoints[randomIndex];
     }
 
     private void ShootToTarget()

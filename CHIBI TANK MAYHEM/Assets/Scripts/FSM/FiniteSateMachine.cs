@@ -1,18 +1,16 @@
 public class FiniteSateMachine
 {
-    private IState _currentState;
+    public IState currentState;
 
 	public void SetState(IState newState)
-    	{
-        	_currentState?.Exit();
-        	_currentState = newState;
-        	_currentState?.Enter();
-    	}
+    {
+    	currentState?.Exit();
+    	currentState = newState;
+    	currentState?.Enter();
+		PlayerEvents.OnAnyStateChanged.Invoke();
+    }
 
-	public void UpdateState()
-	{
-		_currentState.Update();
-	}
+	public void UpdateState() => currentState.Update();
 
-	public void SendEvent(NPCEvents evt, object data = null) {_currentState?.HandleEvent(evt, data);}
+	public void SendEvent(NPCEvents evt, object data = null) {currentState?.HandleEvent(evt, data);}
 }

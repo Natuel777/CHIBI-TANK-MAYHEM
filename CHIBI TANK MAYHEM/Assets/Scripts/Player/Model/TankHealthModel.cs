@@ -17,8 +17,8 @@ public class TankHealthModel
         bodyHealth = new ParticularHealthModel(bodyMaxHealth, PlayerEvents.PlayerTankDeath);
         headHealth = new ParticularHealthModel(headMaxHealth, PlayerEvents.PlayerTankDeath);
         turretHealth = new ParticularHealthModel(turretMaxHealth, PlayerEvents.PlayerTankTurretDestroyed);
-        //trailLFTHealth = new ParticularHealthModel(trailLFTMaxHealth, PlayerEvents.PlayerTankTrailDestroyed);
-        //trailRGTHealth = new ParticularHealthModel(trailRGTMaxHealth, PlayerEvents.PlayerTankTrailDestroyed);
+        trailLFTHealth = new ParticularHealthModel(trailLFTMaxHealth, PlayerEvents.PlayerTankTrailLFTDestroyed);
+        trailRGTHealth = new ParticularHealthModel(trailRGTMaxHealth, PlayerEvents.PlayerTankTrailRGTDestroyed);
         #endregion
 
         #region Event Subscription
@@ -26,12 +26,14 @@ public class TankHealthModel
         PlayerEvents.PlayerTankBodyTakesDamage += bodyHealth.TakeDamage;
         PlayerEvents.PlayerTankHeadTakesDamage += headHealth.TakeDamage;
         PlayerEvents.PlayerTankTurretTakesDamage += turretHealth.TakeDamage;
-        //PlayerEvents.PlayerTankTrailTakesDamage += trailLFTHealth.TakeDamage;
-        //PlayerEvents.PlayerTankTrailTakesDamage += trailRGTHealth.TakeDamage;
+        PlayerEvents.PlayerTankTrailLFTTakesDamage += trailLFTHealth.TakeDamage;
+        PlayerEvents.PlayerTankTrailRGTTakesDamage += trailRGTHealth.TakeDamage;
 
         PlayerEvents.PlayerTankBodyHeals += bodyHealth.Heal;
         PlayerEvents.PlayerTankHeadHeals += headHealth.Heal;
         PlayerEvents.PlayerTankTurretHeals += turretHealth.Heal;
+        PlayerEvents.PlayerTankTrailLFTHeals += trailLFTHealth.Heal;
+        PlayerEvents.PlayerTankTrailRGTHeals += trailRGTHealth.Heal;
         #endregion
     }
 
@@ -41,15 +43,19 @@ public class TankHealthModel
 
     public void TurretTakeDamage(float damage) => PlayerEvents.PlayerTankTurretTakesDamage.Invoke(damage);
 
+    public void TrailLFTTakeDamage(float damage) => PlayerEvents.PlayerTankTrailLFTTakesDamage.Invoke(damage);
+
+    public void TrailRGTTakeDamage(float damage) => PlayerEvents.PlayerTankTrailRGTTakesDamage.Invoke(damage);
+
     public void BodyHeal(float amount) => PlayerEvents.PlayerTankBodyHeals.Invoke(amount);
 
     public void HeadHeal(float amount) => PlayerEvents.PlayerTankHeadHeals.Invoke(amount);
 
     public void TurretHeal(float amount) => PlayerEvents.PlayerTankTurretHeals.Invoke(amount);
 
-    //public void TrailLFTTakeDamage(float damage) =>
+    public void TrailLFTHeal(float amount) => PlayerEvents.PlayerTankTrailLFTHeals.Invoke(amount);
 
-    //public void TrailRGTTakeDamage(float damage) =>
+    public void TrailRGTHeal(float amount) => PlayerEvents.PlayerTankTrailRGTHeals.Invoke(amount);
 
     private void Death() {}
 }

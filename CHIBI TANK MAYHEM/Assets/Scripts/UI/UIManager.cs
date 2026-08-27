@@ -36,7 +36,8 @@ public class UIManager : MonoBehaviour
         if(turretCrosshairUI != null && player.playerTurretAim != null)
             turretCrosshairUI.Initialize(player, player.playerTurretAim);
 
-        healthBar.Initialize(_playerSettings.bodyMaxHealth, _playerSettings.headMaxHealth, _playerSettings.turretMaxHealth);
+        healthBar.Initialize(_playerSettings.bodyMaxHealth, _playerSettings.headMaxHealth, _playerSettings.turretMaxHealth,
+                            _playerSettings.trailLFTMaxHealth, _playerSettings.trailRGTMaxHealth);
     }
 
     private void Update()

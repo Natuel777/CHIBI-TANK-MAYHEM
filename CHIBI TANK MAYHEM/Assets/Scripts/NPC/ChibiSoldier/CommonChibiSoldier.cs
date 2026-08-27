@@ -23,17 +23,11 @@ public class CommonChibiSoldier : ChibiSoldier
                                                         transform, neighborLayerMask, 
                                                         settings.neighborDetectionRadius,
                                                         settings.moveSpeed, settings.rotationSpeed);
+        armAim = new ArmAim(shoulderTransform, this, settings.rotationSpeed);
     }
 
     private void Start()
     {
-        //Dsp se va a expandir con el main menu a multiplayer
-        if(GameManager.Instance.CurrentGameMode == GameMode.SinglePlayer)
-        {
-            Transform[] damageablePoints = FindAnyObjectByType<Player>().TankDamageablePoints;
-            shootAtPlayerBehaviour.GetDamageablePoints(damageablePoints);
-        }
-
         SetState(idleState);
     }
     #endregion

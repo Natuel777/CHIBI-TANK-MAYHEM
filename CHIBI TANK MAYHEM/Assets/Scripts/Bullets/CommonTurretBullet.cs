@@ -22,26 +22,37 @@ public class CommonTurretBullet : ShooteableObject
     {
         if(other.gameObject.CompareTag("TankBody"))
         {
-            if(other.TryGetComponent<Player>(out Player player))
+            Player player = other.GetComponentInParent<Player>();
+            if(player != null)
                 player.healthModel?.BodyTakeDamage(initialDamage);
         }
 
         else if(other.gameObject.CompareTag("TankHead"))
         {
-            if(other.TryGetComponent<Player>(out Player player))
+            Player player = other.GetComponentInParent<Player>();
+            if(player != null)
                 player.healthModel?.HeadTakeDamage(initialDamage);
         }
 
         else if(other.gameObject.CompareTag("TankTurret"))
         {
-            if(other.TryGetComponent<Player>(out Player player))
+            Player player = other.GetComponentInParent<Player>();
+            if(player != null)
                 player.healthModel?.TurretTakeDamage(initialDamage);
         }
 
-        else
+        else if(other.gameObject.CompareTag("TankTrailLFT"))
         {
-            //if(other.TryGetComponent<Player>(out Player player))
-            //    player.healthModel?.TurretTakeDamage();
+            Player player = other.GetComponentInParent<Player>();
+            if(player != null)
+                player.healthModel?.TrailLFTTakeDamage(initialDamage);
+        }
+
+        else if(other.gameObject.CompareTag("TankTrailRGT"))
+        {
+            Player player = other.GetComponentInParent<Player>();
+            if(player != null)
+                player.healthModel?.TrailRGTTakeDamage(initialDamage);
         }
 
         TurretBulletFactory.Instance.Return(this);
