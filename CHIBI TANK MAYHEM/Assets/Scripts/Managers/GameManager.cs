@@ -21,17 +21,19 @@ public enum MatchMode
     BattleRoyale
 }
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviour, IGameManager
 {
     public static GameManager Instance { get; private set; }
+    #region Getters
     public PlatformType CurrentPlatform => _currentPlatform;
     public GameMode CurrentGameMode => _currentGameMode;
+    public LevelManager LevelManager => _levelManager;
+    #endregion
 
     private PlatformType _currentPlatform;
     private GameMode _currentGameMode;
     [SerializeField] private bool _testingMobile;
-
-    public LevelManager levelManager;
+    [SerializeField] private LevelManager _levelManager;
 
     private void Awake()
     {
@@ -40,6 +42,8 @@ public class GameManager : MonoBehaviour
         
         else Instance = this;
 
+        ServiceLocator.Instance.Register<IGameManager>(this);
+
         #if UNITY_ANDROID || UNITY_IOS 
             _currentPlatform = PlatformType.Mobile;
 
@@ -47,7 +51,7 @@ public class GameManager : MonoBehaviour
             _currentPlatform = PlatformType.PC;
         #endif
 
-        levelManager.Initialize();
+        _levelManager.Initialize();
     }
 
     private void Start()
@@ -65,7 +69,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        levelManager.ArtificialUpdate();
+        _levelManager.ArtificialUpdate();
     }
 
     #if UNITY_EDITOR
@@ -81,5 +85,10 @@ public class GameManager : MonoBehaviour
         #if UNITY_EDITOR
         Debug.Log("Destroyed object: " + obj.name);
         #endif
+    }
+
+    private void OnDestroy() 
+    {
+        ServiceLocator.Instance.Unregister<IGameManager>(this);
     }
 }

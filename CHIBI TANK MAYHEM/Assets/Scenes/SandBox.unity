@@ -5747,6 +5747,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3172941148281635090, guid: 4962fb5696be0ff4c83a388d5fc0095d, type: 3}
+      propertyPath: _levelManager._chibiSoldierTargets.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3172941148281635090, guid: 4962fb5696be0ff4c83a388d5fc0095d, type: 3}
       propertyPath: 'levelManager._chibiSoldierTargets.Array.data[0]'
       value: 
       objectReference: {fileID: 4919793999095613684}
@@ -5768,6 +5772,18 @@ PrefabInstance:
       objectReference: {fileID: 726570882}
     - target: {fileID: 3172941148281635090, guid: 4962fb5696be0ff4c83a388d5fc0095d, type: 3}
       propertyPath: 'levelManager._chibiSoldierTargets.Array.data[5]'
+      value: 
+      objectReference: {fileID: 2124285638}
+    - target: {fileID: 3172941148281635090, guid: 4962fb5696be0ff4c83a388d5fc0095d, type: 3}
+      propertyPath: '_levelManager._chibiSoldierTargets.Array.data[0]'
+      value: 
+      objectReference: {fileID: 4919793999095613684}
+    - target: {fileID: 3172941148281635090, guid: 4962fb5696be0ff4c83a388d5fc0095d, type: 3}
+      propertyPath: '_levelManager._chibiSoldierTargets.Array.data[1]'
+      value: 
+      objectReference: {fileID: 726570882}
+    - target: {fileID: 3172941148281635090, guid: 4962fb5696be0ff4c83a388d5fc0095d, type: 3}
+      propertyPath: '_levelManager._chibiSoldierTargets.Array.data[2]'
       value: 
       objectReference: {fileID: 2124285638}
     - target: {fileID: 5467511514213637842, guid: 4962fb5696be0ff4c83a388d5fc0095d, type: 3}

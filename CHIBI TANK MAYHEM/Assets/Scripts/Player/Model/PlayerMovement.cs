@@ -59,6 +59,7 @@ public class PlayerMovement : IInputInitialize
                                                     float suspensionStrength,
                                                     float suspensionDampingRatio,
                                                     float groundNormalSmoothing,
+                                                    float maxDepenetrationVelocity,
                                                     LayerMask groundMask,
                                                     Vector3 centerOfMassOffset)
     {
@@ -82,6 +83,7 @@ public class PlayerMovement : IInputInitialize
         //centerOfMass define alrededor de qué punto rota físicamente el Rigidbody (choques, vuelco en
         //rampas, etc.). Bajarlo un poco ayuda a que el tanque sea más estable y no se dé vuelta fácil.
         _rb.centerOfMass = centerOfMassOffset;
+        _rb.maxDepenetrationVelocity = maxDepenetrationVelocity;
 
         //NO congelamos ninguna rotación: la física es libre de inclinar el tanque según el terreno.
         //El giro por input controla SOLO la guiñada y deja el cabeceo/alabeo en manos de la suspensión

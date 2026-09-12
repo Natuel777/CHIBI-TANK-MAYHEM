@@ -46,6 +46,7 @@ public class Player : MonoBehaviour
                                             _playerSettings.suspensionStrength,
                                             _playerSettings.suspensionDampingRatio,
                                             _playerSettings.groundNormalSmoothing,
+                                            _playerSettings.maxDepenetrationVelocitym,
                                             _groundMask,
                                             _playerSettings.centerOfMassOffset);
         playerShoot = new PlayerShoot(_cannonMuzzleTransform);

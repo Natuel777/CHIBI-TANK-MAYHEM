@@ -6,6 +6,7 @@ public class RunningBehaviour : IBehaviours
     private Transform _transform;
     private ChibiSoldierCaptureTarget _closestTarget;
     private FlockingSteering _flocking;
+    private IGameManager _gameManager;
     public bool hasReachedTarget = false;
     public ChibiSoldierCaptureTarget ClosestTarget => _closestTarget;
 
@@ -22,6 +23,7 @@ public class RunningBehaviour : IBehaviours
         if(!_active) return;
 
         if(!_targetFound) FindClosestTarget();
+
         if(_closestTarget == null) return;
 
         Vector3 direction = VectorMinusVector(_closestTarget.transform.position, _transform.position).normalized;
@@ -34,7 +36,9 @@ public class RunningBehaviour : IBehaviours
 
     private void FindClosestTarget()
     {
-        var targetDic = GameManager.Instance.levelManager.ChibiSoldierTargets;
+        if(!TryResolveGameManager()) return;
+
+        var targetDic = _gameManager.LevelManager.ChibiSoldierTargets;
         float closestDistance = Mathf.Infinity;
         ChibiSoldierCaptureTarget closestTarget = null;
 
@@ -62,10 +66,8 @@ public class RunningBehaviour : IBehaviours
     {
         float distance = VectorMinusVector(_closestTarget.transform.position, _transform.position).magnitude;
 
-        if(distance <= GameManager.Instance.levelManager.TargetCaptureDistance)
-        {
+        if(distance <= _gameManager.LevelManager.TargetCaptureDistance)
             hasReachedTarget = true;
-        }
     }
 
     private Vector3 VectorMinusVector(Vector3 pos1, Vector3 pos2) => (pos1 - pos2);
@@ -76,5 +78,21 @@ public class RunningBehaviour : IBehaviours
         _targetFound = false;
         _closestTarget = null;
         hasReachedTarget = false;
+    }
+
+    //Lazy en vez de resolverse una sola vez en el constructor: si el Awake() de este NPC corre
+    //antes que el de GameManager, ServiceLocator todavía no tiene nada registrado. Reintentando acá
+    //(que se llama todos los frames hasta encontrar target) el service termina apareciendo apenas
+    //GameManager haga su Awake, sin depender de en qué orden Unity llame a los Awake de cada objeto.
+    private bool TryResolveGameManager()
+    {
+        if(_gameManager != null) return true;
+
+        if(!ServiceLocator.Instance.TryGet(out IGameManager gmInterface)) return false;
+        
+        if(gmInterface is not GameManager gameManager) return false;
+
+        _gameManager = gameManager;
+        return true;
     }
 }

@@ -771,7 +771,7 @@ GameObject:
   - component: {fileID: 1504843927972850186}
   - component: {fileID: 8644007416478033252}
   - component: {fileID: 2055085380231624002}
-  - component: {fileID: 6450418498297470958}
+  - component: {fileID: 5376087675639094812}
   m_Layer: 6
   m_Name: Tank
   m_TagString: Untagged
@@ -1017,8 +1017,8 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
---- !u!65 &6450418498297470958
-BoxCollider:
+--- !u!136 &5376087675639094812
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1030,14 +1030,16 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2.2225928, y: 1.5941648, z: 4.018208}
-  m_Center: {x: -0.036468267, y: -0.29708254, z: 0.0014798641}
+  serializedVersion: 2
+  m_Radius: 1.09
+  m_Height: 4.06
+  m_Direction: 2
+  m_Center: {x: 0, y: -0.13, z: 0}
 --- !u!1 &4888421041028162514
 GameObject:
   m_ObjectHideFlags: 0

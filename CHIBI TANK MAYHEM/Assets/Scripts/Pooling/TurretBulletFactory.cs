@@ -10,6 +10,8 @@ public class TurretBulletFactory : Factory<ShooteableObject, BulletType>
 
     private Dictionary<BulletType, ShooteableObject> _prefabsByName;
     private Dictionary<BulletType, ObjectPool<ShooteableObject>> _pools;
+    private IGameManager _gameManager;
+
 
     private void Awake()
     {
@@ -20,6 +22,13 @@ public class TurretBulletFactory : Factory<ShooteableObject, BulletType>
         }
 
         Instance = this;
+
+        if(ServiceLocator.Instance.TryGet(out IGameManager gmInterface))
+        {
+            if(gmInterface is GameManager gameManager)
+                _gameManager = gameManager;
+        }
+
         _prefabsByName = new();
         _pools = new();
 
@@ -43,7 +52,7 @@ public class TurretBulletFactory : Factory<ShooteableObject, BulletType>
     {
         if(!_pools.TryGetValue(bullet.BulletType, out var pool))
         {
-            GameManager.Instance.DestroyObject(bullet.gameObject);
+            _gameManager?.DestroyObject(bullet.gameObject);
             return;
         }
 

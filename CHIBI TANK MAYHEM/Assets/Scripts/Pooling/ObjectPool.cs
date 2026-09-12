@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class ObjectPool<T> where T : MonoBehaviour
 {
-    List<T> _stock = new List<T>();
-    List<T> _active = new List<T>();
-    Action<T> _On;
-    Action<T> _Off;
-    Func<T> _Factory;
+    private List<T> _stock = new List<T>();
+    private List<T> _active = new List<T>();
+    private Action<T> _On;
+    private Action<T> _Off;
+    private Func<T> _Factory;
+    private IGameManager _gameManager;
 
     public ObjectPool(Func<T> Factory, Action<T> ObjOn, Action<T> ObjOff, int initialStock = 15)
     {
@@ -21,6 +22,12 @@ public class ObjectPool<T> where T : MonoBehaviour
             var x = _Factory();
             _Off(x);
             _stock.Add(x);
+        }
+
+        if(ServiceLocator.Instance.TryGet(out IGameManager gmInterface))
+        {
+            if(gmInterface is GameManager gameManager)
+                _gameManager = gameManager;
         }
     }
 
@@ -53,13 +60,13 @@ public class ObjectPool<T> where T : MonoBehaviour
         foreach(var obj in _active)
         {
             if(obj != null)
-                GameManager.Instance.DestroyObject(obj.gameObject);
+                _gameManager?.DestroyObject(obj.gameObject);
         }
         
         foreach(var obj in _stock)
         {
             if(obj != null)
-                GameManager.Instance.DestroyObject(obj.gameObject);
+                _gameManager?.DestroyObject(obj.gameObject);
         }
 
         _active.Clear();

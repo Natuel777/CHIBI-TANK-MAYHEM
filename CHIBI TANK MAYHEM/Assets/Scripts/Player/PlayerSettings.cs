@@ -61,6 +61,9 @@ public class PlayerSettingsSO : ScriptableObject
     [Tooltip("Amortiguación del resorte relativa a la crítica. 0 = rebota eternamente como un resorte ideal; 1 = se asienta sin rebotar nada; ~0.5 deja un rebote breve y natural.")]
     public float suspensionDampingRatio = 0.5f;
 
+    [Tooltip("Velocidad máxima de depenetración del Rigidbody, en m/s. Limita la velocidad a la que el tanque puede salir de colisiones profundas. Más alto = sale más rápido; más bajo = sale más lento y puede quedarse atascado.")]
+    public float maxDepenetrationVelocitym = 3f;
+
     [Header("Tank Head Settings")]
     public float aimRotationSpeed = 720f;
     public float minTankHeadPitch = -20f;
