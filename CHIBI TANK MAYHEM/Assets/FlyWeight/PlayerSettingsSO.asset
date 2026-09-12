@@ -26,9 +26,10 @@ MonoBehaviour:
   pitchTiltSmoothTime: 0.25
   centerOfMassOffset: {x: 0, y: -0.5, z: 0}
   groundNormalSmoothing: 8
-  suspensionRestLength: 0.5
-  suspensionStrength: 2
-  suspensionDampingRatio: 0.5
+  suspensionRestLength: 1
+  suspensionStrength: 4
+  suspensionDampingRatio: 0.94
+  maxDepenetrationVelocitym: 3
   aimRotationSpeed: 10
   minTankHeadPitch: -5
   maxTankHeadPitch: 10

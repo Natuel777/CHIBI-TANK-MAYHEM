@@ -110,6 +110,11 @@ public class Player : MonoBehaviour
         playerMovement.ArtificialFixedUpdate();
     }
 
+    private void OnCollisionEnter(Collision other) 
+    {
+        
+    }
+
     #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
