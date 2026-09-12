@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CapturingState : IState
+public class CapturingState : IState, IServiceConsumer
 {
     private ChibiSoldier _parent;
     private ChibiSoldierCaptureTarget _target;
@@ -15,7 +15,7 @@ public class CapturingState : IState
 
     public void Enter()
     {
-        if(!TryResolveGameManager()) return;
+        if(!TryResolveService()) return;
 
         _gameManager.LevelManager.AddChibiSoldierToCapturedList(_target);
         _parent.shootAtPlayerBehaviour.Active(true);
@@ -39,10 +39,10 @@ public class CapturingState : IState
     //Mismo motivo que en RunningBehaviour: resolver el service acá (recién cuando se entra a este
     //estado, mucho después del arranque de la escena) en vez de en el constructor evita depender del
     //orden de Awake entre este NPC y GameManager.
-    private bool TryResolveGameManager()
+    public bool TryResolveService()
     {
         if(_gameManager != null) return true;
-        
+
         if(!ServiceLocator.Instance.TryGet(out IGameManager gmInterface)) return false;
         
         if(gmInterface is not GameManager gameManager) return false;

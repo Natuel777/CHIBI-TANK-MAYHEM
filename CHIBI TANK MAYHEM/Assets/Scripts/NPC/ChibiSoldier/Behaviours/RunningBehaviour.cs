@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class RunningBehaviour : IBehaviours
+public class RunningBehaviour : IBehaviours, IServiceConsumer
 {
     private bool _active, _targetFound = false;
     private Transform _transform;
@@ -36,7 +36,7 @@ public class RunningBehaviour : IBehaviours
 
     private void FindClosestTarget()
     {
-        if(!TryResolveGameManager()) return;
+        if(!TryResolveService()) return;
 
         var targetDic = _gameManager.LevelManager.ChibiSoldierTargets;
         float closestDistance = Mathf.Infinity;
@@ -84,7 +84,7 @@ public class RunningBehaviour : IBehaviours
     //antes que el de GameManager, ServiceLocator todavía no tiene nada registrado. Reintentando acá
     //(que se llama todos los frames hasta encontrar target) el service termina apareciendo apenas
     //GameManager haga su Awake, sin depender de en qué orden Unity llame a los Awake de cada objeto.
-    private bool TryResolveGameManager()
+    public bool TryResolveService()
     {
         if(_gameManager != null) return true;
 

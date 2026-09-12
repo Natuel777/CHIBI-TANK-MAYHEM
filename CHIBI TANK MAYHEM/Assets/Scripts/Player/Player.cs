@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IPlayer
 {
     [SerializeField] private PlayerSettingsSO _playerSettings;
     [SerializeField] private Transform _cannonMuzzleTransform, _turretMuzzleTransform;
@@ -15,6 +15,8 @@ public class Player : MonoBehaviour
     [SerializeField] private LayerMask _groundMask = ~0;
     [SerializeField] private Transform[] _tankDamageablePoints;
 
+    private bool movementCanceledOnCollision = false;
+
     #region Model
     public PlayerMovement playerMovement;
     public PlayerShoot playerShoot;
@@ -22,14 +24,17 @@ public class Player : MonoBehaviour
     public PlayerTurretAim playerTurretAim;
     public PlayerTurretShoot playerTurretShoot;
     public TankHealthModel healthModel;
+    public PlayerCollision playerCollision;
     #endregion
 
     #region Getters
     public Transform[] TankDamageablePoints => _tankDamageablePoints;
+    public bool MovementCanceledOnCollision => movementCanceledOnCollision;
     #endregion
     #region Initialization
     private void Awake()
     {
+        ServiceLocator.Instance.Register<IPlayer>(this);
         Rigidbody rb = GetComponent<Rigidbody>();
         playerMovement = new PlayerMovement(transform,
                                             _meshTransform,
@@ -78,6 +83,7 @@ public class Player : MonoBehaviour
                                                 _crosshairRaycastMask);
         
         TargetSelection.Initialize(TankDamageablePoints);
+        playerCollision = new PlayerCollision(rb, _playerSettings.movementCancelationThreshold);
     }
 
     private void Start()
@@ -110,10 +116,23 @@ public class Player : MonoBehaviour
         playerMovement.ArtificialFixedUpdate();
     }
 
-    private void OnCollisionEnter(Collision other) 
+    private void OnCollisionStay(Collision other) 
     {
-        
+        if(MovementCanceledOnCollision) return;
+
+        playerCollision.ArticifialCollisionStay();
     }
+
+    private void OnCollisionExit(Collision other) 
+    {
+        if(!MovementCanceledOnCollision) return;
+
+        playerCollision.ArtificialCollisionExit();
+    }
+
+    #region Bool Setters
+    public void SetMovementCanceledOnCollision(bool value) => movementCanceledOnCollision = value;
+    #endregion
 
     #if UNITY_EDITOR
     private void OnDrawGizmos()

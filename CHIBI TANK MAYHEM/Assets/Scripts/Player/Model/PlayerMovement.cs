@@ -20,7 +20,7 @@ using UnityEngine;
 //masa y la física lo resolvía como un impulso puntual → torque enorme → el tanque volcaba o volaba.
 //El collider sigue estando y sigue chocando normal contra paredes y objetos grandes; simplemente
 //dejó de ser la pieza que toca el piso.
-public class PlayerMovement : IInputInitialize
+public class PlayerMovement : IInputInitialize, IServiceConsumer
 {
     private Transform _transform;
     private Transform _meshTransform;
@@ -35,6 +35,7 @@ public class PlayerMovement : IInputInitialize
     private float _groundNormalSmoothing;
     private LayerMask _groundMask;
     private Rigidbody _rb;
+    private IPlayer _player;
 
     private float _currentSpeed;
     private float _currentTurnRate;
@@ -104,6 +105,11 @@ public class PlayerMovement : IInputInitialize
         if(!_initialized) return;
 
         ApplySuspension();    //0. los resortes sostienen el chasis, lo inclinan con el terreno y calculan _isGrounded/_groundNormal
+
+        //No cortamos el resto del movimiento si todavía no se pudo resolver el service: sin _player
+        //asumimos que no hay ningún choque cancelando el avance (falla "abierta", no bloquea input).
+        TryResolveService();
+
         UpdateForwardSpeed(); //1. decide hacia qué velocidad de avance ir
         UpdateTurnRate();     //2. decide hacia qué velocidad de giro ir
         ApplyVelocity();      //3. mueve y rota el Rigidbody según esos dos valores y el estado del suelo
@@ -223,7 +229,15 @@ public class PlayerMovement : IInputInitialize
     //en la dirección que ya llevaba, y _deceleration cuando frena o invierte el sentido
     private void UpdateForwardSpeed()
     {
-        float targetSpeed = _moveInput.y * _maxSpeed;
+        float inputForward = _moveInput.y;
+
+        //Mientras un choque esté cancelando el avance, el input hacia ADELANTE (W, transform.forward)
+        //no genera velocidad objetivo — el tanque no puede seguir empujando contra lo que chocó.
+        //Retroceso y giro (UpdateTurnRate, que usa _moveInput.x) quedan completamente libres.
+        if(inputForward > 0f && _player != null && _player.MovementCanceledOnCollision)
+            inputForward = 0f;
+
+        float targetSpeed = inputForward * _maxSpeed;
 
         //decelerating = true si el objetivo pide MENOS velocidad en la misma dirección, o si pide
         //la dirección contraria a la actual (ej. iba adelante y ahora se pide atrás). Se guarda en
@@ -312,5 +326,17 @@ public class PlayerMovement : IInputInitialize
         _currentTiltAngle = Mathf.SmoothDamp(_currentTiltAngle, targetTilt, ref _tiltVelocity, _pitchTiltSmoothTime, Mathf.Infinity, Time.fixedDeltaTime);
 
         _meshTransform.localRotation = Quaternion.Euler(_currentTiltAngle, 0f, 0f);
+    }
+
+    public bool TryResolveService()
+    {
+        if(_player != null) return true;
+
+        if(!ServiceLocator.Instance.TryGet(out IPlayer playerInterface)) return false;
+        
+        if(playerInterface is not Player player) return false;
+
+        _player = player;
+        return true;
     }
 }

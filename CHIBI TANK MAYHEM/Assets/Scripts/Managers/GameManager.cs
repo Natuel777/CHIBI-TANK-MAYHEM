@@ -21,6 +21,7 @@ public enum MatchMode
     BattleRoyale
 }
 
+[DefaultExecutionOrder(-500)]
 public class GameManager : MonoBehaviour, IGameManager
 {
     public static GameManager Instance { get; private set; }

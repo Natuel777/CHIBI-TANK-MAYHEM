@@ -64,6 +64,10 @@ public class PlayerSettingsSO : ScriptableObject
     [Tooltip("Velocidad máxima de depenetración del Rigidbody, en m/s. Limita la velocidad a la que el tanque puede salir de colisiones profundas. Más alto = sale más rápido; más bajo = sale más lento y puede quedarse atascado.")]
     public float maxDepenetrationVelocitym = 3f;
 
+    [Header("Tank Collision Settings")]
+    public float bounceForce = 1.5f;
+    public float movementCancelationThreshold = 1f;
+
     [Header("Tank Head Settings")]
     public float aimRotationSpeed = 720f;
     public float minTankHeadPitch = -20f;
