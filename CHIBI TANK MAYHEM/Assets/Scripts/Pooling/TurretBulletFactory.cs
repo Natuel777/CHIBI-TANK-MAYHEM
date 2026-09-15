@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+[DefaultExecutionOrder(-400)]
 public class TurretBulletFactory : Factory<ShooteableObject, BulletType>
 {
     public static TurretBulletFactory Instance { get; private set; }
@@ -22,6 +23,8 @@ public class TurretBulletFactory : Factory<ShooteableObject, BulletType>
         }
 
         Instance = this;
+
+        ServiceLocator.Instance.Register<TurretBulletFactory>(this);
 
         if(ServiceLocator.Instance.TryGet(out IGameManager gmInterface))
         {

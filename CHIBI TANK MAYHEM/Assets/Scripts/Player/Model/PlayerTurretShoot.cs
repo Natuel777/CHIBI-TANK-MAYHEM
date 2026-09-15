@@ -18,6 +18,7 @@ public class PlayerTurretShoot : IInputInitialize, IShootable
     private float _minSecondaryYaw, _maxSecondaryYaw;
     private List<int> _secondaryTurretsAbleToShoot;   //índices de las torretas del lado del target
     private Vector3 _aimTargetPoint;
+    private TurretBulletFactory _turretBulletFactory;
 
     public PlayerTurretShoot(Transform turretMuzzleTransform, Transform tankTransform,
                             float fireRate, float fireCooldown,
@@ -36,6 +37,13 @@ public class PlayerTurretShoot : IInputInitialize, IShootable
         _secondaryTurretsCanAim = secondaryTurretsCanAim;
         _minSecondaryYaw = minSecondaryYaw;
         _maxSecondaryYaw = maxSecondaryYaw;
+
+        #if UNITY_EDITOR
+        if(!ServiceLocator.Instance.TryGet(out _turretBulletFactory))
+            Debug.Log("PlayerTurretShoot: ServiceLocator could not find a TurretBulletFactory.");
+        #else
+        ServiceLocator.Instance.TryGet(out _turretBulletFactory);
+        #endif
     }
 
     public void Initialize(InputReader inputReader)
@@ -113,7 +121,7 @@ public class PlayerTurretShoot : IInputInitialize, IShootable
 
     public void Shoot()
     {
-        ShooteableObject bullet = TurretBulletFactory.Instance.Create(_currentBulletType, _turretMuzzleTransform.position, _turretMuzzleTransform.rotation);
+        ShooteableObject bullet = _turretBulletFactory.Create(_currentBulletType, _turretMuzzleTransform.position, _turretMuzzleTransform.rotation);
         bullet.Shoot(_turretMuzzleTransform.up);
 
         #if UNITY_EDITOR
@@ -179,7 +187,7 @@ public class PlayerTurretShoot : IInputInitialize, IShootable
         foreach(int i in _secondaryTurretsAbleToShoot)
         {
             Transform muzzle = _secondaryMuzzleTransforms[i];
-            ShooteableObject bullet = TurretBulletFactory.Instance.Create(_currentBulletType, muzzle.position, muzzle.rotation);
+            ShooteableObject bullet = _turretBulletFactory.Create(_currentBulletType, muzzle.position, muzzle.rotation);
             bullet.Shoot(muzzle.up);
         }
     }

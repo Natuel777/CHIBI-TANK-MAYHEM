@@ -55,6 +55,11 @@ public class CommonTurretBullet : ShooteableObject
                 player.healthModel?.TrailRGTTakeDamage(initialDamage);
         }
 
+        else if(other.TryGetComponent(out ChibiSoldier chibiSoldier))
+        {
+            chibiSoldier.healthModel?.TakeDamage(initialDamage);
+        }
+
         TurretBulletFactory.Instance.Return(this);
     }
 }

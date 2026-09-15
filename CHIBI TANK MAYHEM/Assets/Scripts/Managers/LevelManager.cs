@@ -10,7 +10,7 @@ public class LevelManager
     [SerializeField] private float _captureThreshold = 100f;
 
     private Dictionary<ChibiSoldierCaptureTarget, bool> _capturedTargets = new Dictionary<ChibiSoldierCaptureTarget, bool>();
-    private Dictionary<ChibiSoldierCaptureTarget, int> _chibiSoldierCountPerTarget = new Dictionary<ChibiSoldierCaptureTarget, int>();
+    private Dictionary<ChibiSoldierCaptureTarget, List<ChibiSoldier>> _chibiSoldiersPerTarget = new Dictionary<ChibiSoldierCaptureTarget, List<ChibiSoldier>>();
     private Dictionary<ChibiSoldierCaptureTarget, float> _captureProgress = new Dictionary<ChibiSoldierCaptureTarget, float>();
 
     #region Getters
@@ -23,19 +23,17 @@ public class LevelManager
         foreach(ChibiSoldierCaptureTarget target in _chibiSoldierTargets)
         {
             _capturedTargets.Add(target, false);
-            _chibiSoldierCountPerTarget.Add(target, 0);
+            _chibiSoldiersPerTarget.Add(target, new List<ChibiSoldier>());
             _captureProgress.Add(target, 0f);
         }
     }
 
     public void ArtificialUpdate()
     {
-        foreach(var csQTY in _chibiSoldierCountPerTarget)
+        foreach(var csQTY in _chibiSoldiersPerTarget)
         {
-            if(csQTY.Value > 0)
-            {
-                CaptureTarget(csQTY.Key, csQTY.Value);
-            }
+            if(csQTY.Value.Count > 0)
+                CaptureTarget(csQTY.Key, csQTY.Value.Count);
         }
     }
 
@@ -43,19 +41,32 @@ public class LevelManager
     public void UpdateTargetStatus(ChibiSoldierCaptureTarget target, bool isCaptured)
     {
         if(_capturedTargets.ContainsKey(target))
+        {
             _capturedTargets[target] = isCaptured;
+
+            if(_chibiSoldiersPerTarget.TryGetValue(target, out List<ChibiSoldier> soldiers))
+            {
+                //Copia: cada soldado, al recibir el evento, sale de CapturingState y eso llama a
+                //RemoveChibiSoldierFromCapturedList(), que saca ese mismo soldado de "soldiers" — si
+                //se recorriera la lista original, se modificaría en pleno foreach y tira
+                //InvalidOperationException. Iterando sobre una copia, esas remociones no afectan el recorrido.
+                foreach(ChibiSoldier soldier in soldiers.ToArray())
+                    soldier.SendEvent(NPCEvents.ChibiSoldierHasCapturedTarget);
+            }
+        }
+            
     }
 
-    public void AddChibiSoldierToCapturedList(ChibiSoldierCaptureTarget target)
+    public void AddChibiSoldierToCapturedList(ChibiSoldierCaptureTarget target, ChibiSoldier soldier)
     {
-        if(_chibiSoldierCountPerTarget.TryGetValue(target, out int count))
-            _chibiSoldierCountPerTarget[target] = count + 1;
+        if(_chibiSoldiersPerTarget.TryGetValue(target, out List<ChibiSoldier> soldiers))
+            soldiers.Add(soldier);
     }
 
-    public void RemoveChibiSoldierFromCapturedList(ChibiSoldierCaptureTarget target)
+    public void RemoveChibiSoldierFromCapturedList(ChibiSoldierCaptureTarget target, ChibiSoldier soldier)
     {
-        if(_chibiSoldierCountPerTarget.TryGetValue(target, out int count) && count > 0)
-            _chibiSoldierCountPerTarget[target] = count - 1;
+        if(_chibiSoldiersPerTarget.TryGetValue(target, out List<ChibiSoldier> soldiers))
+            soldiers.Remove(soldier);
     }
 
     private void CaptureTarget(ChibiSoldierCaptureTarget target, int chibiSoldierCount)

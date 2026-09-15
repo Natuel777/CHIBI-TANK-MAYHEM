@@ -17,7 +17,7 @@ public class CapturingState : IState, IServiceConsumer
     {
         if(!TryResolveService()) return;
 
-        _gameManager.LevelManager.AddChibiSoldierToCapturedList(_target);
+        _gameManager.LevelManager.AddChibiSoldierToCapturedList(_target, _parent);
         _parent.shootAtPlayerBehaviour.Active(true);
     }
 
@@ -31,14 +31,15 @@ public class CapturingState : IState, IServiceConsumer
     {
         if(_gameManager == null) return;
 
-        _gameManager.LevelManager.RemoveChibiSoldierFromCapturedList(_target);
+        _gameManager.LevelManager.RemoveChibiSoldierFromCapturedList(_target, _parent);
     }
 
-	public void HandleEvent(NPCEvents evt, object data) {}
+	public void HandleEvent(NPCEvents evt, object data)
+    {
+        if(evt == NPCEvents.ChibiSoldierHasCapturedTarget)
+            _parent.SetState(_parent.runningState);
+    }
 
-    //Mismo motivo que en RunningBehaviour: resolver el service acá (recién cuando se entra a este
-    //estado, mucho después del arranque de la escena) en vez de en el constructor evita depender del
-    //orden de Awake entre este NPC y GameManager.
     public bool TryResolveService()
     {
         if(_gameManager != null) return true;

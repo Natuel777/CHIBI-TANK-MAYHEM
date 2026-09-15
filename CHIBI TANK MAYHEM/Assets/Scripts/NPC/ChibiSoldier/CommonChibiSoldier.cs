@@ -19,11 +19,12 @@ public class CommonChibiSoldier : ChibiSoldier
                                                         neighborLayerMask, 
                                                         settings.neighborDetectionRadius);
         healthModel = new ParticularHealthModel(settings.maxHealth);
+        armAim = new ArmAim(shoulderTransform, this, settings.rotationSpeed);
         shootAtPlayerBehaviour = new ShootAtPlayerBehaviour(settings.gunFireCooldown, gunMuzzleTransform, 
                                                         transform, neighborLayerMask, 
                                                         settings.neighborDetectionRadius,
-                                                        settings.moveSpeed, settings.rotationSpeed);
-        armAim = new ArmAim(shoulderTransform, this, settings.rotationSpeed);
+                                                        settings.moveSpeed, settings.rotationSpeed,
+                                                        armAim);
     }
 
     private void Start()
@@ -35,6 +36,11 @@ public class CommonChibiSoldier : ChibiSoldier
     private void Update()
     {
         stateMachine.UpdateState();
+    }
+
+    private void ChibiSoldierDeath()
+    {
+        
     }
 
     #if UNITY_EDITOR

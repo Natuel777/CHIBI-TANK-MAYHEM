@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ShootAtPlayerBehaviour : IBehaviours
+public class ShootAtPlayerBehaviour : IBehaviours, IServiceConsumer
 {
     private Transform _target = null, _gunMuzzleTransform, _transform;
     private bool _active;
@@ -9,16 +9,19 @@ public class ShootAtPlayerBehaviour : IBehaviours
     private const float _flockingDeadzone = 0.05f;
     private BulletType _currentBulletType = BulletType.CommonChibiSoldierBullet;
     private FlockingSteering _flocking;
+    private TurretBulletFactory _turretBulletFactory;
+    private ArmAim _armAim;
 
     public ShootAtPlayerBehaviour(float initialShootInterval, Transform gunMuzzleTransform,
                                 Transform t, LayerMask neighborLayerMask, float neighborDetectionRadius, 
-                                float speed, float rotationSpeed)
+                                float speed, float rotationSpeed, ArmAim armAim)
     {
         _initialShootInterval = initialShootInterval;
         _shootInterval = initialShootInterval;
         _gunMuzzleTransform = gunMuzzleTransform;
         _transform = t;
         _flocking = new FlockingSteering(t, neighborLayerMask, neighborDetectionRadius, speed, rotationSpeed);
+        _armAim = armAim;
     }
 
     public void Active(bool value) {_active = value;}
@@ -32,6 +35,8 @@ public class ShootAtPlayerBehaviour : IBehaviours
             if(TargetSelection.target == null) TargetSelection.ChooseTarget();
 
             _target = TargetSelection.target;
+            _armAim.SetTarget(_target);
+            TargetSelection.ClearTarget();
         } 
         
         Vector3 flockingForce = _flocking.CalculateFlockingForce(includeAlignment: false);
@@ -54,14 +59,25 @@ public class ShootAtPlayerBehaviour : IBehaviours
     {
         if(_target == null) return;
 
+        if(!TryResolveService()) return;
+
         if(_shootInterval > 0)
         {
             _shootInterval -= Time.deltaTime;
             return;
         }
 
-        ShooteableObject bullet = TurretBulletFactory.Instance.Create(_currentBulletType, _gunMuzzleTransform.position, _gunMuzzleTransform.rotation);
+        ShooteableObject bullet = _turretBulletFactory.Create(_currentBulletType, 
+                                                                    _gunMuzzleTransform.position, 
+                                                                    _gunMuzzleTransform.rotation);
         bullet.Shoot(_gunMuzzleTransform.forward);
         _shootInterval = _initialShootInterval;
+    }
+
+    public bool TryResolveService()
+    {
+        if(_turretBulletFactory != null) return true;
+
+        return ServiceLocator.Instance.TryGet(out _turretBulletFactory);
     }
 }

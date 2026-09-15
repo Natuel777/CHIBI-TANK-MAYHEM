@@ -20,12 +20,7 @@ public class ArmAim
     {
         if(_currentState != _parent.capturingState) return;
 
-        if(_target == null)
-        {
-            if(TargetSelection.target == null) TargetSelection.ChooseTarget();
-
-            _target = TargetSelection.target;
-        }
+        if(_target == null) return;
 
         Vector3 aimDirection = (_target.position - _transform.position).normalized;
 
@@ -46,4 +41,6 @@ public class ArmAim
     }
 
     private void UpdateCurrentParentState() => _currentState = _parent.GetCurrentState();
+
+    public void SetTarget(Transform target) => _target = target;
 }
