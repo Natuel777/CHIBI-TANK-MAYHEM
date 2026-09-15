@@ -29,4 +29,14 @@ public class CommonCannonBullet : ShooteableObject
         if(currentLifetime <= 0)
             CannonBulletFactory.Instance.Return(this);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.TryGetComponent(out CommonChibiSoldier commonChibiSoldier))
+        {
+            commonChibiSoldier.healthModel?.TakeDamage(initialDamage);
+        }
+
+        CannonBulletFactory.Instance.Return(this);
+    }
 }

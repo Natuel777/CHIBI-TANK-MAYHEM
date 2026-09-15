@@ -126,6 +126,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CommonCannonBullet
   speed: 100
-  initialDamage: 1.05
+  initialDamage: 100
   lifetime: 31.82
   bulletType: 0
