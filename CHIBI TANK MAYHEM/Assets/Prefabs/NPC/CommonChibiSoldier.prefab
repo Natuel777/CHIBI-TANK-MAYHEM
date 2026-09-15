@@ -104,6 +104,7 @@ GameObject:
   - component: {fileID: 6464886022162782212}
   - component: {fileID: 2645525477860984136}
   - component: {fileID: 3957467332213323763}
+  - component: {fileID: 1122334455667788991}
   m_Layer: 8
   m_Name: CommonChibiSoldier
   m_TagString: Untagged
@@ -225,6 +226,33 @@ MonoBehaviour:
     m_Bits: 256
   gunMuzzleTransform: {fileID: 147434179315995609}
   shoulderTransform: {fileID: 4965282429526545803}
+--- !u!54 &1122334455667788991
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4028923186453338826}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &6900334809053590461
 GameObject:
   m_ObjectHideFlags: 0

@@ -126,6 +126,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CommonTurretBullet
   speed: 120
-  initialDamage: 0
+  initialDamage: 50
   lifetime: 4
   bulletType: 1

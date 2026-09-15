@@ -18,7 +18,7 @@ public class CommonChibiSoldier : ChibiSoldier
                                                         settings.rotationSpeed,
                                                         neighborLayerMask, 
                                                         settings.neighborDetectionRadius);
-        healthModel = new ParticularHealthModel(settings.maxHealth);
+        healthModel = new ParticularHealthModel(settings.maxHealth, ChibiSoldierDeath);
         armAim = new ArmAim(shoulderTransform, this, settings.rotationSpeed);
         shootAtPlayerBehaviour = new ShootAtPlayerBehaviour(settings.gunFireCooldown, gunMuzzleTransform, 
                                                         transform, neighborLayerMask, 
@@ -40,7 +40,10 @@ public class CommonChibiSoldier : ChibiSoldier
 
     private void ChibiSoldierDeath()
     {
-        
+        if(!TryResolveService()) return;
+
+        chibiSoldierFactory.Return(this);
+        Debug.Log($"CommonChibiSoldier: {gameObject.name} returned to pool.");
     }
 
     #if UNITY_EDITOR
