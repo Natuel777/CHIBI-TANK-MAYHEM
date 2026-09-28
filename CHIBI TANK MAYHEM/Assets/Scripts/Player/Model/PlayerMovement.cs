@@ -234,7 +234,10 @@ public class PlayerMovement : IInputInitialize, IServiceConsumer
         //Mientras un choque esté cancelando el avance, el input hacia ADELANTE (W, transform.forward)
         //no genera velocidad objetivo — el tanque no puede seguir empujando contra lo que chocó.
         //Retroceso y giro (UpdateTurnRate, que usa _moveInput.x) quedan completamente libres.
-        if(inputForward > 0f && _player != null && _player.MovementCanceledOnCollision)
+        if(inputForward > 0f && _player != null && _player.MovementCanceledOnCollisionForward)
+            inputForward = 0f;
+        
+        else if(inputForward < 0f && _player != null && _player.MovementCanceledOnCollisionBack)
             inputForward = 0f;
 
         float targetSpeed = inputForward * _maxSpeed;

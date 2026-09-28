@@ -15,7 +15,7 @@ public class Player : MonoBehaviour, IPlayer
     [SerializeField] private LayerMask _groundMask = ~0;
     [SerializeField] private Transform[] _tankDamageablePoints;
 
-    private bool movementCanceledOnCollision = false;
+    private bool _movementCanceledOnCollisionForward = false, _movementCanceledOnCollisionBack = false;
 
     #region Model
     public PlayerMovement playerMovement;
@@ -29,7 +29,8 @@ public class Player : MonoBehaviour, IPlayer
 
     #region Getters
     public Transform[] TankDamageablePoints => _tankDamageablePoints;
-    public bool MovementCanceledOnCollision => movementCanceledOnCollision;
+    public bool MovementCanceledOnCollisionForward => _movementCanceledOnCollisionForward;
+    public bool MovementCanceledOnCollisionBack => _movementCanceledOnCollisionBack;
     #endregion
     #region Initialization
     private void Awake()
@@ -93,7 +94,6 @@ public class Player : MonoBehaviour, IPlayer
                                             _playerSettings.turretMaxHealth,
                                             _playerSettings.trailLFTMaxHealth,
                                             _playerSettings.trailRGTMaxHealth);
-
         var inputReader = GetComponent<InputReader>();
         playerMovement.Initialize(inputReader);
         playerShoot.Initialize(inputReader);
@@ -118,20 +118,24 @@ public class Player : MonoBehaviour, IPlayer
 
     private void OnCollisionStay(Collision other) 
     {
-        if(MovementCanceledOnCollision) return;
+        if(MovementCanceledOnCollisionForward || MovementCanceledOnCollisionBack) return;
 
-        playerCollision.ArticifialCollisionStay();
+        playerCollision.ArticifialCollisionStay(other);
     }
 
     private void OnCollisionExit(Collision other) 
     {
-        if(!MovementCanceledOnCollision) return;
+        if(!MovementCanceledOnCollisionForward && !MovementCanceledOnCollisionBack) return;
 
-        playerCollision.ArtificialCollisionExit();
+        playerCollision.ArtificialCollisionExit(other);
     }
 
     #region Bool Setters
-    public void SetMovementCanceledOnCollision(bool value) => movementCanceledOnCollision = value;
+    public void SetMovementCanceledOnCollision(bool forward, bool back)
+    {
+        _movementCanceledOnCollisionForward = forward;
+        _movementCanceledOnCollisionBack = back;
+    }
     #endregion
 
     #if UNITY_EDITOR

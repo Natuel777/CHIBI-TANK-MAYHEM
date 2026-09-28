@@ -1,7 +1,11 @@
+using UnityEngine;
+
 public interface IPlayer
 {
-    bool MovementCanceledOnCollision { get; }
-    void SetMovementCanceledOnCollision(bool value);
+    Transform transform { get; }
+    bool MovementCanceledOnCollisionForward { get; }
+    bool MovementCanceledOnCollisionBack { get; }
+    void SetMovementCanceledOnCollision(bool forward, bool back);
 }
 
 public interface IServiceConsumer

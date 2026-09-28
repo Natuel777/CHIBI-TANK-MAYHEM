@@ -75,7 +75,7 @@ public class LevelManager
 
         float captureSpeed = chibiSoldierCount;
         _captureProgress[target] += captureSpeed * Time.deltaTime;
-        target.SetCaptureProgress(_captureProgress[target] / _captureThreshold);
+        target.view.SetCaptureProgress(_captureProgress[target] / _captureThreshold);
 
         if(_captureProgress[target] >= _captureThreshold)
             UpdateTargetStatus(target, true);

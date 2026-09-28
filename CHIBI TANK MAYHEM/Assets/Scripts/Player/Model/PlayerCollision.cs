@@ -14,25 +14,40 @@ public class PlayerCollision : IServiceConsumer
 
     }
 
-    public void ArticifialCollisionStay()
+    public void ArticifialCollisionStay(Collision other)
     {
         if(!TryResolveService()) return;
 
-        if(_player.MovementCanceledOnCollision) return;
+        if(_player.MovementCanceledOnCollisionForward || _player.MovementCanceledOnCollisionBack) return;
 
         if(_timer >= _movementCancelationThreshold) return;
 
-        _player.SetMovementCanceledOnCollision(true);
+        Vector3 contactPoint = other.GetContact(0).point;
+        Vector3 direction = (contactPoint - _player.transform.position).normalized;
+        float forward = Vector3.Dot(_player.transform.forward, direction);
+
+        if(forward > 0.5f)
+        {
+            _player.SetMovementCanceledOnCollision(true, false);
+            Debug.Log("Golpe desde ADELANTE");
+        }
+            
+        else if(forward < -0.5f)
+        {
+            _player.SetMovementCanceledOnCollision(false, true);
+            Debug.Log("Golpe desde ATRÁS");
+        }
+
         _timer += Time.fixedDeltaTime;
     }
 
-    public void ArtificialCollisionExit()
+    public void ArtificialCollisionExit(Collision other)
     {
         if(!TryResolveService()) return;
 
-        if(!_player.MovementCanceledOnCollision) return;
+        if(!_player.MovementCanceledOnCollisionForward && !_player.MovementCanceledOnCollisionBack) return;
 
-        _player.SetMovementCanceledOnCollision(false);
+        _player.SetMovementCanceledOnCollision(false, false);
         _timer = 0f;
     }
 
