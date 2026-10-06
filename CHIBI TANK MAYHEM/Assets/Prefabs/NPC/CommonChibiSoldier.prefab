@@ -204,8 +204,8 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
+  m_Radius: 0.74
+  m_Height: 2.87
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3957467332213323763
@@ -226,6 +226,7 @@ MonoBehaviour:
     m_Bits: 256
   gunMuzzleTransform: {fileID: 147434179315995609}
   shoulderTransform: {fileID: 4965282429526545803}
+  type: 0
 --- !u!54 &1122334455667788991
 Rigidbody:
   m_ObjectHideFlags: 0

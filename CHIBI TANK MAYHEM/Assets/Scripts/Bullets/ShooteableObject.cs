@@ -7,13 +7,14 @@ public enum BulletType
     CommonChibiSoldierBullet
 }
 
-public abstract class ShooteableObject : MonoBehaviour
+public abstract class ShooteableObject : MonoBehaviour, IServiceConsumer
 {
     [SerializeField] protected float speed;
     [SerializeField] protected float initialDamage;
     [SerializeField] protected float lifetime;
 
     protected float currentLifetime;
+    protected ParticleSystemFactory _PSFactory;
 
     [SerializeField] protected BulletType bulletType;
 
@@ -27,4 +28,11 @@ public abstract class ShooteableObject : MonoBehaviour
     }
 
     public abstract void Shoot(Vector3 direction);
+
+    public bool TryResolveService()
+    {
+        if(_PSFactory != null) return true;
+
+        return ServiceLocator.Instance.TryGet(out _PSFactory);
+    }
 }

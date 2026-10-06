@@ -37,6 +37,12 @@ public class CommonCannonBullet : ShooteableObject
             commonChibiSoldier.healthModel?.TakeDamage(initialDamage);
         }
 
+        if(TryResolveService())
+        {
+            GenericPS ps = _PSFactory.Create(PSType.BoomText, transform.position, Quaternion.identity);
+            ps.Initialize();
+        } 
+        
         CannonBulletFactory.Instance.Return(this);
     }
 }
