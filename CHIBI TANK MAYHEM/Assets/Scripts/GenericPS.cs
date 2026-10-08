@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public enum PSType
 {
@@ -7,12 +8,32 @@ public enum PSType
 
 public class GenericPS : MonoBehaviour
 {
-    private ParticleSystem _ps;
+    private List<ParticleSystem> _ps;
     [SerializeField] private PSType _type;
+    private ParticleSystemFactory _factory;
 
     public PSType PSType => _type;
 
-    private void Awake() => _ps = GetComponentInChildren<ParticleSystem>(true);
+    private void Awake() => _ps = new List<ParticleSystem>(GetComponentsInChildren<ParticleSystem>(true));
 
-    public void Initialize() => _ps?.Play();
+    public void Initialize()
+    {
+        if(_factory == null)
+            ServiceLocator.Instance.TryGet(out _factory);
+
+        foreach(ParticleSystem ps in _ps)
+            ps.Play();
+    }
+
+    private void Update()
+    {
+        if(_factory == null)
+        {
+            Debug.LogWarning("[GenericPS] Factory is null.");
+            return;
+        }
+
+        if(_ps.TrueForAll(ps => ps.isStopped))
+            _factory.Return(this);
+    }
 }

@@ -33,6 +33,10 @@ public class PlayerMovement : IInputInitialize, IServiceConsumer
     private float _pitchTiltAmount, _pitchTiltSmoothTime;
     private float _suspensionRestLength, _suspensionStrength, _suspensionDampingRatio;
     private float _groundNormalSmoothing;
+
+    //maxSpringForce y damping dependen solo de _rb.mass (el resto de sus insumos son tunables fijos
+    //desde el constructor) — cachearlos por masa evita recalcularlos a mano cada FixedUpdate.
+    private readonly LookupTable<float, (float maxSpringForce, float damping)> _suspensionConstantsCache = new();
     private LayerMask _groundMask;
     private Rigidbody _rb;
     private IPlayer _player;
@@ -141,26 +145,40 @@ public class PlayerMovement : IInputInitialize, IServiceConsumer
         Vector3 normalSum = Vector3.zero; //vamos sumando la normal de cada resorte que tocó suelo, para promediarla al final
         int hitCount = 0;                 //cuántos resortes tocaron suelo este frame (para el promedio de arriba)
 
-        //--- CUÁNTA FUERZA MÁXIMA puede dar CADA resorte ---
-        //Peso total del tanque (mass * gravedad) repartido en partes iguales entre los N puntos.
-        //Ej: tanque de 1000kg con 6 puntos → cada uno "le toca sostener" 1000/6 kg de peso.
-        float weightPerPoint = _rb.mass * Physics.gravity.magnitude / _suspensionPoints.Length;
-        //La fuerza máxima que puede dar el resorte es un MÚLTIPLO de ese peso (suspensionStrength).
-        //Con strength=2, cada resorte puede empujar hasta el DOBLE de lo que necesita para
-        //sostener su parte del peso → sobra fuerza para además frenar baches, no solo sostenerse quieto.
-        float maxSpringForce = weightPerPoint * _suspensionStrength;
+        //--- CONSTANTES DEL RESORTE (fuerza máxima y amortiguación), con LOOKUP TABLE ---
+        //weightPerPoint, maxSpringForce, springConstant, criticalDamping y damping salen todos de
+        //_rb.mass + tunables fijos (strength, restLength, dampingRatio, cantidad de puntos) — nada de
+        //eso cambia frame a frame, así que recalcularlos acá (con una raíz cuadrada adentro) en CADA
+        //FixedUpdate es trabajo repetido para el mismo resultado. Se cachean por masa: la primera vez
+        //que se ve un valor de masa se calculan una sola vez; si la masa cambiara en runtime (daño,
+        //mejoras, etc.) esa masa nueva se calcula y queda cacheada también, sin invalidar nada a mano.
+        if(!_suspensionConstantsCache.TryGet(_rb.mass, out var constants))
+        {
+            //Peso total del tanque (mass * gravedad) repartido en partes iguales entre los N puntos.
+            //Ej: tanque de 1000kg con 6 puntos → cada uno "le toca sostener" 1000/6 kg de peso.
+            float weightPerPoint = _rb.mass * Physics.gravity.magnitude / _suspensionPoints.Length;
+            //La fuerza máxima que puede dar el resorte es un MÚLTIPLO de ese peso (suspensionStrength).
+            //Con strength=2, cada resorte puede empujar hasta el DOBLE de lo que necesita para
+            //sostener su parte del peso → sobra fuerza para además frenar baches, no solo sostenerse quieto.
+            float computedMaxSpringForce = weightPerPoint * _suspensionStrength;
 
-        //--- CUÁNTO FRENAR EL REBOTE (amortiguación) ---
-        //Un resorte SOLO (sin amortiguador) rebotaría para siempre, como un colchón sin fricción.
-        //El amortiguador le saca energía en cada rebote hasta que se queda quieto.
-        //k = "dureza" del resorte, calculada a partir de la fuerza máxima y el recorrido.
-        float springConstant = maxSpringForce / _suspensionRestLength;
-        //La "amortiguación crítica" es el punto exacto donde el resorte se asienta SIN rebotar
-        //ni una sola vez (fórmula estándar de física: 2 * raíz(dureza * masa)).
-        float criticalDamping = 2f * Mathf.Sqrt(springConstant * (_rb.mass / _suspensionPoints.Length));
-        //suspensionDampingRatio es un porcentaje de esa amortiguación crítica: 0 = nada de freno
-        //(rebota siempre), 1 = freno total (se asienta sin rebotar), 0.5 = un rebotecito y listo.
-        float damping = criticalDamping * _suspensionDampingRatio;
+            //Un resorte SOLO (sin amortiguador) rebotaría para siempre, como un colchón sin fricción.
+            //El amortiguador le saca energía en cada rebote hasta que se queda quieto.
+            //k = "dureza" del resorte, calculada a partir de la fuerza máxima y el recorrido.
+            float springConstant = computedMaxSpringForce / _suspensionRestLength;
+            //La "amortiguación crítica" es el punto exacto donde el resorte se asienta SIN rebotar
+            //ni una sola vez (fórmula estándar de física: 2 * raíz(dureza * masa)).
+            float criticalDamping = 2f * Mathf.Sqrt(springConstant * (_rb.mass / _suspensionPoints.Length));
+            //suspensionDampingRatio es un porcentaje de esa amortiguación crítica: 0 = nada de freno
+            //(rebota siempre), 1 = freno total (se asienta sin rebotar), 0.5 = un rebotecito y listo.
+            float computedDamping = criticalDamping * _suspensionDampingRatio;
+
+            constants = (computedMaxSpringForce, computedDamping);
+            _suspensionConstantsCache.Add(_rb.mass, constants);
+        }
+
+        float maxSpringForce = constants.maxSpringForce;
+        float damping = constants.damping;
 
         //Repetimos este cálculo para CADA uno de los 6 puntos de suspensión (uno por rueda/oruga).
         for(int i = 0; i < _suspensionPoints.Length; i++)

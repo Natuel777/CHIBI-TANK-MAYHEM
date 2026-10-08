@@ -39,7 +39,18 @@ public class CommonCannonBullet : ShooteableObject
 
         if(TryResolveService())
         {
-            GenericPS ps = _PSFactory.Create(PSType.BoomText, transform.position, Quaternion.identity);
+            GenericPS ps = _PSFactory.Create(PSType.BoomText, transform.position + Vector3.up, Quaternion.identity);
+            ps.Initialize();
+        } 
+        
+        CannonBulletFactory.Instance.Return(this);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(TryResolveService())
+        {
+            GenericPS ps = _PSFactory.Create(PSType.BoomText, transform.position + Vector3.up, Quaternion.identity);
             ps.Initialize();
         } 
         
