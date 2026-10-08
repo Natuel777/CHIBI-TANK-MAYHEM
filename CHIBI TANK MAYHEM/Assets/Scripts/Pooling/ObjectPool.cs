@@ -31,7 +31,7 @@ public class ObjectPool<T> where T : MonoBehaviour
         }
     }
 
-    public T Get()
+    public T Get(Action<T> beforeActivate = null)
     {
         T x;
 
@@ -43,9 +43,13 @@ public class ObjectPool<T> where T : MonoBehaviour
 
         else x = _Factory();
 
+        //Algunos objetos pooleados (ej. particulas con Play On Awake) disparan su efecto
+        //apenas se activan. beforeActivate deja acomodarlos (posición, rotación, etc.)
+        //ANTES de ese SetActive, para que no se vean nacer en la posición vieja.
+        beforeActivate?.Invoke(x);
         _On(x);
         _active.Add(x);
-        return x;  
+        return x;
     }
 
     public void Return(T obj)

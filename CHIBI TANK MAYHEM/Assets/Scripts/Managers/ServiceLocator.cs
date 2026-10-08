@@ -12,11 +12,14 @@ public sealed class ServiceLocator
     {
         var type = typeof(T);
 
-        if(_services.TryAdd(type, service))
-            return true;
+        if(_services.TryGetValue(type, out var existingService) && !IsDestroyed(existingService))
+        {
+            Debug.LogWarning($"[SERVICE LOCATOR] Service of type {type} is already registered.");
+            return false;
+        }
 
-        Debug.LogWarning($"[SERVICE LOCATOR] Service of type {type} is already registered.");
-        return false;
+        _services[type] = service;
+        return true;
     }
 
     public bool Unregister<T>(T service)
@@ -33,7 +36,7 @@ public sealed class ServiceLocator
 
     public bool TryGet<T>(out T service)
     {
-        if(_services.TryGetValue(typeof(T), out var existingService))
+        if(_services.TryGetValue(typeof(T), out var existingService) && !IsDestroyed(existingService))
         {
             service = (T)existingService;
             return true;
@@ -43,4 +46,6 @@ public sealed class ServiceLocator
         service = default;
         return false;
     }
+
+    private static bool IsDestroyed(object service) => service is UnityEngine.Object unityObject && unityObject == null;
 }

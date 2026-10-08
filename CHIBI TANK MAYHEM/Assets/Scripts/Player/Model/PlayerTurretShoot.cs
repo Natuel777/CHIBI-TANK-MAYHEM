@@ -1,11 +1,12 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class PlayerTurretShoot : IInputInitialize, IShootable
+public class PlayerTurretShoot : IInputInitialize, IShootable, IServiceConsumer
 {
     private Transform _turretMuzzleTransform;
     private Transform _tankTransform;
-    private Transform[] _secondaryMuzzleTransforms;
+    private class SecondaryMuzzleSlot { public GenericPS flash; }
+    private readonly Dictionary<Transform, SecondaryMuzzleSlot> _secondaryMuzzleTransformsDic = new();
     private Transform[] _secondaryPivots;              //el transform que se rota (padre del cañón, con la rotación de fábrica)
     private Quaternion[] _secondaryPivotRestRotations; //localRotation de reposo de cada pivote (su orientación de fábrica)
     private Vector3[] _secondaryRestAxesLocal;         //eje de disparo de reposo, en el espacio del PADRE del pivote
@@ -19,6 +20,8 @@ public class PlayerTurretShoot : IInputInitialize, IShootable
     private List<int> _secondaryTurretsAbleToShoot;   //índices de las torretas del lado del target
     private Vector3 _aimTargetPoint;
     private TurretBulletFactory _turretBulletFactory;
+    private ParticleSystemFactory _PSFactory;
+    private GenericPS _turretPS = null;
 
     public PlayerTurretShoot(Transform turretMuzzleTransform, Transform tankTransform,
                             float fireRate, float fireCooldown,
@@ -62,7 +65,9 @@ public class PlayerTurretShoot : IInputInitialize, IShootable
     {
         if(secondaryMuzzleTransforms.Length == 0) return this;
 
-        _secondaryMuzzleTransforms = secondaryMuzzleTransforms;
+        for(int i = 0; i < secondaryMuzzleTransforms.Length; i++)
+            _secondaryMuzzleTransformsDic.Add(secondaryMuzzleTransforms[i], new SecondaryMuzzleSlot());
+
         _secondaryPivots = new Transform[secondaryMuzzleTransforms.Length];
         _secondaryPivotRestRotations = new Quaternion[secondaryMuzzleTransforms.Length];
         _secondaryRestAxesLocal = new Vector3[secondaryMuzzleTransforms.Length];
@@ -91,8 +96,31 @@ public class PlayerTurretShoot : IInputInitialize, IShootable
 
     public void ArtificialUpdate(Vector3 aimTargetPoint)
     {
-        if(!_initialized || !_isShooting) return;
+        if(!_initialized || !_isShooting)
+        {
+            if(TryResolveService())
+            {
+                if(_turretPS != null) _PSFactory.Return(_turretPS);
 
+                ReleaseSecondaryFlashes();
+            } 
+
+            _turretPS = null;
+
+            return;
+        } 
+
+        Quaternion flashRotation = GetFlashRotation(_turretMuzzleTransform);
+
+        if(TryResolveService() && _turretPS == null)
+        {
+            _turretPS = _PSFactory.Create(PSType.TurretMuzzleFlash, _turretMuzzleTransform.position, flashRotation);
+            _turretPS.Initialize();
+        }
+
+        if(_turretPS != null)
+            _turretPS.transform.SetPositionAndRotation(_turretMuzzleTransform.position, flashRotation);
+        
         _fireCooldown -= Time.deltaTime;
 
         if(_fireCooldown <= 0f)
@@ -101,12 +129,12 @@ public class PlayerTurretShoot : IInputInitialize, IShootable
             _fireCooldown = 1f / _fireRate;
         }
 
-        if(_secondaryMuzzleTransforms != null && _secondaryMuzzleTransforms.Length > 0)
+        if(_secondaryMuzzleTransformsDic.Count > 0)
         {
             _aimTargetPoint = aimTargetPoint;
             SelectSecondaryTurretsBySide(aimTargetPoint);
             AimSecondaryTurrets();
-
+            UpdateSecondaryFlashes();
             _secondaryFireCooldown -= Time.deltaTime;
 
             if(_secondaryFireCooldown <= 0f)
@@ -140,13 +168,17 @@ public class PlayerTurretShoot : IInputInitialize, IShootable
         Vector3 toTarget = aimTargetPoint - tankPosition;
         float targetSide = Mathf.Sign(Vector3.Dot(Vector3.Cross(tankForward, toTarget), tankUp));
 
-        for(int i = 0; i < _secondaryMuzzleTransforms.Length; i++)
+        int i = 0;
+
+        foreach(Transform muzzle in _secondaryMuzzleTransformsDic.Keys)
         {
-            Vector3 toMuzzle = _secondaryMuzzleTransforms[i].position - tankPosition;
+            Vector3 toMuzzle = muzzle.position - tankPosition;
             float muzzleSide = Mathf.Sign(Vector3.Dot(Vector3.Cross(tankForward, toMuzzle), tankUp));
 
             if(muzzleSide == targetSide)
                 _secondaryTurretsAbleToShoot.Add(i);
+
+            i++;
         }
     }
 
@@ -160,6 +192,7 @@ public class PlayerTurretShoot : IInputInitialize, IShootable
         {
             Transform pivot = _secondaryPivots[i];
             Transform pivotParent = pivot.parent;
+            
             if(pivotParent == null) continue;
 
             //Se trabaja en WORLD space para que "arriba" sea inequívocamente Vector3.up mundial:
@@ -184,11 +217,68 @@ public class PlayerTurretShoot : IInputInitialize, IShootable
 
     public void ShootSecondaryTurrets()
     {
-        foreach(int i in _secondaryTurretsAbleToShoot)
+        int i = 0;
+
+        foreach(Transform muzzle in _secondaryMuzzleTransformsDic.Keys)
         {
-            Transform muzzle = _secondaryMuzzleTransforms[i];
+            if(!_secondaryTurretsAbleToShoot.Contains(i++)) continue;
+
             ShooteableObject bullet = _turretBulletFactory.Create(_currentBulletType, muzzle.position, muzzle.rotation);
             bullet.Shoot(muzzle.up);
         }
+    }
+
+    //Igual que _turretPS pero por torreta: el flash existe mientras esa torreta está seleccionada y el gatillo
+    //apretado, sigue a su muzzle todos los frames y se devuelve al pool apenas deja de estar seleccionada.
+    private void UpdateSecondaryFlashes()
+    {
+        if(!TryResolveService()) return;
+
+        int i = 0;
+
+        foreach(var pair in _secondaryMuzzleTransformsDic)
+        {
+            Transform muzzle = pair.Key;
+            SecondaryMuzzleSlot slot = pair.Value;
+
+            if(!_secondaryTurretsAbleToShoot.Contains(i++))
+            {
+                if(slot.flash == null) continue;
+
+                _PSFactory.Return(slot.flash);
+                slot.flash = null;
+                continue;
+            }
+
+            Quaternion flashRotation = GetFlashRotation(muzzle);
+
+            if(slot.flash == null)
+            {
+                slot.flash = _PSFactory.Create(PSType.TurretMuzzleFlash, muzzle.position, flashRotation);
+                slot.flash.Initialize();
+            }
+            else slot.flash.transform.SetPositionAndRotation(muzzle.position, flashRotation);
+        }
+    }
+
+    private void ReleaseSecondaryFlashes()
+    {
+        foreach(SecondaryMuzzleSlot slot in _secondaryMuzzleTransformsDic.Values)
+        {
+            if(slot.flash == null) continue;
+
+            _PSFactory.Return(slot.flash);
+            slot.flash = null;
+        }
+    }
+
+    //El flash emite sobre su +Z, pero los muzzles disparan sobre su +Y.
+    private static Quaternion GetFlashRotation(Transform muzzle) => Quaternion.LookRotation(muzzle.up, -muzzle.forward);
+
+    public bool TryResolveService()
+    {
+        if(_PSFactory != null) return true;
+
+        return ServiceLocator.Instance.TryGet(out _PSFactory);
     }
 }

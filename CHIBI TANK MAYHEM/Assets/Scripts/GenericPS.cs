@@ -3,13 +3,15 @@ using System.Collections.Generic;
 
 public enum PSType
 {
-    BoomText
+    BoomText,
+    TurretMuzzleFlash,
 }
 
 public class GenericPS : MonoBehaviour
 {
     private List<ParticleSystem> _ps;
     [SerializeField] private PSType _type;
+    [SerializeField] private bool _autoReturnToFactory = false;
     private ParticleSystemFactory _factory;
 
     public PSType PSType => _type;
@@ -32,6 +34,8 @@ public class GenericPS : MonoBehaviour
             Debug.LogWarning("[GenericPS] Factory is null.");
             return;
         }
+
+        if(!_autoReturnToFactory) return;
 
         if(_ps.TrueForAll(ps => ps.isStopped))
             _factory.Return(this);

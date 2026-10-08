@@ -95,4 +95,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ParticleSystemFactory
   _PSPrefabs:
   - {fileID: 486209401897006198, guid: f3562626d926ea644902b8aa181f85c5, type: 3}
+  - {fileID: 1604825208333451940, guid: 93e385dc6c276034fb3602aa298caa8f, type: 3}
   _initialStockPerType: 15

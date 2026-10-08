@@ -9885,6 +9885,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GenericPS
   _type: 0
+  _autoReturnToFactory: 1
 --- !u!1 &7048956661084484434
 GameObject:
   m_ObjectHideFlags: 0

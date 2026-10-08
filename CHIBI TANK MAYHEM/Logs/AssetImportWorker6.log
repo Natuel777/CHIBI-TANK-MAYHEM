@@ -1,0 +1,785 @@
+[Licensing::Module] Trying to connect to existing licensing client channel...
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-nahue" at "2026-10-08T18:51:07.3134321Z"
+Built from '6000.4/staging' branch; Version is '6000.4.9f1 (f7258d6eebbe) revision 16197005'; Using compiler version '194234433'; Build Type 'Release'
+OS: 'Windows 11  (10.0.26200) Core' Language: 'es' Physical Memory: 16004 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1
+System  architecture: x64
+Process architecture: x64
+Date: 2026-10-08T18:51:07Z
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\6000.4.9f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker6
+-projectPath
+C:/Users/nahue/Documents/CHIBI-TANK-MAYHEM/CHIBI TANK MAYHEM
+-logFile
+Logs/AssetImportWorker6.log
+-srvPort
+63139
+-licensingIpc
+LicenseClient-nahue
+-force-d3d12
+-job-worker-count
+9
+-background-job-worker-count
+8
+-gc-helper-count
+1
+-name
+AssetImport
+Successfully changed project path to: C:/Users/nahue/Documents/CHIBI-TANK-MAYHEM/CHIBI TANK MAYHEM
+C:/Users/nahue/Documents/CHIBI-TANK-MAYHEM/CHIBI TANK MAYHEM
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gfx=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-allocator-temp-initial-block-size-main=262144"
+    "memorysetup-allocator-temp-initial-block-size-worker=262144"
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+Player connection [25012]  Target information:
+
+Player connection [25012]  * "[IP] 172.30.208.1 [Port] 0 [Flags] 2 [Guid] 938478628 [EditorId] 938478628 [Version] 1048832 [Id] WindowsEditor(7,Nahuel) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Player connection [25012]  * "[IP] 192.168.0.6 [Port] 0 [Flags] 2 [Guid] 938478628 [EditorId] 938478628 [Version] 1048832 [Id] WindowsEditor(7,Nahuel) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Player connection [25012] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [25012] Host joined alternative multi-casting on [225.0.0.222:34997]...
+JobSystem: Creating JobQueue using job-worker-count value 9
+Input System module state changed to: Initialized.
+[Physics::Module] Initialized fallback backend.
+[Physics::Module] Id: 0xdecafbad
+Library Redirect Path: Library/
+[Physics::Module] Selected backend.
+[Physics::Module] Name: PhysX
+[Physics::Module] Id: 0xf2b8ea05
+[Physics::Module] SDK Version: 4.1.2
+[Physics::Module] Integration Version: 1.0.0
+[Physics::Module] Threading Mode: Multi-Threaded
+Refreshing native plugins compatible for Editor in 20.14 ms, found 4 plugins.
+Initialize engine version: 6000.4.9f1 (f7258d6eebbe)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/6000.4.9f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/nahue/Documents/CHIBI-TANK-MAYHEM/CHIBI TANK MAYHEM/Assets
+Forcing GfxDevice: Direct3D 12
+GfxDevice: creating device client; kGfxThreadingModeNonThreaded
+d3d12: failed to query info queue interface (0x80004002).
+Direct3D:
+    Version:         Direct3D 12 [level 12.2]
+    Renderer:        NVIDIA GeForce RTX 3060 Laptop GPU (ID=0x2520)
+    Vendor:          NVIDIA
+    VRAM:            5996 MB
+    App VRAM Budget: 5228 MB
+    Driver:          32.0.15.6607
+Shader 'WFX/Transparent Diffuse': fallback shader 'Particles/Alpha Blended' not found
+Shader 'WFX/Transparent Specular': fallback shader 'Particles/Alpha Blended' not found
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/6000.4.9f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/6000.4.9f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/6000.4.9f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56992
+CodeReloadManager initialized
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.4.9f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+[Licensing::Module] Licensing is not yet initialized.
+[Licensing::Client] Error: HandshakeResponse reported an error:
+	ResponseCode: 505
+	ResponseStatus: Unsupported protocol version '1.18.1'.
+[Licensing::Module] Error: Failed to handshake to channel: "LicenseClient-nahue"
+[Licensing::IpcConnector] LicenseClient-nahue channel disconnected successfully.
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-nahue-6000.4.9" at "2026-10-08T18:51:09.9150737Z"
+[Licensing::Client] Code 10 while verifying Licensing Client signature (process Id: 4076, path: "C:/Program Files/Unity/Hub/Editor/6000.4.9f1/Editor/Data/Resources/Licensing/Client/Unity.Licensing.Client.exe")
+[Licensing::Module] LicensingClient has failed validation; ignoring
+[Licensing::Client] Handshaking with LicensingClient:
+  Version:                 1.18.1+9fbee8e
+  Session Id:              e740cad7ec3846da94a74de29a8878d4
+  Correlation Id:          058c096ccaafdbebdaabd6f10192069d
+  External correlation Id: 4046014756336188888
+  Machine Id:              d3wIjImyigoZ2yiH37n7ItByCpM=
+[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-nahue-6000.4.9" (connect: 0.00s, validation: 0.00s, handshake: 0.01s)
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-nahue-6000.4.9-notifications" at "2026-10-08T18:51:09.9326244Z"
+[Licensing::Module] Licensing Background thread has ended after 2.62s
+[Licensing::Module] Licensing is initialized (took 0.91s).
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] License group:
+  Id: F4-ZF4W-JG7U-QS5D-T52E-XXXX
+  Product: Unity Personal
+  Type: ULF
+  Expiration: Unlimited
+[Licensing::Module] License group:
+  Id: 4673487441905-UnityPersXXXX
+  Product: Unity Personal
+  Type: Assigned
+  Expiration: Unlimited
+Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.4.9f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] License group:
+  Id: F4-ZF4W-JG7U-QS5D-T52E-XXXX
+  Product: Unity Personal
+  Type: ULF
+  Expiration: Unlimited
+[Licensing::Module] License group:
+  Id: 4673487441905-UnityPersXXXX
+  Product: Unity Personal
+  Type: Assigned
+  Expiration: Unlimited
+Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.4.9f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.4.9f1/Editor/Data/PlaybackEngines/LinuxStandaloneSupport/UnityEditor.LinuxStandalone.Extensions.dll
+Registered in 0.920743 seconds.
+Native extension for LinuxStandalone target not found
+[usbmuxd] Start listen thread
+[usbmuxd] Listen thread started
+Native extension for iOS target not found
+Native extension for Android target not found
+Native extension for WindowsStandalone target not found
+Package Manager log level set to [2]
+[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Unable to send message (not connected to server process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Unable to send message (not connected to server process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:True
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.565 seconds
+Domain Reload Profiling: 2586ms
+	BeginReloadAssembly (201ms)
+	RebuildCommonClasses (57ms)
+	RebuildNativeTypeToScriptingClass (22ms)
+	initialDomainReloadingComplete (999ms)
+	LoadAllAssembliesAndSetupDomain (742ms)
+		LoadAssemblies (203ms)
+		AnalyzeDomain (722ms)
+			TypeCache.Refresh (721ms)
+				TypeCache.ScanAssembly (703ms)
+	FinalizeReload (566ms)
+		SetupLoadedEditorAssemblies (0ms)
+			InitializePlatformSupportModulesInManaged (126ms)
+			BeforeProcessingInitializeOnLoad (109ms)
+			ProcessInitializeOnLoadAttributes (145ms)
+			ProcessInitializeOnLoadMethodAttributes (93ms)
+========================================================================
+Worker process is ready to serve import requests
+Import Worker Mode flag is 0x00
+Begin MonoManager ReloadAssembly
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] License group:
+  Id: F4-ZF4W-JG7U-QS5D-T52E-XXXX
+  Product: Unity Personal
+  Type: ULF
+  Expiration: Unlimited
+[Licensing::Module] License group:
+  Id: 4673487441905-UnityPersXXXX
+  Product: Unity Personal
+  Type: Assigned
+  Expiration: Unlimited
+Assembly Assembly-CSharp-Editor-firstpass.dll at Library/ScriptAssemblies/Assembly-CSharp-Editor-firstpass.dll not valid. Loading of assembly skipped.
+Assembly Assembly-CSharp-firstpass.dll at Library/ScriptAssemblies/Assembly-CSharp-firstpass.dll not valid. Loading of assembly skipped.
+Assembly DocCodeExamples.dll at Library/ScriptAssemblies/DocCodeExamples.dll not valid. Loading of assembly skipped.
+Assembly TestNewCustomAssembly.dll at Library/ScriptAssemblies/TestNewCustomAssembly.dll not valid. Loading of assembly skipped.
+Assembly Unity.2D.Sprite.Package.EditorTests.dll at Library/ScriptAssemblies/Unity.2D.Sprite.Package.EditorTests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Addressables.Editor.Tests.dll at Library/ScriptAssemblies/Unity.Addressables.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Addressables.Runtime.Tests.dll at Library/ScriptAssemblies/Unity.Addressables.Runtime.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Collections.BurstCompatibilityGen.dll at Library/ScriptAssemblies/Unity.Collections.BurstCompatibilityGen.dll not valid. Loading of assembly skipped.
+Assembly Unity.Collections.DocCodeSamples.dll at Library/ScriptAssemblies/Unity.Collections.DocCodeSamples.dll not valid. Loading of assembly skipped.
+Assembly Unity.Collections.PerformanceTests.dll at Library/ScriptAssemblies/Unity.Collections.PerformanceTests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Collections.Tests.dll at Library/ScriptAssemblies/Unity.Collections.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Collections.Tests.Playmode.dll at Library/ScriptAssemblies/Unity.Collections.Tests.Playmode.dll not valid. Loading of assembly skipped.
+Assembly Unity.InputSystem.IntegrationTests.dll at Library/ScriptAssemblies/Unity.InputSystem.IntegrationTests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Localization.DocCodeSamples.dll at Library/ScriptAssemblies/Unity.Localization.DocCodeSamples.dll not valid. Loading of assembly skipped.
+Assembly Unity.Mathematics.Tests.dll at Library/ScriptAssemblies/Unity.Mathematics.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Multiplayer.Center.Editor.Tests.dll at Library/ScriptAssemblies/Unity.Multiplayer.Center.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Multiplayer.Center.Tests.dll at Library/ScriptAssemblies/Unity.Multiplayer.Center.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Nuget.Mono-Cecil.dll at Library/ScriptAssemblies/Unity.Nuget.Mono-Cecil.dll not valid. Loading of assembly skipped.
+Assembly Unity.PathTracing.Editor.Tests.dll at Library/ScriptAssemblies/Unity.PathTracing.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.PathTracing.Runtime.Tests.dll at Library/ScriptAssemblies/Unity.PathTracing.Runtime.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.RenderPipelines.Core.Editor.Tests.dll at Library/ScriptAssemblies/Unity.RenderPipelines.Core.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.RenderPipelines.Core.Runtime.Tests.dll at Library/ScriptAssemblies/Unity.RenderPipelines.Core.Runtime.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.RenderPipelines.Universal.Config.Editor.Tests.dll at Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Config.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.RenderPipelines.Universal.Editor.Tests.dll at Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.RenderPipelines.Universal.Runtime.Tests.dll at Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Runtime.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.ResourceManager.Tests.dll at Library/ScriptAssemblies/Unity.ResourceManager.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.ScriptableBuildPipeline.Editor.Tests.dll at Library/ScriptAssemblies/Unity.ScriptableBuildPipeline.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.ScriptableBuildPipeline.Tests.dll at Library/ScriptAssemblies/Unity.ScriptableBuildPipeline.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.ScriptableBuildPipelineTests.Runtime.Tests.dll at Library/ScriptAssemblies/Unity.ScriptableBuildPipelineTests.Runtime.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Searcher.EditorTests.dll at Library/ScriptAssemblies/Unity.Searcher.EditorTests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Settings.Tests.dll at Library/ScriptAssemblies/Unity.Settings.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.ShaderGraph.Editor.Tests.dll at Library/ScriptAssemblies/Unity.ShaderGraph.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.TextMeshPro.Editor.Tests.dll at Library/ScriptAssemblies/Unity.TextMeshPro.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.TextMeshPro.Tests.dll at Library/ScriptAssemblies/Unity.TextMeshPro.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.UnifiedRayTracing.Editor.Tests.dll at Library/ScriptAssemblies/Unity.UnifiedRayTracing.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly UnityEditor.UI.Common.Tests.dll at Library/ScriptAssemblies/UnityEditor.UI.Common.Tests.dll not valid. Loading of assembly skipped.
+Assembly UnityEditor.UI.EditorTests.dll at Library/ScriptAssemblies/UnityEditor.UI.EditorTests.dll not valid. Loading of assembly skipped.
+Assembly UnityEngine.UI.Tests.dll at Library/ScriptAssemblies/UnityEngine.UI.Tests.dll not valid. Loading of assembly skipped.
+Symbol file LoadedFromMemory is not a mono symbol file
+Refreshing native plugins compatible for Editor in 13.75 ms, found 4 plugins.
+Native extension for LinuxStandalone target not found
+Native extension for iOS target not found
+Native extension for Android target not found
+Native extension for WindowsStandalone target not found
+[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Unable to send message (not connected to server process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+Refreshing native plugins compatible for Editor in 2.53 ms, found 4 plugins.
+[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Unable to send message (not connected to server process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+[MODES] ModeService[none].Initialize
+[MODES] ModeService[none].LoadModes
+[MODES] Loading mode Default (0) for mode-current-id-CHIBI TANK MAYHEM
+ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:True
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  1.334 seconds
+Domain Reload Profiling: 2812ms
+	BeginReloadAssembly (228ms)
+		DisableScriptedObjects (6ms)
+		CreateAndSetChildDomain (39ms)
+	RebuildCommonClasses (46ms)
+	RebuildNativeTypeToScriptingClass (16ms)
+	initialDomainReloadingComplete (313ms)
+	LoadAllAssembliesAndSetupDomain (874ms)
+		LoadAssemblies (591ms)
+		AnalyzeDomain (404ms)
+			TypeCache.Refresh (292ms)
+				TypeCache.ScanAssembly (267ms)
+			BuildScriptInfoCaches (98ms)
+			ResolveRequiredComponents (12ms)
+	FinalizeReload (1334ms)
+		SetupLoadedEditorAssemblies (0ms)
+			InitializePlatformSupportModulesInManaged (33ms)
+			BeforeProcessingInitializeOnLoad (219ms)
+			ProcessInitializeOnLoadAttributes (572ms)
+			ProcessInitializeOnLoadMethodAttributes (135ms)
+			AfterProcessingInitializeOnLoad (10ms)
+		AwakeInstancesAfterBackupRestoration (9ms)
+Shader 'WFX/Transparent Specular': fallback shader 'Particles/Alpha Blended' not found
+Shader 'WFX/Transparent Diffuse': fallback shader 'Particles/Alpha Blended' not found
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.02 seconds
+Refreshing native plugins compatible for Editor in 2.30 ms, found 4 plugins.
+Unloading 25 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 8119 unused Assets / (6.2 MB). Loaded Objects now: 8994.
+Memory consumption went from 171.5 MB to 165.3 MB.
+Total: 12.650200 ms (FindLiveObjects: 1.767700 ms CreateObjectMapping: 0.864700 ms MarkObjects: 6.771900 ms  DeleteObjects: 3.243800 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 2000971.282134 seconds.
+  path: Assets/JMO Assets/WarFX/Demo/Assets/WFX_Demo_T_Metal Normal.tga
+  importAddress: Guid(eb7b1c04257f39243a38762db836d80c) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/JMO Assets/WarFX/Demo/Assets/WFX_Demo_T_Metal Normal.tga using Guid(eb7b1c04257f39243a38762db836d80c) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'f19b8a242be5469ba8a1a740bdacf0c7') in 0.1363353 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=685562593e772539c8253ce7c020c8a7 DependenciesID=e1d74983af1f483d4f262307deb18ef3 StaticDependenciesID=5bd6f9e9a4f20244c50c320535336345 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/JMO Assets/WarFX/Mobile/Textures/Smoke/WFXM_T_SmokeNoise.tga
+  importAddress: Guid(d9e7467f4890a244083c45417bc31ab4) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/JMO Assets/WarFX/Mobile/Textures/Smoke/WFXM_T_SmokeNoise.tga using Guid(d9e7467f4890a244083c45417bc31ab4) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'd16cb2fae2e2211f2440dd824ddbea2e') in 0.0172483 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=e12e5a35086a9287f3b9f010020a538e DependenciesID=7865e636767f608732321ba3f7ee7e93 StaticDependenciesID=219a221068e5a2c1cc865d1a13155194 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/JMO Assets/WarFX/Mobile/Materials/Misc
+  importAddress: Guid(8e8b784b575f226428503e5a86b561dd) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/JMO Assets/WarFX/Mobile/Materials/Misc using Guid(8e8b784b575f226428503e5a86b561dd) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '2e8a335911ebd21b66114b1ec85d2065') in 0.0120911 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=4d621d1c74a08c20d79f165df88d2a75 DependenciesID=f48aee37c034918e4cb2c7f39f315998 StaticDependenciesID=0f0416a1f39ad2bf4a0ab4db069ab445 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000071 seconds.
+  path: Assets/JMO Assets/WarFX/Demo/UI Canvas/CFX Demo Btn SlowMo H.png
+  importAddress: Guid(48624f05b683e4a4ab1a142e40fd6971) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/JMO Assets/WarFX/Demo/UI Canvas/CFX Demo Btn SlowMo H.png using Guid(48624f05b683e4a4ab1a142e40fd6971) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '1e6fc6bf9299af7188385ed0b85f9789') in 0.0276373 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=ae03e98eb32663ffe469f782e19e7947 DependenciesID=f1d91542056f02e1936654dba065fb99 StaticDependenciesID=c6c3f9f94943f7947744a4a41b40aaa4 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/JMO Assets/WarFX/Mobile/Materials/Impacts/WFXM_M_Impact WoodDebris.mat
+  importAddress: Guid(524fb5b3e56449d48a919f31f3de5694) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/JMO Assets/WarFX/Mobile/Materials/Impacts/WFXM_M_Impact WoodDebris.mat using Guid(524fb5b3e56449d48a919f31f3de5694) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'a09c97a8ba6333ab5bd69da8cd161e5b') in 0.0249921 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=9e936436f4f8fc8ab452b88b9089f61c DependenciesID=4dc50a5429142b5b57696ddd56ac0bff StaticDependenciesID=0d9a4fb66f8715796fcfb3389809182f 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/JMO Assets/WarFX/Desktop/Materials/Bullet Holes/WFX_BulletHole Wood.mat
+  importAddress: Guid(c301bbc4eedf9c641921c1affecab38f) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/JMO Assets/WarFX/Desktop/Materials/Bullet Holes/WFX_BulletHole Wood.mat using Guid(c301bbc4eedf9c641921c1affecab38f) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '6b4f6e3b7918ee347b00e3e15c7f6da6') in 0.0146616 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=84f5d417d064fe47dc6e812a42281b43 DependenciesID=940ff50cb6722400a21edb112e5745cf StaticDependenciesID=4e36b688f800b95194c240f7b9417be2 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/JMO Assets/WarFX/_Effects/Bullet Impacts/WFX_BImpact SoftBody.prefab
+  importAddress: Guid(3b1513bcb86426b4795879be6a128ed7) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/JMO Assets/WarFX/_Effects/Bullet Impacts/WFX_BImpact SoftBody.prefab using Guid(3b1513bcb86426b4795879be6a128ed7) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'a898c0682611eab66a1d1a69d4611b0e') in 0.0902628 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=885afa7f638b0133ab55c30ac879b3cb DependenciesID=49641d03206a207f29cb81e42ec2eecb StaticDependenciesID=f9a50dcae34892305ff2927cd2743a52 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 15
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000039 seconds.
+  path: Assets/JMO Assets/WarFX/Demo/Assets/WFX_Demo_T_Cobblestone.tga
+  importAddress: Guid(3795ce9fd3b225244b8149252918c4e9) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/JMO Assets/WarFX/Demo/Assets/WFX_Demo_T_Cobblestone.tga using Guid(3795ce9fd3b225244b8149252918c4e9) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'f4b6918333630d859a7a29e59f3f3156') in 0.0188022 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=321975ae9fc58254f61eafac836d3a43 DependenciesID=8668301557b52de5e709c0ab4cf643e2 StaticDependenciesID=b2b4a8645e2ba3f56d03d24e1f0ddcef 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/JMO Assets/WarFX/Desktop/Materials/Bullet Holes/WFX_BulletHole Concrete Lighted.mat
+  importAddress: Guid(510d824c243583b488605ed79cd5f7d0) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/JMO Assets/WarFX/Desktop/Materials/Bullet Holes/WFX_BulletHole Concrete Lighted.mat using Guid(510d824c243583b488605ed79cd5f7d0) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '3c6620e6182b860f23b70af6aec14497') in 0.0166403 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=7668451c49fd248580e4e3bff2acf6e2 DependenciesID=871b6abdb596cb67798a1f48da906ab8 StaticDependenciesID=df1573e875f03704f4b661eea1c1d73b 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/JMO Assets/WarFX/_Effects (Mobile)/Bullet Impacts
+  importAddress: Guid(bf7d30d2e33da424493e8f75833dd8e7) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/JMO Assets/WarFX/_Effects (Mobile)/Bullet Impacts using Guid(bf7d30d2e33da424493e8f75833dd8e7) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '5da686c66cf341ee8da06b667a5377fd') in 0.0134631 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=aa4c2ca51e6f8d5c62e560f8fbb39de9 DependenciesID=8f4b7c2e7fa022cb61205c69b8a7af8c StaticDependenciesID=7000e44f8b5ac62339454bcb6992a39b 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/JMO Assets/WarFX/Mesh/Plane1x1.FBX
+  importAddress: Guid(9d0862121c112ec4abc229920df08581) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/JMO Assets/WarFX/Mesh/Plane1x1.FBX using Guid(9d0862121c112ec4abc229920df08581) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'e3cee2f91a5f62db2412419f7ad2eb03') in 0.0376221 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=5b1d5e30a67709c11f45a8e1d2aee8f0 DependenciesID=d183b5bc73be0d5baaab109e3890d13c StaticDependenciesID=140180e90809a8a9298561071d139654 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 8
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/JMO Assets/WarFX/_Effects/Explosions/WFX_ExplosiveSmoke Big.prefab
+  importAddress: Guid(1dbc518224e49f34095aab42fe05751a) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/JMO Assets/WarFX/_Effects/Explosions/WFX_ExplosiveSmoke Big.prefab using Guid(1dbc518224e49f34095aab42fe05751a) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'bd4709286622c271b43f2d0f7616850a') in 0.0262843 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=a8835a16b8659a293086f7f45841ef1e DependenciesID=a7967522e59d655fae71405151b0258b StaticDependenciesID=b71d6ca22cc10da536a30501da61050e 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 27
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/JMO Assets/WarFX/Mobile/Textures/Flames/WFXM_T_FlamesBig A8.tga
+  importAddress: Guid(bb71b965fb657ac4188ec7eff1a468ac) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/JMO Assets/WarFX/Mobile/Textures/Flames/WFXM_T_FlamesBig A8.tga using Guid(bb71b965fb657ac4188ec7eff1a468ac) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'b777543ebed9d808a6fe97e96f033e7e') in 0.0171022 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=36381d16774bcafc61f891e0c43c64e3 DependenciesID=38c3a495b0861449f1918645e30606ec StaticDependenciesID=d99987a098035b5934f633da4f70f79d 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/JMO Assets/WarFX/Desktop/Textures/Smoke/WFX_T_SmokeLoopAlpha.tga
+  importAddress: Guid(a222b3d2c604e1946af11e01d29efdee) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/JMO Assets/WarFX/Desktop/Textures/Smoke/WFX_T_SmokeLoopAlpha.tga using Guid(a222b3d2c604e1946af11e01d29efdee) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'd2324624ca99fcfbac0aff3e3dcc07c0') in 0.0168235 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=eea0d9496b8d5852c878f0004b72cc70 DependenciesID=8184e161f5710b96cf3f172f7ed273f8 StaticDependenciesID=6cefb9c70c6875c6afb58007d5a31740 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/JMO Assets/WarFX/Demo/Assets/WFX_Demo_M_Concrete.mat
+  importAddress: Guid(c071c19d8a6f8b34aa95017397002b83) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/JMO Assets/WarFX/Demo/Assets/WFX_Demo_M_Concrete.mat using Guid(c071c19d8a6f8b34aa95017397002b83) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'b85189947ebe3f16e7cc0ede54e458ac') in 0.0229716 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=404abd638d1bff84a2c534cc5e624b5f DependenciesID=df0acdaf5da1c5eb3d448a881812e53d StaticDependenciesID=7789935c270bedf2c53598b6690e6635 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/JMO Assets/WarFX/Demo/Assets/WFX_Demo_New.cs
+  importAddress: Guid(6b322923f82d20c4ba75b8657b00331b) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/JMO Assets/WarFX/Demo/Assets/WFX_Demo_New.cs using Guid(6b322923f82d20c4ba75b8657b00331b) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'b1d08a4a3995fdf0bbe3528100650e1a') in 0.0143226 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=a21e15608e2737e2fcfff66542bb687f DependenciesID=c1d3f0f5b3b6b4c2344a592d065c37ef StaticDependenciesID=ac9ace1ef7cc9db1bf87f50c81a96206 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000033 seconds.
+  path: Assets/JMO Assets/WarFX/Mobile/Materials/MuzzleFlashes/WFXM_M_MF Sparks RIFLE2.mat
+  importAddress: Guid(4dde6e2427a9e8f4d9eb28f4a4b7aedc) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/JMO Assets/WarFX/Mobile/Materials/MuzzleFlashes/WFXM_M_MF Sparks RIFLE2.mat using Guid(4dde6e2427a9e8f4d9eb28f4a4b7aedc) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '71ab2286f5a6e52898e12d716d66d468') in 0.0165666 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=da1f5c955de71a6ce7a94c5339f51e00 DependenciesID=e73ad94332693662c0dec5f2f0ae1278 StaticDependenciesID=c8435229d5045116bee79bb9546ee175 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/JMO Assets/WarFX/Mobile/Textures/Bullet Holes/WFXM_T_BulletHoles Metal.tga
+  importAddress: Guid(d74d17bdf6b914349b2ab7ed40e9def6) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/JMO Assets/WarFX/Mobile/Textures/Bullet Holes/WFXM_T_BulletHoles Metal.tga using Guid(d74d17bdf6b914349b2ab7ed40e9def6) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '7662a0d8f53eebe048605b3d800fe526') in 0.0177869 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=e99a536b92e0c1a470c31b789574010b DependenciesID=1c6ef9ba49e99b5c39a01c14922667fa StaticDependenciesID=01a6a87dbc1216b1ca92e501f7bab5dc 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/JMO Assets/WarFX/_Effects/Fire/Gray Smoke/WFX_Fire Natural Circle (Gray Smoke).prefab
+  importAddress: Guid(dc0674a8a869b5043ab6f4155bdd5b02) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/JMO Assets/WarFX/_Effects/Fire/Gray Smoke/WFX_Fire Natural Circle (Gray Smoke).prefab using Guid(dc0674a8a869b5043ab6f4155bdd5b02) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '7d9f61e567ebc10e1ae9af1bd5332c8e') in 0.0314966 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=ee0b69c006680f98aa7d7502169f89f0 DependenciesID=905434f0408d6e03ac2ba1c25bd43608 StaticDependenciesID=9bbcb993dbcb3174021559c6c34f88c6 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 15
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/JMO Assets/WarFX/_Effects/Bullet Impacts/+ Bullet Hole
+  importAddress: Guid(a297b09d592ebf84ab49d01578e8be93) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/JMO Assets/WarFX/_Effects/Bullet Impacts/+ Bullet Hole using Guid(a297b09d592ebf84ab49d01578e8be93) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '1f6290024ce2ac2cefeba2ed076746ba') in 0.0139153 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=725db9081b62c5532ab9841b23c1ad93 DependenciesID=af4aa5dc5c06289f098276da85de35ae StaticDependenciesID=5b40fb1201c08c99c0700a78aabe5ba1 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/JMO Assets/WarFX/Mobile/Textures/Misc/WFXM_T_GroundGlow A8.tga
+  importAddress: Guid(d06d2f147c474b542a9d215471c93d1a) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/JMO Assets/WarFX/Mobile/Textures/Misc/WFXM_T_GroundGlow A8.tga using Guid(d06d2f147c474b542a9d215471c93d1a) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '27b6a7a00f51d2e39aa932a9ff35ebf0') in 0.015386 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=ec4af1e70a0f6c27116aeb3e4b5230cf DependenciesID=baaf03a8d3532a2541fa2a36d107ab9c StaticDependenciesID=2232c5de861282e49609f0ba3e797ea8 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/JMO Assets/WarFX/_Effects (Mobile)/Explosions/WFXMR_ExplosiveSmoke Big.prefab
+  importAddress: Guid(1ae4db7b36e51124b89d2b32303a7a0b) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/JMO Assets/WarFX/_Effects (Mobile)/Explosions/WFXMR_ExplosiveSmoke Big.prefab using Guid(1ae4db7b36e51124b89d2b32303a7a0b) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'ef595df76e89453b656a0d492dc37987') in 0.0311576 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=b3d938b48c6d6a7f6f6b7ee5cfc302a4 DependenciesID=d76730695af9d4dff1955d014a86509f StaticDependenciesID=8668a55b8c2f14aeddaaba98e9d8774d 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 27
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/JMO Assets/WarFX/_Effects (Mobile)/Fire/Gray Smoke/WFXMR_Fire SmallFlame (Gray Smoke).prefab
+  importAddress: Guid(ff7840f1c1582ea4cbe1d632c878e884) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/JMO Assets/WarFX/_Effects (Mobile)/Fire/Gray Smoke/WFXMR_Fire SmallFlame (Gray Smoke).prefab using Guid(ff7840f1c1582ea4cbe1d632c878e884) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '523475cdc1eb4c74cd527ad4191f9101') in 0.0313208 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=3b59b2005bd0cc43963bb5425a4305e7 DependenciesID=8ce895028a7ec44f7d20e1360ec01ba6 StaticDependenciesID=25ac5ed4dfb3df366c54fdddc0aa1907 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 15
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000039 seconds.
+  path: Assets/JMO Assets/WarFX/Desktop/Materials/Smoke/WFX_M_ExplosiveSmoke.mat
+  importAddress: Guid(c4934188b933304409ce48e07d589342) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/JMO Assets/WarFX/Desktop/Materials/Smoke/WFX_M_ExplosiveSmoke.mat using Guid(c4934188b933304409ce48e07d589342) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '5f1a2e5e629cc14363077e9d7bde19cc') in 0.0151672 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=e9acb492a22f29522e3e39e68813fd83 DependenciesID=2bed4801ebbe5f49495494ece1a68b5d StaticDependenciesID=4ab17969e9e6608dfa7d56426d6dc895 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/JMO Assets/WarFX/_Effects/Smoke/WFX_SmokeGrenade AlphaBlend Black.prefab
+  importAddress: Guid(6f8449a4663a4fd44b6140772d4f39f9) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/JMO Assets/WarFX/_Effects/Smoke/WFX_SmokeGrenade AlphaBlend Black.prefab using Guid(6f8449a4663a4fd44b6140772d4f39f9) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'fbab5600d0dcb039b5e218213eb0edb3') in 0.0293821 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=efbc4f1995d7480fcf2ec9b134a7da4c DependenciesID=039699daacb5351a6c0a50eb389e6b65 StaticDependenciesID=867ab6227e258ec31972b2255be99cb2 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 11
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/JMO Assets/WarFX/Shaders/WFX_S Particle AddSoft A8.shader
+  importAddress: Guid(7da55032bc1723749a4a351ea0d98969) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/JMO Assets/WarFX/Shaders/WFX_S Particle AddSoft A8.shader using Guid(7da55032bc1723749a4a351ea0d98969) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '0d5453cd262935a1a00ed2224417ef7d') in 0.0174126 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=832592a493b0a5eff4bb9c66265d1f92 DependenciesID=7e474288b87f35f0067f6349280e7456 StaticDependenciesID=d42f9bd6cd43820719f5a440111c84a4 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000044 seconds.
+  path: Assets/JMO Assets/WarFX/Desktop/Materials/Misc/WFX_M_SmallDotsInv Mult.mat
+  importAddress: Guid(4d1d4d88cfac1d747af75ea13f5d3e42) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/JMO Assets/WarFX/Desktop/Materials/Misc/WFX_M_SmallDotsInv Mult.mat using Guid(4d1d4d88cfac1d747af75ea13f5d3e42) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '1d8d9bb5a1831f39b899bdb6c34f932e') in 0.0155187 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=400c4691ba7022bffa1512be25e4aad2 DependenciesID=48bd6bd903c3a8721d11b1efdf829c64 StaticDependenciesID=fadbbb115da386a14bb6bd335c47c98d 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/JMO Assets/WarFX/_Effects (Mobile)/Fire/WFXMR_FlameThrower Looped.prefab
+  importAddress: Guid(9debd342863be9747b5a48c343184a31) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/JMO Assets/WarFX/_Effects (Mobile)/Fire/WFXMR_FlameThrower Looped.prefab using Guid(9debd342863be9747b5a48c343184a31) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'c854dfa559ec24fc533f21bd66b30823') in 0.0359119 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=2ceb58666a9a98b9dce22a0dd1facbe9 DependenciesID=e3110ed19bb5a987bd549811a3f1bb07 StaticDependenciesID=822a6d2fb62d58b8e70ad88239e95625 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 11
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/JMO Assets/WarFX/Desktop/Textures/Flames/WFX_T_FlamesSmall 4frm.tga
+  importAddress: Guid(9cb7bb0b99eccab4794a6de5e6593024) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/JMO Assets/WarFX/Desktop/Textures/Flames/WFX_T_FlamesSmall 4frm.tga using Guid(9cb7bb0b99eccab4794a6de5e6593024) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '690ec50e3a2f0ab5fdca75139dc8e07e') in 0.0162381 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=0b2cebebf71e7a0f449cc268a954a931 DependenciesID=49b0abd98615aeec34c71faf85bc1f77 StaticDependenciesID=cd1250b54ad72523fc1dfb77de96a172 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/JMO Assets/WarFX/Desktop/Materials/Impacts/WFX_M_Impact WoodDebris.mat
+  importAddress: Guid(078ce4622ab78df4aa7130cddc6c0b5c) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/JMO Assets/WarFX/Desktop/Materials/Impacts/WFX_M_Impact WoodDebris.mat using Guid(078ce4622ab78df4aa7130cddc6c0b5c) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '2047174016e9d16e5adc222559ae9516') in 0.0154116 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=f214a9061b958b94e7bcba5f4d2eb3f3 DependenciesID=8f7010466372cdaded68fb7afb924f6e StaticDependenciesID=d74478f67836b3ae370fa069fabb3c48 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/JMO Assets/WarFX/_Effects (Mobile)/MuzzleFlashes/4Planes/WFXMR_MF 4P RIFLE1.prefab
+  importAddress: Guid(5317fde2cd7d75a4d8888fd00df21599) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/JMO Assets/WarFX/_Effects (Mobile)/MuzzleFlashes/4Planes/WFXMR_MF 4P RIFLE1.prefab using Guid(5317fde2cd7d75a4d8888fd00df21599) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '3730bd4d28a6a3bb6e695dcb2745055c') in 0.0320611 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=86116a153e547d046f4bf29a8890f4e8 DependenciesID=101f1203a29d00588693d3944aa7bc40 StaticDependenciesID=fa18815358e50bc5a16709bc6b1fed01 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 29
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/JMO Assets/WarFX/_Effects/Explosions/WFX_ExplosiveSmokeGround Big Alt.prefab
+  importAddress: Guid(3364c97de68d3a147af572d1c71c6455) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/JMO Assets/WarFX/_Effects/Explosions/WFX_ExplosiveSmokeGround Big Alt.prefab using Guid(3364c97de68d3a147af572d1c71c6455) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '1d41635c0faf7723838992b75dff4c3a') in 0.0313605 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=d45a8432793f319b6bff798ac0a77bdc DependenciesID=2e5243f01016e2a8f2f75a20d985b649 StaticDependenciesID=e1aee634fe563d15253a76eb12b32f91 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 31
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000035 seconds.
+  path: Assets/JMO Assets/WarFX/Desktop/Materials/Smoke/WFX_M_SmokeSpikeStretched.mat
+  importAddress: Guid(5c8ba5bc91b214f4b878b96136b4d1fa) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/JMO Assets/WarFX/Desktop/Materials/Smoke/WFX_M_SmokeSpikeStretched.mat using Guid(5c8ba5bc91b214f4b878b96136b4d1fa) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '62f4c5b303286ed311ead787833c788f') in 0.0176157 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=4530059ea48f786a53f925d78a850f4c DependenciesID=24a3d6395c60b014db8f93621cb7ef20 StaticDependenciesID=03f40203a026c23795afcca1a75a928a 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000060 seconds.
+  path: Assets/JMO Assets/WarFX/Desktop/Textures/Misc
+  importAddress: Guid(04c2af48e099cce479200151c1f69e7b) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/JMO Assets/WarFX/Desktop/Textures/Misc using Guid(04c2af48e099cce479200151c1f69e7b) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '245522884b481a0791146c0301e70582') in 0.013937 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=82563a8a4fcc2b5608e5a304a2df33e2 DependenciesID=3e81aba48fce0728e9baa24d204aeff5 StaticDependenciesID=703a3650e75a0ded7c78ee74680ddc2e 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000043 seconds.
+  path: Assets/JMO Assets/WarFX/_Effects (Mobile)/Fire/Black Smoke/WFXMR_Fire Natural (Black Smoke).prefab
+  importAddress: Guid(f4a2c3f050b1cad4d9241bd31795a925) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/JMO Assets/WarFX/_Effects (Mobile)/Fire/Black Smoke/WFXMR_Fire Natural (Black Smoke).prefab using Guid(f4a2c3f050b1cad4d9241bd31795a925) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '1fc09111d1f93a9e2579398d22da556e') in 0.030098 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=18397a443bc8c1f6b02c2e9cd341e855 DependenciesID=ca764559dd4832f3e304b26d4eeaf3b5 StaticDependenciesID=1fa6055e2de4696c8bb3dbdf05c8c6d2 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 15
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/JMO Assets/WarFX/Demo/Assets/CFX_Demo_RotateCamera.cs
+  importAddress: Guid(f71e90e62dfae594490eb4d9b611f930) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/JMO Assets/WarFX/Demo/Assets/CFX_Demo_RotateCamera.cs using Guid(f71e90e62dfae594490eb4d9b611f930) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '92d518bdb29c1488fb924327859d8931') in 0.0134262 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=aa0bf4e8b52cbabeb5bcfdc32dadd90d DependenciesID=cb98c1408b9d97a617f104350fd0d666 StaticDependenciesID=6f24dfc62f4e46e1eda4b4d57a672c76 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/JMO Assets/WarFX/_Effects (Mobile)/Explosions/WFXMR_ExplosiveSmokeGround Big Alt.prefab
+  importAddress: Guid(990c2328597308a46a8f3d888b380296) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/JMO Assets/WarFX/_Effects (Mobile)/Explosions/WFXMR_ExplosiveSmokeGround Big Alt.prefab using Guid(990c2328597308a46a8f3d888b380296) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '24daf84494d1ef6fa4fe5f91b9f0a556') in 0.0327219 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=b1c511e11f14a837b100558acd0c80b1 DependenciesID=b463629bd4e149b6d62d707fe4d4c4c7 StaticDependenciesID=8423d5c905cfa980df53e1546992f9e5 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 31
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/JMO Assets/WarFX/Shaders
+  importAddress: Guid(76d80da38348456428f40ad47fa7c359) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/JMO Assets/WarFX/Shaders using Guid(76d80da38348456428f40ad47fa7c359) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'b696bde73a9b7235a1cb5451769e4828') in 0.0110467 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=64eb87f9627c5b68777c8abd4b31220c DependenciesID=2b774df109708416468d6c16796abe32 StaticDependenciesID=f98236598338d773a8719051e142dc61 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/JMO Assets/WarFX/Demo/Assets/CFX_AutoStopLoopedEffect.cs
+  importAddress: Guid(d9c4e89389fa607479b0744ec6611490) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/JMO Assets/WarFX/Demo/Assets/CFX_AutoStopLoopedEffect.cs using Guid(d9c4e89389fa607479b0744ec6611490) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '0d11100ac2a7a038fa91ab81cf0acd88') in 0.0125457 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=fd41e815bcb2d5aa75529a627660e14f DependenciesID=d386ba23ff28bfaf5f2eeec561b2f7b9 StaticDependenciesID=bf375ce664cdb1d44158ee6790edcdb8 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/JMO Assets/WarFX/Demo/Assets/WFX_Demo_M_Concrete Wall.mat
+  importAddress: Guid(ab6453a18f7ff2f4ebb1d7ccb0fe1353) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/JMO Assets/WarFX/Demo/Assets/WFX_Demo_M_Concrete Wall.mat using Guid(ab6453a18f7ff2f4ebb1d7ccb0fe1353) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'f813aa73f88528212e9ced22cbf3c60e') in 0.0188537 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=96730376e3a249de486c4fbd848f127c DependenciesID=43e1ffadded5f9700893b12246e8fdc7 StaticDependenciesID=4dc2bb5d03b5d778eea49c74bf5ec84c 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Assets/JMO Assets/WarFX/_Effects/Fire/WFX_FlameThrower Big Alt Looped.prefab
+  importAddress: Guid(06d796ccd85dc4c4b9c98270196715ae) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/JMO Assets/WarFX/_Effects/Fire/WFX_FlameThrower Big Alt Looped.prefab using Guid(06d796ccd85dc4c4b9c98270196715ae) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '2e2080328697bdfeb12e3bd6134d8d68') in 0.0326134 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=94963ceb7c65f8c945ed9995d571ad48 DependenciesID=29938c1a5a2ab8d8681e1ad13cc95880 StaticDependenciesID=8caa206de1b5ccd7dfa94402e3944e05 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 15
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/JMO Assets/WarFX/Shaders/WFX_S Multiply Soft Scroll.shader
+  importAddress: Guid(d07d6d0a86d4865468e58eacf94364ae) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/JMO Assets/WarFX/Shaders/WFX_S Multiply Soft Scroll.shader using Guid(d07d6d0a86d4865468e58eacf94364ae) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '38be8c0a2492001438409e6a3ec2bfae') in 0.013822 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=39826e818a89c30837bbc1b05369a6a4 DependenciesID=1133fb658da7f18d5c5401e0d220ab7d StaticDependenciesID=69de8de93a35ae52090298bae01bb0bd 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/JMO Assets/WarFX/_Effects/Bullet Impacts/+ Bullet Hole/WFX_BImpact Sand + Hole.prefab
+  importAddress: Guid(0b24f31f464fa614a84acdeac974ed6b) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/JMO Assets/WarFX/_Effects/Bullet Impacts/+ Bullet Hole/WFX_BImpact Sand + Hole.prefab using Guid(0b24f31f464fa614a84acdeac974ed6b) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '778010f7b063cba33b4c8dd631205950') in 0.0286819 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=41e2e91c655c599faa422bd3dda9f2e7 DependenciesID=73b3515cf07b5a1783ed2a5d1d0c7377 StaticDependenciesID=fc7bfd681c2319f09da4d84e5caf4e38 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 21
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/JMO Assets/WarFX/Desktop/Materials/Flames/WFX_M_FlameMine Add.mat
+  importAddress: Guid(5a8f1cdae1622674cbadec66134c60ad) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/JMO Assets/WarFX/Desktop/Materials/Flames/WFX_M_FlameMine Add.mat using Guid(5a8f1cdae1622674cbadec66134c60ad) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'd9e59b2d9c7fccae9eff621bd916b3bb') in 0.0140394 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=d9423e0cfd3886c13848df1945c2d3c9 DependenciesID=3689f2f188965167bd6aec14a8d61e5b StaticDependenciesID=589d9491fc391d4f0550f46f2a0e8491 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/JMO Assets/WarFX/Desktop/Materials/Bullet Holes/WFX_BulletHole Generic Sand.mat
+  importAddress: Guid(bdd14d80d6f714d4ebc207bf6ad3164c) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/JMO Assets/WarFX/Desktop/Materials/Bullet Holes/WFX_BulletHole Generic Sand.mat using Guid(bdd14d80d6f714d4ebc207bf6ad3164c) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'eae0d2fe96ed88badfa7280f267f627e') in 0.0192226 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=3aecc1c98ee2777b3a6e3f495785a298 DependenciesID=e1b4ffde8a0105c92f3237dcdcf31f97 StaticDependenciesID=328d28b0c1550b4a5c24732582105b3c 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/JMO Assets/WarFX/Mobile/Materials/Flames/WFXM_M_FlameMine Add.mat
+  importAddress: Guid(2982c27c5a079614097abf8aa0e32609) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/JMO Assets/WarFX/Mobile/Materials/Flames/WFXM_M_FlameMine Add.mat using Guid(2982c27c5a079614097abf8aa0e32609) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '99253575a7d61d60784e323e9b75361e') in 0.0159099 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=2b447f6001575179f642e15e0d4bf996 DependenciesID=960d5fd7b9bd43992084cf36dcabf817 StaticDependenciesID=db97fa3f512b24c3ef22019ec94492a5 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/JMO Assets/WarFX/Desktop/Textures/MuzzleFlashes/WFX_T_MF FrontRear RIFLE3 A8.png
+  importAddress: Guid(6de2876ac79ff9642a6dc07ef232a0aa) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/JMO Assets/WarFX/Desktop/Textures/MuzzleFlashes/WFX_T_MF FrontRear RIFLE3 A8.png using Guid(6de2876ac79ff9642a6dc07ef232a0aa) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '55a0a84e5d586e77ac4b76535e00402c') in 0.0164006 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=ffccbd279da657acf0b304c5a9ebb2f3 DependenciesID=79b788eaedb0b684638f5bd3fb026a3d StaticDependenciesID=4b2a4636871aac2a19d4873fb2bf76df 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Prepare
+Refreshing native plugins compatible for Editor in 3.66 ms, found 4 plugins.
+Unloading 25 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 8105 unused Assets / (5.9 MB). Loaded Objects now: 8996.
+Memory consumption went from 170.7 MB to 164.9 MB.
+Total: 11.492500 ms (FindLiveObjects: 0.709700 ms CreateObjectMapping: 0.686100 ms MarkObjects: 6.186200 ms  DeleteObjects: 3.909100 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+Shader 'WFX/Transparent Specular': fallback shader 'Particles/Alpha Blended' not found
+Shader 'WFX/Transparent Diffuse': fallback shader 'Particles/Alpha Blended' not found
+========================================================================
+Received Prepare
+Begin MonoManager ReloadAssembly
+Assembly Assembly-CSharp-Editor-firstpass.dll at Library/ScriptAssemblies/Assembly-CSharp-Editor-firstpass.dll not valid. Loading of assembly skipped.
+Assembly Assembly-CSharp-firstpass.dll at Library/ScriptAssemblies/Assembly-CSharp-firstpass.dll not valid. Loading of assembly skipped.
+Assembly DocCodeExamples.dll at Library/ScriptAssemblies/DocCodeExamples.dll not valid. Loading of assembly skipped.
+Assembly TestNewCustomAssembly.dll at Library/ScriptAssemblies/TestNewCustomAssembly.dll not valid. Loading of assembly skipped.
+Assembly Unity.2D.Sprite.Package.EditorTests.dll at Library/ScriptAssemblies/Unity.2D.Sprite.Package.EditorTests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Addressables.Editor.Tests.dll at Library/ScriptAssemblies/Unity.Addressables.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Addressables.Runtime.Tests.dll at Library/ScriptAssemblies/Unity.Addressables.Runtime.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Collections.BurstCompatibilityGen.dll at Library/ScriptAssemblies/Unity.Collections.BurstCompatibilityGen.dll not valid. Loading of assembly skipped.
+Assembly Unity.Collections.DocCodeSamples.dll at Library/ScriptAssemblies/Unity.Collections.DocCodeSamples.dll not valid. Loading of assembly skipped.
+Assembly Unity.Collections.PerformanceTests.dll at Library/ScriptAssemblies/Unity.Collections.PerformanceTests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Collections.Tests.dll at Library/ScriptAssemblies/Unity.Collections.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Collections.Tests.Playmode.dll at Library/ScriptAssemblies/Unity.Collections.Tests.Playmode.dll not valid. Loading of assembly skipped.
+Assembly Unity.InputSystem.IntegrationTests.dll at Library/ScriptAssemblies/Unity.InputSystem.IntegrationTests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Localization.DocCodeSamples.dll at Library/ScriptAssemblies/Unity.Localization.DocCodeSamples.dll not valid. Loading of assembly skipped.
+Assembly Unity.Mathematics.Tests.dll at Library/ScriptAssemblies/Unity.Mathematics.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Multiplayer.Center.Editor.Tests.dll at Library/ScriptAssemblies/Unity.Multiplayer.Center.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Multiplayer.Center.Tests.dll at Library/ScriptAssemblies/Unity.Multiplayer.Center.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Nuget.Mono-Cecil.dll at Library/ScriptAssemblies/Unity.Nuget.Mono-Cecil.dll not valid. Loading of assembly skipped.
+Assembly Unity.PathTracing.Editor.Tests.dll at Library/ScriptAssemblies/Unity.PathTracing.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.PathTracing.Runtime.Tests.dll at Library/ScriptAssemblies/Unity.PathTracing.Runtime.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.RenderPipelines.Core.Editor.Tests.dll at Library/ScriptAssemblies/Unity.RenderPipelines.Core.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.RenderPipelines.Core.Runtime.Tests.dll at Library/ScriptAssemblies/Unity.RenderPipelines.Core.Runtime.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.RenderPipelines.Universal.Config.Editor.Tests.dll at Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Config.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.RenderPipelines.Universal.Editor.Tests.dll at Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.RenderPipelines.Universal.Runtime.Tests.dll at Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Runtime.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.ResourceManager.Tests.dll at Library/ScriptAssemblies/Unity.ResourceManager.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.ScriptableBuildPipeline.Editor.Tests.dll at Library/ScriptAssemblies/Unity.ScriptableBuildPipeline.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.ScriptableBuildPipeline.Tests.dll at Library/ScriptAssemblies/Unity.ScriptableBuildPipeline.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.ScriptableBuildPipelineTests.Runtime.Tests.dll at Library/ScriptAssemblies/Unity.ScriptableBuildPipelineTests.Runtime.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Searcher.EditorTests.dll at Library/ScriptAssemblies/Unity.Searcher.EditorTests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Settings.Tests.dll at Library/ScriptAssemblies/Unity.Settings.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.ShaderGraph.Editor.Tests.dll at Library/ScriptAssemblies/Unity.ShaderGraph.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.TextMeshPro.Editor.Tests.dll at Library/ScriptAssemblies/Unity.TextMeshPro.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.TextMeshPro.Tests.dll at Library/ScriptAssemblies/Unity.TextMeshPro.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.UnifiedRayTracing.Editor.Tests.dll at Library/ScriptAssemblies/Unity.UnifiedRayTracing.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly UnityEditor.UI.Common.Tests.dll at Library/ScriptAssemblies/UnityEditor.UI.Common.Tests.dll not valid. Loading of assembly skipped.
+Assembly UnityEditor.UI.EditorTests.dll at Library/ScriptAssemblies/UnityEditor.UI.EditorTests.dll not valid. Loading of assembly skipped.
+Assembly UnityEngine.UI.Tests.dll at Library/ScriptAssemblies/UnityEngine.UI.Tests.dll not valid. Loading of assembly skipped.
+Symbol file LoadedFromMemory is not a mono symbol file
+Refreshing native plugins compatible for Editor in 7.42 ms, found 4 plugins.
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Assertion failed on expression: 'pred(*previous, *i)'
+Native extension for LinuxStandalone target not found
+Native extension for iOS target not found
+Native extension for Android target not found
+Native extension for WindowsStandalone target not found
+[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Unable to send message (not connected to server process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Unable to send message (not connected to server process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+[MODES] ModeService[none].Initialize
+[MODES] ModeService[none].LoadModes
+ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:True
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  1.142 seconds
+Domain Reload Profiling: 2314ms
+	BeginReloadAssembly (269ms)
+		DisableScriptedObjects (6ms)
+		CreateAndSetChildDomain (64ms)
+	RebuildCommonClasses (39ms)
+	RebuildNativeTypeToScriptingClass (16ms)
+	initialDomainReloadingComplete (89ms)
+	LoadAllAssembliesAndSetupDomain (758ms)
+		LoadAssemblies (595ms)
+		AnalyzeDomain (280ms)
+			TypeCache.Refresh (14ms)
+			BuildScriptInfoCaches (238ms)
+			ResolveRequiredComponents (26ms)
+	FinalizeReload (1143ms)
+		SetupLoadedEditorAssemblies (0ms)
+			InitializePlatformSupportModulesInManaged (40ms)
+			BeforeProcessingInitializeOnLoad (190ms)
+			ProcessInitializeOnLoadAttributes (496ms)
+			ProcessInitializeOnLoadMethodAttributes (148ms)
+			AfterProcessingInitializeOnLoad (13ms)
+		AwakeInstancesAfterBackupRestoration (16ms)
+Refreshing native plugins compatible for Editor in 2.90 ms, found 4 plugins.
+Unloading 25 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 8116 unused Assets / (5.2 MB). Loaded Objects now: 9014.
+Memory consumption went from 180.6 MB to 175.3 MB.
+Total: 15.382600 ms (FindLiveObjects: 2.352900 ms CreateObjectMapping: 0.887700 ms MarkObjects: 8.392700 ms  DeleteObjects: 3.747300 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+Shader 'WFX/Transparent Specular': fallback shader 'Particles/Alpha Blended' not found
+Shader 'WFX/Transparent Diffuse': fallback shader 'Particles/Alpha Blended' not found
+Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
+AssetImportWorker is now disconnected from the server
+Process exiting
+Exiting without the bug reporter. Application will terminate with return code 0
