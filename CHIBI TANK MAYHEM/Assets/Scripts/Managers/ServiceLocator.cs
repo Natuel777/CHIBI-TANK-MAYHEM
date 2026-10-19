@@ -48,4 +48,6 @@ public sealed class ServiceLocator
     }
 
     private static bool IsDestroyed(object service) => service is UnityEngine.Object unityObject && unityObject == null;
+
+    public void Clear() => _services.Clear();
 }
