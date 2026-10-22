@@ -29,7 +29,8 @@ public sealed class ChibiSoldierCaptureTargetCannonBehaviour : IShootable, IBeha
 
         if(_targetTransform == null) return;
 
-        RotateTowardsTarget();
+        RotateYTowardsTarget();
+        RotateXTowardsTarget();
 
         if(_shootTimer > 0f) return;
 
@@ -37,7 +38,7 @@ public sealed class ChibiSoldierCaptureTargetCannonBehaviour : IShootable, IBeha
         _shootTimer = _shootCooldown;
     }
 
-    private void RotateTowardsTarget()
+    private void RotateYTowardsTarget()
     {
         Vector3 toTarget = Vector3.ProjectOnPlane(_targetTransform.position - _yRotationCannonMesh.position, Vector3.up);
         Vector3 barrelDirection = Vector3.ProjectOnPlane(_muzzle.up, Vector3.up);
@@ -48,6 +49,23 @@ public sealed class ChibiSoldierCaptureTargetCannonBehaviour : IShootable, IBeha
         float maxStep = _rotationSpeed * Time.deltaTime;
 
         _yRotationCannonMesh.Rotate(0f, Mathf.Clamp(angle, -maxStep, maxStep), 0f, Space.World);
+    }
+
+    private void RotateXTowardsTarget()
+    {
+        //El eje de pitch es el X local del cañón: como el padre solo gira en Y, siempre queda horizontal.
+        //Proyectar sobre el plano perpendicular a ese eje deja solo la componente vertical del ángulo,
+        //así el pitch no se contamina con el error de giro en Y mientras todavía está rotando.
+        Vector3 pitchAxis = _xRotationCannonMesh.right;
+        Vector3 toTarget = Vector3.ProjectOnPlane(_targetTransform.position - _xRotationCannonMesh.position, pitchAxis);
+        Vector3 barrelDirection = Vector3.ProjectOnPlane(_muzzle.up, pitchAxis);
+
+        if(toTarget.sqrMagnitude < 0.0001f || barrelDirection.sqrMagnitude < 0.0001f) return;
+
+        float angle = Vector3.SignedAngle(barrelDirection, toTarget, pitchAxis);
+        float maxStep = _rotationSpeed * Time.deltaTime;
+
+        _xRotationCannonMesh.Rotate(Mathf.Clamp(angle, -maxStep, maxStep), 0f, 0f, Space.Self);
     }
 
     public void Shoot()
