@@ -62,9 +62,24 @@ public class ChibiSoldierCaptureTarget : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay(Collider other) 
+    {    
+        if(other.TryGetComponent(out Player player))
+        {
+            if(!cannonBehaviour.IsActive) return;
+
+            if(cannonBehaviour.TargetTransform == player.transform)
+            {
+                Debug.Log("[ChibiSoldierCaptureTarget] Player not moving.");
+                return;
+            } 
+
+            cannonBehaviour.UpdateTarget(player.transform);
+        }
+    }
+
     private void OnTriggerExit(Collider other) 
     {
-        
         if(other.TryGetComponent(out Player player))
         {
             if(!cannonBehaviour.IsActive) return;

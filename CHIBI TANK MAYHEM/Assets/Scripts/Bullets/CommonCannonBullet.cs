@@ -5,6 +5,11 @@ public class CommonCannonBullet : ShooteableObject
     private Vector3 _velocity;
     private const float _Gravity = -9.81f;
 
+    //El Rigidbody del prefab es kinematic y sin useGravity: el motor de físicas no mueve esta bala y Physics.gravity no la afecta.
+    //Se mueve sola en Update(), y la caída sale de _Gravity. Por eso este es el valor que tiene que usar quien calcule la
+    //trayectoria (ver ChibiSoldierCaptureTargetCannonBehaviour).
+    public override float Gravity => _Gravity;
+
     public override void ResetState()
     {
         base.ResetState();
