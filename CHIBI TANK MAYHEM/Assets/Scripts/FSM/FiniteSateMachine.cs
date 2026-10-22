@@ -1,4 +1,4 @@
-public class FiniteSateMachine
+public class FiniteStateMachine
 {
     public IState currentState;
 

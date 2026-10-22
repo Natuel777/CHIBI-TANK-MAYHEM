@@ -37,7 +37,9 @@ public class PlayerAim : IWeaponAimProvider
         Ray ray = _camera.ScreenPointToRay(screenCenter);
 
         //Si hay racast en la dirección del mouse, se toma el punto de impacto como objetivo
-        if(Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, _cameraRaycastMask))
+        //(se ignoran los triggers: zonas de detección como la del capture target quedan entre la cámara y el tanque
+        //y el punto de impacto caía detrás del tanque, haciendo que apunte hacia la cámara)
+        if(Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, _cameraRaycastMask, QueryTriggerInteraction.Ignore))
             AimTargetPoint = hit.point;
 
         //Si no hay impacto, se toma un punto lejano en la dirección del mouse
@@ -66,7 +68,7 @@ public class PlayerAim : IWeaponAimProvider
 
         //Si hay racast en la dirección del cañón, se toma el punto de impacto como objetivo
         //(se excluyen las balas propias vía LayerMask para que el rayo no choque con el disparo recién salido del cañón)
-        if(Physics.Raycast(muzzleRay, out RaycastHit crosshairHit, _MaxDistance, _crosshairRaycastMask))
+        if(Physics.Raycast(muzzleRay, out RaycastHit crosshairHit, _MaxDistance, _crosshairRaycastMask, QueryTriggerInteraction.Ignore))
             _crosshairPoint = crosshairHit.point;
 
         //Si no hay impacto, se toma un punto lejano (pero acotado) en la dirección del cañón.

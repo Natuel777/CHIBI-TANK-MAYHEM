@@ -43,7 +43,7 @@ public class PlayerTurretAim : IWeaponAimProvider
         #region Raycast from turret muzzle to get crosshair point
         Ray muzzleRay = new Ray(_turretMuzzleTransform.position, _turretMuzzleTransform.up);
 
-        if(Physics.Raycast(muzzleRay, out RaycastHit crosshairHit, _MaxDistance, _crosshairRaycastMask))
+        if(Physics.Raycast(muzzleRay, out RaycastHit crosshairHit, _MaxDistance, _crosshairRaycastMask, QueryTriggerInteraction.Ignore))
             _crosshairPoint = crosshairHit.point;
         else
             _crosshairPoint = muzzleRay.origin + muzzleRay.direction * _FallbackDistance;

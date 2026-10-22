@@ -13,6 +13,7 @@ public enum NPCEvents
     ChibiSoldierFoundTarget,
 	ChibiSoldierHasCapturedTarget,
 	ChibiSoldierCapturingTarget,
+	OnChibiSoldierTargetCaptured
 }
 
 public static class PlayerEvents

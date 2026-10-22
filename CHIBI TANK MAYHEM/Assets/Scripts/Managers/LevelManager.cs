@@ -44,12 +44,11 @@ public class LevelManager
         {
             _capturedTargets[target] = isCaptured;
 
+            if(isCaptured)
+                target.SendEvent(NPCEvents.OnChibiSoldierTargetCaptured);
+
             if(_chibiSoldiersPerTarget.TryGetValue(target, out List<ChibiSoldier> soldiers))
             {
-                //Copia: cada soldado, al recibir el evento, sale de CapturingState y eso llama a
-                //RemoveChibiSoldierFromCapturedList(), que saca ese mismo soldado de "soldiers" — si
-                //se recorriera la lista original, se modificaría en pleno foreach y tira
-                //InvalidOperationException. Iterando sobre una copia, esas remociones no afectan el recorrido.
                 foreach(ChibiSoldier soldier in soldiers.ToArray())
                     soldier.SendEvent(NPCEvents.ChibiSoldierHasCapturedTarget);
             }

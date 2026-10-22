@@ -5,7 +5,7 @@ public class CommonChibiSoldier : ChibiSoldier
     #region Initialization
     private void Awake()
     {
-        stateMachine = new FiniteSateMachine();
+        stateMachine = new FiniteStateMachine();
 
         //State Initialization
         idleState = new IdleState(this);

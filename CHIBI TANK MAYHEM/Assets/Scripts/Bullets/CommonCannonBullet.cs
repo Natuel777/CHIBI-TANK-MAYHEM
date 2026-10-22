@@ -32,6 +32,9 @@ public class CommonCannonBullet : ShooteableObject
 
     private void OnTriggerEnter(Collider other)
     {
+        //El trigger de detección del capture target no es un blanco: sin esto la bala se desarma apenas nace dentro de su radio.
+        if(other.TryGetComponent(out ChibiSoldierCaptureTarget _)) return;
+
         if(other.TryGetComponent(out CommonChibiSoldier commonChibiSoldier))
         {
             commonChibiSoldier.healthModel?.TakeDamage(initialDamage);

@@ -12,7 +12,7 @@ public abstract class ChibiSoldier : MonoBehaviour, IServiceConsumer
     [SerializeField] protected LayerMask neighborLayerMask;
     [SerializeField] protected Transform gunMuzzleTransform, shoulderTransform;
     [SerializeField] protected ChibiSoldierType type;
-    protected FiniteSateMachine stateMachine;
+    protected FiniteStateMachine stateMachine;
     protected ChibiSoldierFactory chibiSoldierFactory;
 
     #region States
