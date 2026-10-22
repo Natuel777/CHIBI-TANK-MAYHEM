@@ -11,5 +11,6 @@ The new scene created **MUST HAVE** the following prefabs configured as the inst
 * **Factory prefab** (contains all factories and pools, the prefab is already configured)
 * **Game Manager prefab** (prefab is already configured)
 * **Canvas prefab** (prefab is already configured)
+* **Ground Layer** All ground in a new scene must have the Ground Layer
 * **MobileInput** (make sure that the child gameobject 'Shootgun' has the component 'Shoot While Held' attached, referencing the instance of the tank prefab)
 
