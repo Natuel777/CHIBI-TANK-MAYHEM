@@ -14,6 +14,7 @@ public class Player : MonoBehaviour, IPlayer
     [SerializeField] private LayerMask _crosshairRaycastMask = ~0, _cameraRaycastMask = ~0;
     [SerializeField] private LayerMask _groundMask = ~0;
     [SerializeField] private Transform[] _tankDamageablePoints;
+    [SerializeField] private IMesh _tankMesh;
 
     private bool _movementCanceledOnCollisionForward = false, _movementCanceledOnCollisionBack = false;
 
@@ -85,6 +86,9 @@ public class Player : MonoBehaviour, IPlayer
         
         TargetSelection.Initialize(TankDamageablePoints);
         playerCollision = new PlayerCollision(rb, _playerSettings.movementCancelationThreshold);
+        
+        if(TryGetComponent(out IMesh _tankMesh))
+            _tankMesh.Initialize();
     }
 
     private void Start()

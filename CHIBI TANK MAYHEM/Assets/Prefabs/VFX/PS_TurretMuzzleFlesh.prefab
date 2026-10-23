@@ -14707,7 +14707,6 @@ GameObject:
   - component: {fileID: 1014986694731164161}
   - component: {fileID: 5025838963350964290}
   - component: {fileID: 2109513119450328138}
-  - component: {fileID: 6499728922983740952}
   m_Layer: 0
   m_Name: WFXMR_MF Spr RIFLE3
   m_TagString: Untagged
@@ -19567,17 +19566,3 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
---- !u!114 &6499728922983740952
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6255373517644243420}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e25fb020ba21c3a4cbfe37df1e936d08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GenericPS
-  _type: 0
-  _autoReturnToFactory: 0
