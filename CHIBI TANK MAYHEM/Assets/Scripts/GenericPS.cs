@@ -5,6 +5,8 @@ public enum PSType
 {
     BoomText,
     TurretMuzzleFlash,
+    WallTurretBulletImpact,
+    MetalTurretBulletImpact,
 }
 
 public class GenericPS : MonoBehaviour
