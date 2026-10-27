@@ -50,6 +50,10 @@ public class PlayerMovement : IInputInitialize, IServiceConsumer
     private float _currentTiltAngle;       //ángulo de cabeceo visual ACTUAL del mesh (grados), se desliza suavemente hacia un objetivo y de vuelta a 0
     private float _tiltVelocity;           //velocidad interna que usa SmoothDamp para suavizar _currentTiltAngle (la mantiene entre frames, no la tocamos a mano)
 
+    //Estado de movimiento actual, de solo lectura: lo consume la vista (TankMovementAnimation) para animar las orugas.
+    public float CurrentSpeed => _currentSpeed;       //avance en m/s: + adelante, - atrás
+    public float CurrentTurnRate => _currentTurnRate; //giro en grados/s: + gira a la derecha, - a la izquierda
+
     public PlayerMovement(Transform playerTransform, Transform meshTransform,
                                                     Transform[] suspensionPoints,
                                                     Rigidbody rb,

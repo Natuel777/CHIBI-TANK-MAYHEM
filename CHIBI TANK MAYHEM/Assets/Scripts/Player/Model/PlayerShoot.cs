@@ -30,10 +30,6 @@ public class PlayerShoot : IShootable, IInputInitialize, IServiceConsumer
 
         ShooteableObject bullet = _cannonBulletFactory.Create(_currentBulletType, _cannonTransform.position, _cannonTransform.rotation);
         bullet.Shoot(_cannonTransform.up);
-
-        #if UNITY_EDITOR
-        Debug.Log($"PlayerShoot: Shot a bullet of type {_currentBulletType} from position {_cannonTransform.position} in direction {_cannonTransform.forward}");
-        #endif
     }
 
     public bool TryResolveService()

@@ -15,6 +15,10 @@ public class Player : MonoBehaviour, IPlayer
     [SerializeField] private LayerMask _groundMask = ~0;
     [SerializeField] private Transform[] _tankDamageablePoints;
 
+    [Header("View")]
+    [SerializeField] private IMesh _tankMesh;
+    [SerializeField] private Animator _animator;
+
     private bool _movementCanceledOnCollisionForward = false, _movementCanceledOnCollisionBack = false;
 
     #region Model
@@ -27,11 +31,16 @@ public class Player : MonoBehaviour, IPlayer
     public PlayerCollision playerCollision;
     #endregion
 
+    #region View
+    public TankMovementAnimation tankMovementAnimation;
+    #endregion
+
     #region Getters
     public Transform[] TankDamageablePoints => _tankDamageablePoints;
     public bool MovementCanceledOnCollisionForward => _movementCanceledOnCollisionForward;
     public bool MovementCanceledOnCollisionBack => _movementCanceledOnCollisionBack;
     #endregion
+  
     #region Initialization
     private void Awake()
     {
@@ -85,6 +94,18 @@ public class Player : MonoBehaviour, IPlayer
         
         TargetSelection.Initialize(TankDamageablePoints);
         playerCollision = new PlayerCollision(rb, _playerSettings.movementCancelationThreshold);
+        
+        if(TryGetComponent(out IMesh _tankMesh))
+            _tankMesh.Initialize();
+
+        //Los tanques sin esqueleto animado dejan _animator vacío: sin Animator no hay vista que crear.
+        if(_animator != null)
+            tankMovementAnimation = new TankMovementAnimation(_animator,
+                                                            playerMovement,
+                                                            _playerSettings.trackSurfaceSpeed,
+                                                            _playerSettings.trackHalfGauge,
+                                                            _playerSettings._directionDamping,
+                                                            _playerSettings._speedDamping);
     }
 
     private void Start()
@@ -109,6 +130,7 @@ public class Player : MonoBehaviour, IPlayer
         playerAim.ArtificialUpdate();
         playerTurretAim?.ArtificialUpdate(playerAim.AimTargetPoint);
         playerTurretShoot.ArtificialUpdate(playerAim.AimTargetPoint);
+        tankMovementAnimation?.ArtificialUpdate();
     }
 
     private void FixedUpdate()

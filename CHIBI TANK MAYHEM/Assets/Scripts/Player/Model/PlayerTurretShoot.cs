@@ -151,10 +151,6 @@ public class PlayerTurretShoot : IInputInitialize, IShootable, IServiceConsumer
     {
         ShooteableObject bullet = _turretBulletFactory.Create(_currentBulletType, _turretMuzzleTransform.position, _turretMuzzleTransform.rotation);
         bullet.Shoot(_turretMuzzleTransform.up);
-
-        #if UNITY_EDITOR
-        Debug.Log($"PlayerShoot: Shot a bullet of type {_currentBulletType} from position {_turretMuzzleTransform.position} in direction {_turretMuzzleTransform.forward}");
-        #endif
     }
 
     //Selecciona TODAS las torretas del mismo lado que el target (izquierda/derecha), no solo la más cercana.
