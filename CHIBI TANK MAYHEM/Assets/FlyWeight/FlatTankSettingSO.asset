@@ -26,9 +26,9 @@ MonoBehaviour:
   pitchTiltSmoothTime: 0.25
   centerOfMassOffset: {x: 0, y: -0.5, z: 0}
   groundNormalSmoothing: 8
-  suspensionRestLength: 1
-  suspensionStrength: 7.71
-  suspensionDampingRatio: 0.94
+  suspensionRestLength: 0.81
+  suspensionStrength: 11.4
+  suspensionDampingRatio: 1
   maxDepenetrationVelocitym: 3
   bounceForce: 1500
   movementCancelationThreshold: 1
