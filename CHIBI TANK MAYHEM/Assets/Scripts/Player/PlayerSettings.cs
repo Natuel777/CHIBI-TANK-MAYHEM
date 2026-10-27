@@ -121,4 +121,17 @@ public class PlayerSettingsSO : ScriptableObject
     
     [Tooltip("Height offset for the camera's pivot point.")]
     public float orbitPivotHeightOffset = 1.5f;
+
+    [Header("Animation Settings")]
+    [Tooltip("Tiempo de suavizado (s) de la dirección de la mezcla de orugas (MoveX/MoveY) del Animator.")]
+    public float _directionDamping = 0.1f;
+
+    [Tooltip("Tiempo de suavizado (s) de la velocidad de reproducción de las orugas (MoveSpeed). Mantenelo bajo: el avance ya sale con rampa desde PlayerMovement, y un valor alto hace que las orugas se retrasen respecto del casco al frenar.")]
+    public float _speedDamping = 0.05f;
+
+    [Tooltip("Cuánto avanza la superficie de cada oruga (m/s) con los clips a velocidad de reproducción 1x. Es el paso entre eslabones dividido la duración del clip: 0.5955 m / 0.7917 s = 0.752 con Tank.fbx a escala 0.4253. Proporcional a la escala del modelo: si la cambiás, recalculala (un valor mayor al real hace que las orugas giren más lento que el piso).")]
+    public float trackSurfaceSpeed = 0.752f;
+
+    [Tooltip("Mitad de la trocha, en metros: distancia del centro del tanque al eje de cada oruga (en Tank.fbx a escala 0.4253, las orugas están en x = -1.672 y +1.715). Define cuánto más rápida va una oruga que la otra al girar.")]
+    public float trackHalfGauge = 1.694f;
 }
