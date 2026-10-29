@@ -29,7 +29,6 @@ public class NavGraph
         _neighbors = new int[totalEdges];
         _neighborCosts = new float[totalEdges];
 
-        //Cada nodo copia sus vecinos y costos a su tramo del array plano.
         for(int i = 0; i < positions.Length; i++)
         {
             neighbors[i].CopyTo(_neighbors, _neighborStart[i]);

@@ -1458,17 +1458,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6128fde209a5774795fd1ca4e0fa3e0, type: 3}
---- !u!114 &640719159 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1504843927972850186, guid: b6128fde209a5774795fd1ca4e0fa3e0, type: 3}
-  m_PrefabInstance: {fileID: 640719158}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 646c5bd4222f98340a34ae3636e7f4b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InputReader
 --- !u!4 &672431344 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2518724024716815450, guid: 6a3b919f2ddb0034b8c119625e3d4f3a, type: 3}
@@ -5907,7 +5896,7 @@ PrefabInstance:
     - target: {fileID: 8595540889495747634, guid: 3e16da15648028e4d95c26107c3bbd3e, type: 3}
       propertyPath: _inputReader
       value: 
-      objectReference: {fileID: 640719159}
+      objectReference: {fileID: 2077802089}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
