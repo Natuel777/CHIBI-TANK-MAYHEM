@@ -1,97 +1,113 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AStarPathfinder
+public class AStarPathfinder : MonoBehaviour
 {
-    private readonly NavGraph _graph;
-    private readonly MinHeap _minheap;
-    private readonly float[] _gScore;
-    private readonly int[] _cameFrom;
-    private readonly int[] _gStamp;
-    private readonly int[] _closedStamp;
-    private int _currentStamp;
+    private Grid _grid;
 
-    public int ExpandedCount { get; private set; }
-    public float PathCost { get; private set; }
+    #if UNITY_EDITOR
+    [SerializeField] private Transform seeker, target;
+    #endif
 
-    public AStarPathfinder(NavGraph graph)
+    private void Start()
     {
-        _graph = graph;
-        _minheap = new MinHeap(graph.NodeCount);
-        _gScore = new float[graph.NodeCount];
-        _cameFrom = new int[graph.NodeCount];
-        _gStamp = new int[graph.NodeCount];
-        _closedStamp = new int[graph.NodeCount];
+        _grid = GetComponent<Grid>();
     }
 
-    public bool FindPath(int start, int goal, List<int> path, float heuristicWeight = 1f)
+    #if UNITY_EDITOR
+    private void Update()
     {
-        path.Clear();
-        ExpandedCount = 0;
-        PathCost = 0f;
+        FindPath(seeker.position, target.position);
+    }
+    #endif
 
-        if(start < 0 || goal < 0) return false;
+    private void FindPath(Vector3 startPosition, Vector3 targetPosition)
+    {
+        Node startNode = _grid.NodeFromWorldPoint(startPosition);
+        Node targetNode = _grid.NodeFromWorldPoint(targetPosition);
+        List<Node> openSet = new List<Node>();
+        HashSet<Node> closedSet = new HashSet<Node>(); 
+        openSet.Add(startNode);
 
-        _currentStamp++;
-        _minheap.Clear();
-        _gStamp[start] = _currentStamp;
-        _gScore[start] = 0f;
-        _cameFrom[start] = -1;
-        _minheap.Push(start, heuristicWeight * Heuristic(start, goal));
-        
-        while(_minheap.Count > 0)
+        while(openSet.Count > 0)
         {
-            int current = _minheap.Pop();
+            Node currentNode = openSet[0];
 
-            if(_closedStamp[current] == _currentStamp) continue;
-
-            _closedStamp[current] = _currentStamp;
-            ExpandedCount++;
-
-            if(current == goal) 
-            { 
-                PathCost = _gScore[goal]; 
-                BuildPath(goal, path); 
-                return true; 
-            }
-
-            int currentNodeNeighborcount = _graph.GetNeighborCount(current);
-
-            for(int k = 0; k < currentNodeNeighborcount; k++)
+            for(int i = 1; i < openSet.Count; i++)
             {
-                int neighbor = _graph.GetNeighbor(current, k);
-                
-                if(_closedStamp[neighbor] == _currentStamp) continue;
+                if(openSet[i].fCost < currentNode.fCost || 
+                    openSet[i].fCost == currentNode.fCost && openSet[i].hCost < currentNode.hCost)
+                    currentNode = openSet[i];
+            }
 
-                // newG es lo que cuesta llegar al vecino pasando por el nodo current.
-                float newG = _gScore[current] + _graph.GetNeighborCost(current, k);
-                
-                // Si el vecino ya tenía un costo en esta búsqueda y el nuevo no lo mejora, se ignora.
-                if(_gStamp[neighbor] == _currentStamp && newG >= _gScore[neighbor]) continue;
+            closedSet.Add(currentNode);
+            openSet.Remove(currentNode);
 
-                _gStamp[neighbor] = _currentStamp;
-                _gScore[neighbor] = newG;
-                _cameFrom[neighbor] = current;
-                _minheap.Push(neighbor, newG + heuristicWeight * Heuristic(neighbor, goal));
+            if(currentNode == targetNode)
+            {
+                RetracePath(startNode, targetNode);
+                return;
+            }
+
+            foreach(Node neighbor in _grid.GetNeighbors(currentNode))
+            {
+                if(!neighbor.isWalkable || closedSet.Contains(neighbor)) continue;
+
+                int newMovementCostToNeighbor = currentNode.gCost + GetDistance(currentNode, neighbor);
+
+                if(newMovementCostToNeighbor < neighbor.gCost || !openSet.Contains(neighbor))
+                {
+                    neighbor.gCost = newMovementCostToNeighbor;
+                    neighbor.hCost = GetDistance(neighbor, targetNode);
+                    neighbor.parent = currentNode;
+
+                    if(!openSet.Contains(neighbor))
+                        openSet.Add(neighbor);
+                }
             }
         }
-
-        return false;
     }
 
-    private float Heuristic(int a, int b) => Vector3.Distance(_graph.GetPosition(a), _graph.GetPosition(b));
-
-    private void BuildPath(int goal, List<int> path)
+    private void RetracePath(Node startNode, Node endNode)
     {
-        int node = goal;
+        List<Node> path = new List<Node>();
+        Node currentNode = endNode;
 
-        while(node != -1)
+        while(currentNode != startNode)
         {
-            path.Add(node);
-            node = _cameFrom[node];
+            path.Add(currentNode);
+            currentNode = currentNode.parent;
         }
-
-        // La lista de nodos con el camino hacia goal queda al reves, List.Reverse() la invierte.
+        path.Add(startNode);
         path.Reverse();
+        
+        #if UNITY_EDITOR
+        _grid.path = path;
+        #endif
+    }
+
+    private int GetDistance(Node nodeA, Node nodeB)
+    {
+        // Calculamos la distancia entre dos nodos con un resultado devuelto en números naturales.
+        int distX = Mathf.Abs(nodeA.gridX - nodeB.gridX);
+        int distY = Mathf.Abs(nodeA.gridY - nodeB.gridY);
+
+        // ¿Por qué 13 y 10?
+        // Se da por sentado que la distancia entre nodo consecutivo al otro (no diagonal) es 1.
+        // La distancia entre nodos diagonales es la hipotenusa de un triángulo rectángulo con catetos de longitud 1.
+        // La hipotenussa de este caso es √2 = 1.41421356237. Trabajar con este tipo de números es dificíl,
+        // por lo que se multiplica por 10 para trabajar con números enteros. 1.41421356237 * 10 = 14.1421356237.
+        // Por lo tanto, la distancia entre nodos consecutivos es 10 y la distancia entre nodos diagonales es 14.
+        if(distX > distY)
+        {
+            // 14 * la cantidad de nodos verticales, aptos para moverse en diagonal.
+            // + el resto de nodos horizontales, calculados con: 10 * (distX - distY)
+            return 14 * distY + 10 * (distX - distY);
+        }
+            
+        // Caso contrario: Hay más nodos verticales que horizontales, por lo que se calcula las diagonales 
+        // con la cantidad de nodos horizontales y el resto de nodos verticales con: 10 * (distY - distX)
+        return 14 * distX + 10 * (distY - distX);
     }
 }

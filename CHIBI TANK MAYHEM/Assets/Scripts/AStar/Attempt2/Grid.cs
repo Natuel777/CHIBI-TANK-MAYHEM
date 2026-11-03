@@ -1,10 +1,16 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class Grid : MonoBehaviour
 {
     [SerializeField] private Vector2 _gridWorldSize;
     [SerializeField] private float _nodeRadius;
     [SerializeField] private LayerMask _unwalkeableMasks;
+
+    #if UNITY_EDITOR
+    //[SerializeField] private Transform _agent;
+    public List<Node> path;
+    #endif
 
     private Node[,] _grid;
     private float _nodeDiamenter;
@@ -13,9 +19,9 @@ public class Grid : MonoBehaviour
     private void Start() 
     {
         _nodeDiamenter = _nodeRadius * 2;
-        // FloorToInt redondea el valor de un float al entero más cercano tirando hacia abajo. Ej: 1,2f = 1, 1,5f = 1, 1,8f = 1.
-        _nodeCountInGridSizeX = Mathf.FloorToInt(_gridWorldSize.x / _nodeDiamenter);
-        _nodeCountInGridSizeY = Mathf.FloorToInt(_gridWorldSize.y / _nodeDiamenter);
+        // Round redondea el valor de un float al entero más cercano. Ej: 1,2f = 1, 1,5f = 2, 1,8f = 2.
+        _nodeCountInGridSizeX = Mathf.RoundToInt(_gridWorldSize.x / _nodeDiamenter);
+        _nodeCountInGridSizeY = Mathf.RoundToInt(_gridWorldSize.y / _nodeDiamenter);
         CreateGrid();
     }
 
@@ -33,9 +39,45 @@ public class Grid : MonoBehaviour
                 // Definición de la documentación de Unity sobre Physics.CheckSphere
                 // Returns true if there are any colliders overlapping the sphere defined by position and radius in world coordinates.
                 bool walkable = !(Physics.CheckSphere(worldPoint, _nodeRadius, _unwalkeableMasks));
-                _grid[x, y] = new Node(walkable, worldPoint);
+                _grid[x, y] = new Node(walkable, worldPoint, x, y);
             }
         }
+    }
+
+    public Node NodeFromWorldPoint(Vector3 worldPosition)
+    {
+        // Normalizamos el valor de worldPosition.x y worldPosition.z para que estén entre 0 y 1.
+        float percentX = (worldPosition.x - transform.position.x + _gridWorldSize.x / 2) / _gridWorldSize.x;
+        float percentY = (worldPosition.z - transform.position.z + _gridWorldSize.y / 2) / _gridWorldSize.y;
+        percentX = Mathf.Clamp01(percentX);
+        percentY = Mathf.Clamp01(percentY);
+        int x = Mathf.RoundToInt((_nodeCountInGridSizeX - 1) * percentX);
+        int y = Mathf.RoundToInt((_nodeCountInGridSizeY - 1) * percentY);
+        return _grid[x, y];
+    }
+
+    public List<Node> GetNeighbors(Node node)
+    {
+        List<Node> neighbors = new List<Node>();
+
+        // Recorremos los nodos vecinos en un cuadrado de 3x3 alrededor del nodo actual
+        for(int x = -1; x <= 1; x++)
+        {
+            for(int y = -1; y <= 1; y++)
+            {
+                if(x == 0 && y == 0) continue;
+
+                // Calculamos las coordenadas del nodo vecino en x e y.
+                int checkX = node.gridX + x;
+                int checkY = node.gridY + y;
+
+                // Si no estamos fuera de los límites, agregamos el nodo vecino a la lista.
+                if(checkX >= 0 && checkX < _nodeCountInGridSizeX && checkY >= 0 && checkY < _nodeCountInGridSizeY)
+                    neighbors.Add(_grid[checkX, checkY]);
+            }
+        }
+
+        return neighbors;
     }
 
     #if UNITY_EDITOR
@@ -45,6 +87,8 @@ public class Grid : MonoBehaviour
 
         if(_grid != null)
         {
+            //Node agentNode = NodeFromWorldPoint(_agent.position);
+
             foreach(Node node in _grid)
             {
                 if(node.isWalkable)
@@ -52,9 +96,17 @@ public class Grid : MonoBehaviour
                 
                 else Gizmos.color = Color.red;
 
+                if(path != null)
+                {
+                    if(path.Contains(node))
+                        Gizmos.color = Color.black;
+                }
+
+                //if(agentNode == node)
+                //    Gizmos.color = Color.cyan;
+
                 Gizmos.DrawCube(node.worldPosition, Vector3.one * (_nodeDiamenter - 0.4f));
-            }
-                
+            }  
         }
     }
     #endif
