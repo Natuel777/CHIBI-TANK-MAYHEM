@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class NavGraph
+public sealed class NavGraph
 {
     private Vector3[] _positions;
     private int[] _neighborStart, _neighbors;
@@ -22,6 +22,7 @@ public class NavGraph
             if(neighbors[i].Count != neighborsCost[i].Count)
                 Debug.LogError($"El nodo {i} tiene {neighbors[i].Count} vecinos pero {neighborsCost[i].Count} costos.");
 
+            // _neighborStart es un array que contiene el índice de inicio de los vecinos de cada nodo en el array _neighbors.
             _neighborStart[i + 1] = _neighborStart[i] + neighbors[i].Count;
         }
 
@@ -31,13 +32,20 @@ public class NavGraph
 
         for(int i = 0; i < positions.Length; i++)
         {
+            // Cada valor de neighbors contiene todos los vecinos del nodo i.
+            // List.CopyTo copia los elementos de la lista neighbors[i] en el array _neighbors a partir del índice _neighborStart[i].
             neighbors[i].CopyTo(_neighbors, _neighborStart[i]);
+            // Cada valor de neighborsCost contiene los costos (distancia real) de las aristas del nodo i hacia cada uno de sus vecinos.
+            // List.CopyTo copia los elementos de la lista neighborsCost[i] en el array _neighborCosts 
+            // a partir del índice _neighborStart[i].
             neighborsCost[i].CopyTo(_neighborCosts, _neighborStart[i]);
         }
     }
 
     public Vector3 GetPosition(int node) => _positions[node];
 
+    // El tramo de vecinos de node va de _neighborStart[node] a _neighborStart[node + 1] (sin incluir).
+    // Su largo, es decir la cantidad de vecinos de node, es la resta entre ambos.
     public int GetNeighborCount(int node) => _neighborStart[node + 1] - _neighborStart[node];
 
     public int GetNeighbor(int node, int k)

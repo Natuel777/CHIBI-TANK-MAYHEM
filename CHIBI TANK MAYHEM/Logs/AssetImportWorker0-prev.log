@@ -1,11 +1,11 @@
 [Licensing::Module] Trying to connect to existing licensing client channel...
 Built from '6000.4/staging' branch; Version is '6000.4.9f1 (f7258d6eebbe) revision 16197005'; Using compiler version '194234433'; Build Type 'Release'
-[Licensing::IpcConnector] Successfully connected to: "LicenseClient-nahue" at "2026-10-29T14:18:45.4104885Z"
 OS: 'Windows 11  (10.0.26200) Core' Language: 'es' Physical Memory: 16004 MB
 BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-nahue" at "2026-10-30T14:57:03.4014383Z"
 System  architecture: x64
 Process architecture: x64
-Date: 2026-10-29T14:18:45Z
+Date: 2026-10-30T14:57:03Z
 
 COMMAND LINE ARGUMENTS:
 C:\Program Files\Unity\Hub\Editor\6000.4.9f1\Editor\Unity.exe
@@ -19,7 +19,7 @@ C:/Users/nahue/Documents/CHIBI-TANK-MAYHEM/CHIBI TANK MAYHEM
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-55039
+54184
 -licensingIpc
 LicenseClient-nahue
 -force-d3d12
@@ -68,14 +68,14 @@ C:/Users/nahue/Documents/CHIBI-TANK-MAYHEM/CHIBI TANK MAYHEM
     "memorysetup-job-temp-allocator-block-size=2097152"
     "memorysetup-job-temp-allocator-block-size-background=1048576"
     "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
-Player connection [31788]  Target information:
+Player connection [37760]  Target information:
 
-Player connection [31788]  * "[IP] 172.30.208.1 [Port] 0 [Flags] 2 [Guid] 2101162664 [EditorId] 2101162664 [Version] 1048832 [Id] WindowsEditor(7,Nahuel) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+Player connection [37760]  * "[IP] 172.30.208.1 [Port] 0 [Flags] 2 [Guid] 1610936837 [EditorId] 1610936837 [Version] 1048832 [Id] WindowsEditor(7,Nahuel) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
 
-Player connection [31788]  * "[IP] 192.168.0.6 [Port] 0 [Flags] 2 [Guid] 2101162664 [EditorId] 2101162664 [Version] 1048832 [Id] WindowsEditor(7,Nahuel) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+Player connection [37760]  * "[IP] 192.168.0.6 [Port] 0 [Flags] 2 [Guid] 1610936837 [EditorId] 1610936837 [Version] 1048832 [Id] WindowsEditor(7,Nahuel) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
 
-Player connection [31788] Host joined multi-casting on [225.0.0.222:54997]...
-Player connection [31788] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [37760] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [37760] Host joined alternative multi-casting on [225.0.0.222:34997]...
 JobSystem: Creating JobQueue using job-worker-count value 9
 Input System module state changed to: Initialized.
 [Physics::Module] Initialized fallback backend.
@@ -87,7 +87,7 @@ Library Redirect Path: Library/
 [Physics::Module] SDK Version: 4.1.2
 [Physics::Module] Integration Version: 1.0.0
 [Physics::Module] Threading Mode: Multi-Threaded
-Refreshing native plugins compatible for Editor in 4.16 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 3.85 ms, found 4 plugins.
 Initialize engine version: 6000.4.9f1 (f7258d6eebbe)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/6000.4.9f1/Editor/Data/Resources/UnitySubsystems
 [Subsystems] Discovering subsystems at path C:/Users/nahue/Documents/CHIBI-TANK-MAYHEM/CHIBI TANK MAYHEM/Assets
@@ -107,7 +107,7 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/6000.4.9f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/6000.4.9f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/6000.4.9f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56384
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56828
 CodeReloadManager initialized
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
@@ -118,19 +118,19 @@ Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.4.9f1/E
 	ResponseStatus: Unsupported protocol version '1.18.1'.
 [Licensing::Module] Error: Failed to handshake to channel: "LicenseClient-nahue"
 [Licensing::IpcConnector] LicenseClient-nahue channel disconnected successfully.
-[Licensing::IpcConnector] Successfully connected to: "LicenseClient-nahue-6000.4.9" at "2026-10-29T14:18:47.4854195Z"
-[Licensing::Client] Code 10 while verifying Licensing Client signature (process Id: 4632, path: "C:/Program Files/Unity/Hub/Editor/6000.4.9f1/Editor/Data/Resources/Licensing/Client/Unity.Licensing.Client.exe")
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-nahue-6000.4.9" at "2026-10-30T14:57:05.3694135Z"
+[Licensing::Client] Code 10 while verifying Licensing Client signature (process Id: 27396, path: "C:/Program Files/Unity/Hub/Editor/6000.4.9f1/Editor/Data/Resources/Licensing/Client/Unity.Licensing.Client.exe")
 [Licensing::Module] LicensingClient has failed validation; ignoring
 [Licensing::Client] Handshaking with LicensingClient:
   Version:                 1.18.1+9fbee8e
-  Session Id:              c292107e7a9b4f24aad7aca2bce1fe55
-  Correlation Id:          e6f5aaec1df7fdf8d1cb9216e7dbd4c3
-  External correlation Id: 8891274756585638235
+  Session Id:              683a8f410d424855892897f9f07b861d
+  Correlation Id:          78b01a57856f2bb4e207a809c6249afc
+  External correlation Id: 9016463853662084378
   Machine Id:              d3wIjImyigoZ2yiH37n7ItByCpM=
-[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-nahue-6000.4.9" (connect: 0.00s, validation: 0.00s, handshake: 0.01s)
-[Licensing::IpcConnector] Successfully connected to: "LicenseClient-nahue-6000.4.9-notifications" at "2026-10-29T14:18:47.4979152Z"
-[Licensing::Module] Licensing Background thread has ended after 2.09s
-[Licensing::Module] Licensing is initialized (took 0.87s).
+[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-nahue-6000.4.9" (connect: 0.00s, validation: 0.00s, handshake: 0.02s)
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-nahue-6000.4.9-notifications" at "2026-10-30T14:57:05.3909511Z"
+[Licensing::Module] Licensing Background thread has ended after 1.99s
+[Licensing::Module] Licensing is initialized (took 0.96s).
 [Licensing::Client] Successfully resolved entitlement details
 [Licensing::Module] License group:
   Id: F4-ZF4W-JG7U-QS5D-T52E-XXXX
@@ -144,7 +144,7 @@ Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.4.9f1/E
   Expiration: Unlimited
 Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.4.9f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
 Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.4.9f1/Editor/Data/PlaybackEngines/LinuxStandaloneSupport/UnityEditor.LinuxStandalone.Extensions.dll
-Registered in 0.880811 seconds.
+Registered in 0.967363 seconds.
 Native extension for LinuxStandalone target not found
 Native extension for Android target not found
 Native extension for WindowsStandalone target not found
@@ -157,23 +157,23 @@ Package Manager log level set to [2]
 [Package Manager] Cannot connect to Unity Package Manager local server
 ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:True
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.420 seconds
-Domain Reload Profiling: 1744ms
-	BeginReloadAssembly (127ms)
-	RebuildCommonClasses (36ms)
+- Finished resetting the current domain, in  0.379 seconds
+Domain Reload Profiling: 1750ms
+	BeginReloadAssembly (125ms)
+	RebuildCommonClasses (31ms)
 	RebuildNativeTypeToScriptingClass (11ms)
-	initialDomainReloadingComplete (942ms)
-	LoadAllAssembliesAndSetupDomain (206ms)
-		LoadAssemblies (125ms)
-		AnalyzeDomain (195ms)
-			TypeCache.Refresh (195ms)
-				TypeCache.ScanAssembly (181ms)
-	FinalizeReload (421ms)
+	initialDomainReloadingComplete (1024ms)
+	LoadAllAssembliesAndSetupDomain (178ms)
+		LoadAssemblies (122ms)
+		AnalyzeDomain (169ms)
+			TypeCache.Refresh (168ms)
+				TypeCache.ScanAssembly (154ms)
+	FinalizeReload (381ms)
 		SetupLoadedEditorAssemblies (0ms)
-			InitializePlatformSupportModulesInManaged (106ms)
-			BeforeProcessingInitializeOnLoad (78ms)
-			ProcessInitializeOnLoadAttributes (103ms)
-			ProcessInitializeOnLoadMethodAttributes (65ms)
+			InitializePlatformSupportModulesInManaged (92ms)
+			BeforeProcessingInitializeOnLoad (74ms)
+			ProcessInitializeOnLoadAttributes (98ms)
+			ProcessInitializeOnLoadMethodAttributes (54ms)
 ========================================================================
 Worker process is ready to serve import requests
 Import Worker Mode flag is 0x00
@@ -190,7 +190,9 @@ Begin MonoManager ReloadAssembly
   Type: Assigned
   Expiration: Unlimited
 Assembly Assembly-CSharp-Editor-firstpass.dll at Library/ScriptAssemblies/Assembly-CSharp-Editor-firstpass.dll not valid. Loading of assembly skipped.
+Assembly Assembly-CSharp-Editor.dll at Library/ScriptAssemblies/Assembly-CSharp-Editor.dll not valid. Loading of assembly skipped.
 Assembly Assembly-CSharp-firstpass.dll at Library/ScriptAssemblies/Assembly-CSharp-firstpass.dll not valid. Loading of assembly skipped.
+Assembly Assembly-CSharp.dll at Library/ScriptAssemblies/Assembly-CSharp.dll not valid. Loading of assembly skipped.
 Assembly DocCodeExamples.dll at Library/ScriptAssemblies/DocCodeExamples.dll not valid. Loading of assembly skipped.
 Assembly TestNewCustomAssembly.dll at Library/ScriptAssemblies/TestNewCustomAssembly.dll not valid. Loading of assembly skipped.
 Assembly Unity.2D.Sprite.Package.EditorTests.dll at Library/ScriptAssemblies/Unity.2D.Sprite.Package.EditorTests.dll not valid. Loading of assembly skipped.
@@ -228,14 +230,13 @@ Assembly UnityEditor.UI.Common.Tests.dll at Library/ScriptAssemblies/UnityEditor
 Assembly UnityEditor.UI.EditorTests.dll at Library/ScriptAssemblies/UnityEditor.UI.EditorTests.dll not valid. Loading of assembly skipped.
 Assembly UnityEngine.UI.Tests.dll at Library/ScriptAssemblies/UnityEngine.UI.Tests.dll not valid. Loading of assembly skipped.
 Symbol file LoadedFromMemory is not a mono symbol file
-Refreshing native plugins compatible for Editor in 5.92 ms, found 4 plugins.
 Native extension for LinuxStandalone target not found
 Native extension for Android target not found
 Native extension for WindowsStandalone target not found
 [Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
 [Package Manager] Unable to send message (not connected to server process).
 [Package Manager] Cannot connect to Unity Package Manager local server
-Refreshing native plugins compatible for Editor in 7.13 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 2.08 ms, found 4 plugins.
 [Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
 [Package Manager] Unable to send message (not connected to server process).
 [Package Manager] Cannot connect to Unity Package Manager local server
@@ -244,71 +245,130 @@ Refreshing native plugins compatible for Editor in 7.13 ms, found 4 plugins.
 [MODES] Loading mode Default (0) for mode-current-id-CHIBI TANK MAYHEM
 ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:True
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  2.119 seconds
-Domain Reload Profiling: 4193ms
-	BeginReloadAssembly (312ms)
-		DisableScriptedObjects (8ms)
-		CreateAndSetChildDomain (35ms)
-	RebuildCommonClasses (55ms)
-	RebuildNativeTypeToScriptingClass (18ms)
-	initialDomainReloadingComplete (257ms)
-	LoadAllAssembliesAndSetupDomain (1431ms)
-		LoadAssemblies (1064ms)
-		AnalyzeDomain (556ms)
-			TypeCache.Refresh (382ms)
-				TypeCache.ScanAssembly (349ms)
-			BuildScriptInfoCaches (154ms)
-			ResolveRequiredComponents (18ms)
-	FinalizeReload (2119ms)
+- Finished resetting the current domain, in  0.859 seconds
+Domain Reload Profiling: 1750ms
+	BeginReloadAssembly (166ms)
+		DisableScriptedObjects (5ms)
+		CreateAndSetChildDomain (24ms)
+	RebuildCommonClasses (33ms)
+	RebuildNativeTypeToScriptingClass (10ms)
+	initialDomainReloadingComplete (68ms)
+	LoadAllAssembliesAndSetupDomain (613ms)
+		LoadAssemblies (408ms)
+		AnalyzeDomain (297ms)
+			TypeCache.Refresh (204ms)
+				TypeCache.ScanAssembly (185ms)
+			BuildScriptInfoCaches (80ms)
+			ResolveRequiredComponents (10ms)
+	FinalizeReload (859ms)
 		SetupLoadedEditorAssemblies (0ms)
-			InitializePlatformSupportModulesInManaged (35ms)
-			BeforeProcessingInitializeOnLoad (285ms)
-			ProcessInitializeOnLoadAttributes (1017ms)
-			ProcessInitializeOnLoadMethodAttributes (215ms)
-			AfterProcessingInitializeOnLoad (20ms)
-		AwakeInstancesAfterBackupRestoration (20ms)
+			InitializePlatformSupportModulesInManaged (17ms)
+			BeforeProcessingInitializeOnLoad (138ms)
+			ProcessInitializeOnLoadAttributes (405ms)
+			ProcessInitializeOnLoadMethodAttributes (98ms)
+			AfterProcessingInitializeOnLoad (7ms)
+		AwakeInstancesAfterBackupRestoration (5ms)
 Shader 'WFX/Transparent Specular': fallback shader 'Particles/Alpha Blended' not found
 Shader 'WFX/Transparent Diffuse': fallback shader 'Particles/Alpha Blended' not found
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.02 seconds
-Refreshing native plugins compatible for Editor in 12.03 ms, found 4 plugins.
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.03 seconds
 Unloading 25 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 8130 unused Assets / (3.3 MB). Loaded Objects now: 9006.
-Memory consumption went from 173.9 MB to 170.6 MB.
-Total: 22.651200 ms (FindLiveObjects: 1.230100 ms CreateObjectMapping: 0.615800 ms MarkObjects: 15.797600 ms  DeleteObjects: 5.005300 ms)
+Unloading 8131 unused Assets / (5.9 MB). Loaded Objects now: 9007.
+Memory consumption went from 171.8 MB to 165.9 MB.
+Total: 8.720900 ms (FindLiveObjects: 0.654500 ms CreateObjectMapping: 0.602900 ms MarkObjects: 5.266700 ms  DeleteObjects: 2.195000 ms)
 
 ========================================================================
 Received Import Request.
-  Time since last request: 1157127.427322 seconds.
-  path: Assets/Scripts/AStar/NavGraph cómo funciona.pdf
-  importAddress: Guid(db767c23aebfb1647b1b6e6b43ae131c) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Scripts/AStar/NavGraph cómo funciona.pdf using Guid(db767c23aebfb1647b1b6e6b43ae131c) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'b5abacd8e707727062b259fd48cea72f') in 0.145807 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=0646dfbb8531a4022a2a5d657befa8db DependenciesID=ec6d12d956f526f0206cced6b93bfb31 StaticDependenciesID=1465d5b3042496942f8f328bb859d7e6 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+  Time since last request: 1245828.059634 seconds.
+  path: Assets/Scripts/AStar/GridGraphBuilder.cs
+  importAddress: Guid(54288382b738cf6419f1379282b1becc) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Scripts/AStar/GridGraphBuilder.cs using Guid(54288382b738cf6419f1379282b1becc) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '32bb572a367b91b405fa16b6101831b8') in 0.0803911 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=4e0305a9a52d71f68faecbcd2a1c225f DependenciesID=fc385dbc8bbdd1f78922976a53482bb4 StaticDependenciesID=4332be5c58926c8eaf58310d08d3c447 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
 
 ========================================================================
 Received Prepare
+Refreshing native plugins compatible for Editor in 6.21 ms, found 4 plugins.
 Unloading 25 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 8117 unused Assets / (6.2 MB). Loaded Objects now: 9009.
-Memory consumption went from 172.2 MB to 166.0 MB.
-Total: 11.476000 ms (FindLiveObjects: 0.867900 ms CreateObjectMapping: 0.799700 ms MarkObjects: 6.849200 ms  DeleteObjects: 2.957900 ms)
+Unloading 8117 unused Assets / (5.7 MB). Loaded Objects now: 9009.
+Memory consumption went from 170.1 MB to 164.4 MB.
+Total: 17.057500 ms (FindLiveObjects: 0.982400 ms CreateObjectMapping: 0.941200 ms MarkObjects: 10.750700 ms  DeleteObjects: 4.381500 ms)
 
 Prepare: number of updated asset objects reloaded= 0
 Shader 'WFX/Transparent Specular': fallback shader 'Particles/Alpha Blended' not found
 Shader 'WFX/Transparent Diffuse': fallback shader 'Particles/Alpha Blended' not found
 ========================================================================
 Received Import Request.
-  Time since last request: 57.903737 seconds.
+  Time since last request: 26.451892 seconds.
   path: Assets/Scripts/AStar/GridGraphBuilder.cs
-  importAddress: Guid(54288382b738cf6419f1379282b1becc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/AStar/GridGraphBuilder.cs using Guid(54288382b738cf6419f1379282b1becc) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (Import Result ID: 'f56eb0993e122988b975b2132811a5b8') in 0.0010403 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=12ec26fd485c5ed218fdc7ebc97f5204 DependenciesID=58e573cb3df51194a4aacf75ea551b61 StaticDependenciesID=c24ea7ecd67dc29120ff8dffd2d5a36c 
+  importAddress: Guid(54288382b738cf6419f1379282b1becc) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Scripts/AStar/GridGraphBuilder.cs using Guid(54288382b738cf6419f1379282b1becc) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'a9451d459fe6a4882fc007627b5e3a67') in 0.011714 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=ed99f4374d123b78603df373d9557540 DependenciesID=53cfa20a83e9f5c75da7e8a6311d6299 StaticDependenciesID=6ec94669c920867ddcfe33673cae0dbe 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Prepare
+Unloading 25 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 8117 unused Assets / (3.5 MB). Loaded Objects now: 9009.
+Memory consumption went from 170.1 MB to 166.6 MB.
+Total: 14.034200 ms (FindLiveObjects: 0.781800 ms CreateObjectMapping: 0.679300 ms MarkObjects: 9.696000 ms  DeleteObjects: 2.875500 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+Shader 'WFX/Transparent Specular': fallback shader 'Particles/Alpha Blended' not found
+Shader 'WFX/Transparent Diffuse': fallback shader 'Particles/Alpha Blended' not found
+========================================================================
+Received Import Request.
+  Time since last request: 114577.506582 seconds.
+  path: Assets/Scripts/AStar/GridGraphBuilder.cs
+  importAddress: Guid(54288382b738cf6419f1379282b1becc) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Scripts/AStar/GridGraphBuilder.cs using Guid(54288382b738cf6419f1379282b1becc) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '00000000000000000000000000000000') in 0.0104204 seconds
+Import Error Code:(4)
+Message: Build asset version error: assets/scripts/astar/gridgraphbuilder.cs in SourceAssetDB has modification time of '2026-10-31T22:46:48.6827431Z' while content on disk has modification time of '2026-10-31T22:47:06.3738506Z'
+  ERROR: Build asset version error: assets/scripts/astar/gridgraphbuilder.cs in SourceAssetDB has modification time of '2026-10-31T22:46:48.6827431Z' while content on disk has modification time of '2026-10-31T22:47:06.3738506Z'
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Prepare
+Refreshing native plugins compatible for Editor in 6.73 ms, found 4 plugins.
+Unloading 25 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 8117 unused Assets / (3.9 MB). Loaded Objects now: 9009.
+Memory consumption went from 170.1 MB to 166.3 MB.
+Total: 11.751300 ms (FindLiveObjects: 1.101900 ms CreateObjectMapping: 0.645900 ms MarkObjects: 6.806500 ms  DeleteObjects: 3.195700 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+Shader 'WFX/Transparent Specular': fallback shader 'Particles/Alpha Blended' not found
+Shader 'WFX/Transparent Diffuse': fallback shader 'Particles/Alpha Blended' not found
+========================================================================
+Received Import Request.
+  Time since last request: 34.245975 seconds.
+  path: Assets/Scripts/AStar/GridGraphBuilder.cs
+  importAddress: Guid(54288382b738cf6419f1379282b1becc) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Scripts/AStar/GridGraphBuilder.cs using Guid(54288382b738cf6419f1379282b1becc) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '341c59effdbd5178d825c93ec5e175da') in 0.0161268 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=67691b1b34f52bf3df922e31da17d9a1 DependenciesID=b98826a0ab9974cac93520e85b31052c StaticDependenciesID=5bdf288c51a3d0ec990f56bf65c4b9b7 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Prepare
+Refreshing native plugins compatible for Editor in 6.91 ms, found 4 plugins.
+Unloading 25 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 8117 unused Assets / (5.1 MB). Loaded Objects now: 9009.
+Memory consumption went from 170.1 MB to 165.0 MB.
+Total: 17.024400 ms (FindLiveObjects: 1.534600 ms CreateObjectMapping: 1.110000 ms MarkObjects: 10.293300 ms  DeleteObjects: 4.084700 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+Shader 'WFX/Transparent Specular': fallback shader 'Particles/Alpha Blended' not found
+Shader 'WFX/Transparent Diffuse': fallback shader 'Particles/Alpha Blended' not found
+========================================================================
+Received Import Request.
+  Time since last request: 60.999507 seconds.
+  path: Assets/Scripts/AStar/GridGraphBuilder.cs
+  importAddress: Guid(54288382b738cf6419f1379282b1becc) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/Scripts/AStar/GridGraphBuilder.cs using Guid(54288382b738cf6419f1379282b1becc) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '86083cf88574107fefa3e33c7ca34003') in 0.013755 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=949b577f8d8e1eb2d5269b65c00e0cf9 DependenciesID=3acedebf01169f094828359c9bbd602a StaticDependenciesID=8f1991f5296b81232ab02d94ba81ecfc 
 Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.403606 seconds.
-  path: Assets/Scripts/AStar/GridGraphBuilder.cs
-  importAddress: Guid(54288382b738cf6419f1379282b1becc) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Scripts/AStar/GridGraphBuilder.cs using Guid(54288382b738cf6419f1379282b1becc) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '0f96591aae1519cb429d8baa0b29eb37') in 0.025748 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=7fefa0e4cd44577ef02852df4745e986 DependenciesID=1089479881957856231b390cc516cf8a StaticDependenciesID=4ec4b5738aaa4ca0eaf01fc8f8a563cb 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+  Time since last request: 1051.896076 seconds.
+  path: Assets/Scripts/AStar/NavGraph cómo funciona.pdf
+  importAddress: Guid(db767c23aebfb1647b1b6e6b43ae131c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/AStar/NavGraph cómo funciona.pdf using Guid(db767c23aebfb1647b1b6e6b43ae131c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (Import Result ID: '84fae3c4ffc686019b7fd99dab0d4b52') in 0.1702574 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=c1389deae510f5932550e96f42e79ca5 DependenciesID=e717e90213cd0b53aa8868dc2b0d7d7f StaticDependenciesID=7ad27fd8823474ea84f59067b191ff59 
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
 
 ========================================================================
 Received Prepare
@@ -363,7 +423,7 @@ Assembly UnityEditor.UI.Common.Tests.dll at Library/ScriptAssemblies/UnityEditor
 Assembly UnityEditor.UI.EditorTests.dll at Library/ScriptAssemblies/UnityEditor.UI.EditorTests.dll not valid. Loading of assembly skipped.
 Assembly UnityEngine.UI.Tests.dll at Library/ScriptAssemblies/UnityEngine.UI.Tests.dll not valid. Loading of assembly skipped.
 Symbol file LoadedFromMemory is not a mono symbol file
-Refreshing native plugins compatible for Editor in 3.88 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 4.43 ms, found 4 plugins.
 Native extension for LinuxStandalone target not found
 Native extension for Android target not found
 Native extension for WindowsStandalone target not found
@@ -377,55 +437,33 @@ Native extension for WindowsStandalone target not found
 [MODES] ModeService[none].LoadModes
 ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:True
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  1.362 seconds
-Domain Reload Profiling: 2895ms
-	BeginReloadAssembly (331ms)
-		DisableScriptedObjects (8ms)
-		CreateAndSetChildDomain (65ms)
-	RebuildCommonClasses (53ms)
-	RebuildNativeTypeToScriptingClass (19ms)
-	initialDomainReloadingComplete (154ms)
-	LoadAllAssembliesAndSetupDomain (975ms)
-		LoadAssemblies (755ms)
-		AnalyzeDomain (376ms)
-			TypeCache.Refresh (18ms)
-			BuildScriptInfoCaches (335ms)
-			ResolveRequiredComponents (19ms)
-	FinalizeReload (1362ms)
+- Finished resetting the current domain, in  1.404 seconds
+Domain Reload Profiling: 6323ms
+	BeginReloadAssembly (1459ms)
+		DisableScriptedObjects (124ms)
+		CreateAndSetChildDomain (226ms)
+	RebuildCommonClasses (150ms)
+	RebuildNativeTypeToScriptingClass (18ms)
+	initialDomainReloadingComplete (179ms)
+	LoadAllAssembliesAndSetupDomain (3112ms)
+		LoadAssemblies (2976ms)
+		AnalyzeDomain (667ms)
+			TypeCache.Refresh (51ms)
+				TypeCache.ScanAssembly (4ms)
+			BuildScriptInfoCaches (582ms)
+			ResolveRequiredComponents (11ms)
+	FinalizeReload (1405ms)
 		SetupLoadedEditorAssemblies (0ms)
-			InitializePlatformSupportModulesInManaged (37ms)
-			BeforeProcessingInitializeOnLoad (255ms)
-			ProcessInitializeOnLoadAttributes (625ms)
-			ProcessInitializeOnLoadMethodAttributes (133ms)
-			AfterProcessingInitializeOnLoad (21ms)
-		AwakeInstancesAfterBackupRestoration (21ms)
-Refreshing native plugins compatible for Editor in 7.35 ms, found 4 plugins.
+			InitializePlatformSupportModulesInManaged (22ms)
+			BeforeProcessingInitializeOnLoad (275ms)
+			ProcessInitializeOnLoadAttributes (591ms)
+			ProcessInitializeOnLoadMethodAttributes (148ms)
+			AfterProcessingInitializeOnLoad (6ms)
+		AwakeInstancesAfterBackupRestoration (11ms)
 Unloading 25 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 8129 unused Assets / (6.3 MB). Loaded Objects now: 9027.
-Memory consumption went from 179.5 MB to 173.3 MB.
-Total: 13.345600 ms (FindLiveObjects: 1.093600 ms CreateObjectMapping: 0.663900 ms MarkObjects: 7.693500 ms  DeleteObjects: 3.893200 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-Shader 'WFX/Transparent Specular': fallback shader 'Particles/Alpha Blended' not found
-Shader 'WFX/Transparent Diffuse': fallback shader 'Particles/Alpha Blended' not found
-========================================================================
-Received Prepare
-Refreshing native plugins compatible for Editor in 9.38 ms, found 4 plugins.
-Unloading 25 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 8117 unused Assets / (6.5 MB). Loaded Objects now: 9027.
-Memory consumption went from 183.1 MB to 176.6 MB.
-Total: 198.929800 ms (FindLiveObjects: 11.378800 ms CreateObjectMapping: 1.617700 ms MarkObjects: 177.401800 ms  DeleteObjects: 8.193000 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-Shader 'WFX/Transparent Specular': fallback shader 'Particles/Alpha Blended' not found
-Shader 'WFX/Transparent Diffuse': fallback shader 'Particles/Alpha Blended' not found
-========================================================================
-Received Prepare
-Refreshing native plugins compatible for Editor in 2.88 ms, found 4 plugins.
-Unloading 25 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 8117 unused Assets / (8.2 MB). Loaded Objects now: 9027.
-Memory consumption went from 186.5 MB to 178.3 MB.
-Total: 181.685000 ms (FindLiveObjects: 14.542300 ms CreateObjectMapping: 2.966800 ms MarkObjects: 150.421300 ms  DeleteObjects: 13.750900 ms)
+Unloading 8129 unused Assets / (6.7 MB). Loaded Objects now: 9028.
+Memory consumption went from 177.7 MB to 171.0 MB.
+Total: 14.193300 ms (FindLiveObjects: 0.853100 ms CreateObjectMapping: 0.642100 ms MarkObjects: 8.351900 ms  DeleteObjects: 4.145100 ms)
 
 Prepare: number of updated asset objects reloaded= 0
 Shader 'WFX/Transparent Specular': fallback shader 'Particles/Alpha Blended' not found
@@ -483,3 +521,48 @@ Assembly UnityEditor.UI.Common.Tests.dll at Library/ScriptAssemblies/UnityEditor
 Assembly UnityEditor.UI.EditorTests.dll at Library/ScriptAssemblies/UnityEditor.UI.EditorTests.dll not valid. Loading of assembly skipped.
 Assembly UnityEngine.UI.Tests.dll at Library/ScriptAssemblies/UnityEngine.UI.Tests.dll not valid. Loading of assembly skipped.
 Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for LinuxStandalone target not found
+Native extension for Android target not found
+Native extension for WindowsStandalone target not found
+[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Unable to send message (not connected to server process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Unable to send message (not connected to server process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+[MODES] ModeService[none].Initialize
+[MODES] ModeService[none].LoadModes
+ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:True
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.931 seconds
+Domain Reload Profiling: 2991ms
+	BeginReloadAssembly (826ms)
+		DisableScriptedObjects (59ms)
+		CreateAndSetChildDomain (262ms)
+	RebuildCommonClasses (35ms)
+	RebuildNativeTypeToScriptingClass (11ms)
+	initialDomainReloadingComplete (107ms)
+	LoadAllAssembliesAndSetupDomain (1081ms)
+		LoadAssemblies (857ms)
+		AnalyzeDomain (377ms)
+			TypeCache.Refresh (51ms)
+				TypeCache.ScanAssembly (3ms)
+			BuildScriptInfoCaches (299ms)
+			ResolveRequiredComponents (17ms)
+	FinalizeReload (932ms)
+		SetupLoadedEditorAssemblies (0ms)
+			InitializePlatformSupportModulesInManaged (24ms)
+			BeforeProcessingInitializeOnLoad (152ms)
+			ProcessInitializeOnLoadAttributes (423ms)
+			ProcessInitializeOnLoadMethodAttributes (120ms)
+			AfterProcessingInitializeOnLoad (6ms)
+		AwakeInstancesAfterBackupRestoration (18ms)
+Refreshing native plugins compatible for Editor in 2.05 ms, found 4 plugins.
+Unloading 25 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 8129 unused Assets / (5.6 MB). Loaded Objects now: 9034.
+Memory consumption went from 182.9 MB to 177.3 MB.
+Total: 11.057900 ms (FindLiveObjects: 0.703900 ms CreateObjectMapping: 0.615600 ms MarkObjects: 5.560300 ms  DeleteObjects: 4.176800 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+Shader 'WFX/Transparent Specular': fallback shader 'Particles/Alpha Blended' not found
+Shader 'WFX/Transparent Diffuse': fallback shader 'Particles/Alpha Blended' not found
