@@ -6,10 +6,15 @@ public class PlayerShoot : IShootable, IInputInitialize, IServiceConsumer
     private Transform _cannonTransform;
     private BulletType _currentBulletType = BulletType.CommonCannonBullet;
     private CannonBulletFactory _cannonBulletFactory;
+    private float _timer = 0f;
+    private readonly float _shootCooldown;
+    private bool _canShoot = true;
+    private MobileInputUIManager _mobileInputUIManager;
 
-    public PlayerShoot(Transform cannonTransform)
+    public PlayerShoot(Transform cannonTransform, float shootCooldown)
     {
         _cannonTransform = cannonTransform;
+        _shootCooldown = shootCooldown;
     }
 
     public void Initialize(InputReader inputReader)
@@ -18,9 +23,39 @@ public class PlayerShoot : IShootable, IInputInitialize, IServiceConsumer
         _initialized = true;
     }
 
-    public void Shoot()
+    public void ArtificialUpdate()
     {
         if(!_initialized) return;
+
+        if(_timer < _shootCooldown && !_canShoot)
+        {
+            _timer += Time.deltaTime;
+
+            if(TryResolveMobileInputUIManager())
+            {
+                if(!_mobileInputUIManager.cannonCooldownImage.gameObject.activeSelf) 
+                    _mobileInputUIManager.cannonCooldownImage.gameObject.SetActive(true);
+
+                _mobileInputUIManager.cannonCooldownImage.fillAmount = _timer / _shootCooldown;
+            }
+                
+        }
+        
+        else if(_timer >= _shootCooldown && !_canShoot)
+        {
+            if(TryResolveMobileInputUIManager())
+            {
+                if(_mobileInputUIManager.cannonCooldownImage.gameObject.activeSelf) 
+                    _mobileInputUIManager.cannonCooldownImage.gameObject.SetActive(false);
+            }
+
+            _canShoot = true;
+        } 
+    }
+
+    public void Shoot()
+    {
+        if(!_initialized || !_canShoot) return;
 
         if(!TryResolveService())
         {
@@ -30,6 +65,8 @@ public class PlayerShoot : IShootable, IInputInitialize, IServiceConsumer
 
         ShooteableObject bullet = _cannonBulletFactory.Create(_currentBulletType, _cannonTransform.position, _cannonTransform.rotation);
         bullet.Shoot(_cannonTransform.up);
+        _canShoot = false;
+        _timer = 0f;
     }
 
     public bool TryResolveService()
@@ -37,5 +74,12 @@ public class PlayerShoot : IShootable, IInputInitialize, IServiceConsumer
         if(_cannonBulletFactory != null) return true;
 
         return ServiceLocator.Instance.TryGet(out _cannonBulletFactory);
+    }
+
+    private bool TryResolveMobileInputUIManager()
+    {
+        if(_mobileInputUIManager != null) return true;
+
+        return ServiceLocator.Instance.TryGet(out _mobileInputUIManager);
     }
 }

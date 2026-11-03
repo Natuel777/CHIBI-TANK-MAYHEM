@@ -73,6 +73,9 @@ public class PlayerSettingsSO : ScriptableObject
     public float minTankHeadPitch = -20f;
     public float maxTankHeadPitch = 20f;
 
+    [Header("Cannon Settings")]
+    public float cannonCooldown = 2f;
+
     [Header("Turret Settings")]
     public float turretRotationSpeed = 900f;
     public float minTurretPitch = -20f;

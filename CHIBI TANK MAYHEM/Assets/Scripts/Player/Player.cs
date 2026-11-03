@@ -64,7 +64,7 @@ public class Player : MonoBehaviour, IPlayer
                                             _playerSettings.maxDepenetrationVelocitym,
                                             _groundMask,
                                             _playerSettings.centerOfMassOffset);
-        playerShoot = new PlayerShoot(_cannonMuzzleTransform);
+        playerShoot = new PlayerShoot(_cannonMuzzleTransform, _playerSettings.cannonCooldown);
         playerAim = new PlayerAim(_tankHeadTransform,
                                 _playerSettings.aimRotationSpeed,
                                 Camera.main, _cannonMuzzleTransform,
@@ -131,6 +131,7 @@ public class Player : MonoBehaviour, IPlayer
         playerTurretAim?.ArtificialUpdate(playerAim.AimTargetPoint);
         playerTurretShoot.ArtificialUpdate(playerAim.AimTargetPoint);
         tankMovementAnimation?.ArtificialUpdate();
+        playerShoot.ArtificialUpdate();
     }
 
     private void FixedUpdate()
