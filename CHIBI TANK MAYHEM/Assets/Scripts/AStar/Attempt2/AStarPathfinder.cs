@@ -1,67 +1,75 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Diagnostics;
+using System;
 
 public class AStarPathfinder : MonoBehaviour
 {
     private Grid _grid;
-
-    #if UNITY_EDITOR
-    [SerializeField] private Transform seeker, target;
-    #endif
+    private PathRequestManager _pathRequestManager;
 
     private void Start()
     {
         _grid = GetComponent<Grid>();
+        _pathRequestManager = GetComponent<PathRequestManager>();
     }
 
-    #if UNITY_EDITOR
-    private void Update()
+    public void StartFindPath(Vector3 startPos, Vector3 endPos)
     {
-        FindPath(seeker.position, target.position);
+        StartCoroutine(FindPath(startPos, endPos));
     }
-    #endif
 
-    private void FindPath(Vector3 startPosition, Vector3 targetPosition)
+    private IEnumerator FindPath(Vector3 startPosition, Vector3 targetPosition)
     {
+        Vector3[] waypoints = new Vector3[0];
+        bool pathSuccess = false;
         Node startNode = _grid.NodeFromWorldPoint(startPosition);
         Node targetNode = _grid.NodeFromWorldPoint(targetPosition);
-        Heap<Node> openSet = new Heap<Node>(_grid.MaxSize);
-        HashSet<Node> closedSet = new HashSet<Node>(); 
-        openSet.Add(startNode);
 
-        while(openSet.Count > 0)
+        if(startNode.isWalkable && targetNode.isWalkable)
         {
-            Node currentNode = openSet.Pop();
-            closedSet.Add(currentNode);
+            Heap<Node> openSet = new Heap<Node>(_grid.MaxSize);
+            HashSet<Node> closedSet = new HashSet<Node>(); 
+            openSet.Add(startNode);
 
-            if(currentNode == targetNode)
+            while(openSet.Count > 0)
             {
-                RetracePath(startNode, targetNode);
-                return;
-            }
+                Node currentNode = openSet.Pop();
+                closedSet.Add(currentNode);
 
-            foreach(Node neighbor in _grid.GetNeighbors(currentNode))
-            {
-                if(!neighbor.isWalkable || closedSet.Contains(neighbor)) continue;
-
-                int newMovementCostToNeighbor = currentNode.gCost + GetDistance(currentNode, neighbor);
-
-                if(newMovementCostToNeighbor < neighbor.gCost || !openSet.Contains(neighbor))
+                if(currentNode == targetNode)
                 {
-                    neighbor.gCost = newMovementCostToNeighbor;
-                    neighbor.hCost = GetDistance(neighbor, targetNode);
-                    neighbor.parent = currentNode;
+                    pathSuccess = true;
+                    break;
+                }
 
-                    if(!openSet.Contains(neighbor))
-                        openSet.Add(neighbor);
+                foreach(Node neighbor in _grid.GetNeighbors(currentNode))
+                {
+                    if(!neighbor.isWalkable || closedSet.Contains(neighbor)) continue;
+
+                    int newMovementCostToNeighbor = currentNode.gCost + GetDistance(currentNode, neighbor);
+
+                    if(newMovementCostToNeighbor < neighbor.gCost || !openSet.Contains(neighbor))
+                    {
+                        neighbor.gCost = newMovementCostToNeighbor;
+                        neighbor.hCost = GetDistance(neighbor, targetNode);
+                        neighbor.parent = currentNode;
+
+                        if(!openSet.Contains(neighbor))
+                            openSet.Add(neighbor);
+                    }
                 }
             }
         }
+
+        yield return null;
+        
+        if(pathSuccess) waypoints = RetracePath(startNode, targetNode);
+
+        _pathRequestManager.FinishProcessingPath(waypoints, pathSuccess);
     }
 
-    private void RetracePath(Node startNode, Node endNode)
+    private Vector3[] RetracePath(Node startNode, Node endNode)
     {
         List<Node> path = new List<Node>();
         Node currentNode = endNode;
@@ -72,11 +80,32 @@ public class AStarPathfinder : MonoBehaviour
             currentNode = currentNode.parent;
         }
         path.Add(startNode);
-        path.Reverse();
-        
-        #if UNITY_EDITOR
-        _grid.path = path;
-        #endif
+        Vector3[] waypoints = SimplifyPath(path);
+        Array.Reverse(waypoints);
+        return waypoints;
+    }
+
+    private Vector3[] SimplifyPath(List<Node> path)
+    {
+        List<Vector3> waypoints = new List<Vector3>();
+        Vector2 oldDirection = Vector2.zero;
+
+        for(int i = 0; i < path.Count; i++)
+        {
+            // Obtenemos la dirección entre el nodo i y el nodo anterior.
+            // Si esta dirección es igual a oldDirection, significa que
+            // los nodos, en este tramo, no cambiaron de dirección, y por ende
+            // se pueden simplificar en el array de waypoints (Optimización).
+            Vector2 newDirection = new Vector2(path[i-1].gridX - path[i].gridX,
+                                                path[i-1].gridY - path[i].gridY);
+            
+            if(newDirection != oldDirection)
+                waypoints.Add(path[i].worldPosition);
+            
+            oldDirection = newDirection;
+        }
+
+        return waypoints.ToArray();
     }
 
     private int GetDistance(Node nodeA, Node nodeB)

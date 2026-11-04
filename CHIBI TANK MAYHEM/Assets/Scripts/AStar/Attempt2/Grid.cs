@@ -7,11 +7,6 @@ public class Grid : MonoBehaviour
     [SerializeField] private float _nodeRadius;
     [SerializeField] private LayerMask _unwalkeableMasks;
 
-    #if UNITY_EDITOR
-    //[SerializeField] private Transform _agent;
-    public List<Node> path;
-    #endif
-
     private Node[,] _grid;
     private float _nodeDiamenter;
     private int _nodeCountInGridSizeX, _nodeCountInGridSizeY;
@@ -89,23 +84,12 @@ public class Grid : MonoBehaviour
 
         if(_grid != null)
         {
-            //Node agentNode = NodeFromWorldPoint(_agent.position);
-
             foreach(Node node in _grid)
             {
                 if(node.isWalkable)
                     Gizmos.color = Color.white;
                 
                 else Gizmos.color = Color.red;
-
-                if(path != null)
-                {
-                    if(path.Contains(node))
-                        Gizmos.color = Color.black;
-                }
-
-                //if(agentNode == node)
-                //    Gizmos.color = Color.cyan;
 
                 Gizmos.DrawCube(node.worldPosition, Vector3.one * (_nodeDiamenter - 0.4f));
             }  
