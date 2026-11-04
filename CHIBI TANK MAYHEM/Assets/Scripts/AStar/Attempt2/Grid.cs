@@ -16,6 +16,8 @@ public class Grid : MonoBehaviour
     private float _nodeDiamenter;
     private int _nodeCountInGridSizeX, _nodeCountInGridSizeY;
 
+    public int MaxSize => _nodeCountInGridSizeX * _nodeCountInGridSizeY;
+
     private void Start() 
     {
         _nodeDiamenter = _nodeRadius * 2;

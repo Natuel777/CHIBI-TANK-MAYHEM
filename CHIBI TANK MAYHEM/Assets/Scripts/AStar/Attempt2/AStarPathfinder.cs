@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Diagnostics;
 
 public class AStarPathfinder : MonoBehaviour
 {
@@ -26,23 +27,14 @@ public class AStarPathfinder : MonoBehaviour
     {
         Node startNode = _grid.NodeFromWorldPoint(startPosition);
         Node targetNode = _grid.NodeFromWorldPoint(targetPosition);
-        List<Node> openSet = new List<Node>();
+        Heap<Node> openSet = new Heap<Node>(_grid.MaxSize);
         HashSet<Node> closedSet = new HashSet<Node>(); 
         openSet.Add(startNode);
 
         while(openSet.Count > 0)
         {
-            Node currentNode = openSet[0];
-
-            for(int i = 1; i < openSet.Count; i++)
-            {
-                if(openSet[i].fCost < currentNode.fCost || 
-                    openSet[i].fCost == currentNode.fCost && openSet[i].hCost < currentNode.hCost)
-                    currentNode = openSet[i];
-            }
-
+            Node currentNode = openSet.Pop();
             closedSet.Add(currentNode);
-            openSet.Remove(currentNode);
 
             if(currentNode == targetNode)
             {
