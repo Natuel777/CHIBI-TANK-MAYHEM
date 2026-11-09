@@ -27,9 +27,9 @@ public class PlayerShoot : IShootable, IInputInitialize, IServiceConsumer
     {
         if(!_initialized) return;
 
-        if(_timer < _shootCooldown && !_canShoot)
+        if(_timer > 0 && !_canShoot)
         {
-            _timer += Time.deltaTime;
+            _timer -= Time.deltaTime;
 
             if(TryResolveMobileInputUIManager())
             {
@@ -41,7 +41,7 @@ public class PlayerShoot : IShootable, IInputInitialize, IServiceConsumer
                 
         }
         
-        else if(_timer >= _shootCooldown && !_canShoot)
+        else if(_timer <= 0 && !_canShoot)
         {
             if(TryResolveMobileInputUIManager())
             {
@@ -66,7 +66,7 @@ public class PlayerShoot : IShootable, IInputInitialize, IServiceConsumer
         ShooteableObject bullet = _cannonBulletFactory.Create(_currentBulletType, _cannonTransform.position, _cannonTransform.rotation);
         bullet.Shoot(_cannonTransform.up);
         _canShoot = false;
-        _timer = 0f;
+        _timer = _shootCooldown;
     }
 
     public bool TryResolveService()
