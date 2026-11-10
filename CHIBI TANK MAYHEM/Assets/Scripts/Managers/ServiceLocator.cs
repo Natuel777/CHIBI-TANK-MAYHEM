@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 
+[DefaultExecutionOrder(-501)]
 public sealed class ServiceLocator
 {
     private static ServiceLocator _instance;

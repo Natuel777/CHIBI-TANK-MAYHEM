@@ -2,13 +2,13 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 
+[DefaultExecutionOrder(-400)]
 public class PathRequestManager : MonoBehaviour
 {
     private Queue<PathRequest> _pathRequestQueue = new Queue<PathRequest>();
     private PathRequest _current;
     private AStarPathfinder _pathfinder;
     private bool _isProcessing;
-    private static PathRequestManager _instance;
 
     private void Awake()
     {
@@ -16,11 +16,11 @@ public class PathRequestManager : MonoBehaviour
         _pathfinder = GetComponent<AStarPathfinder>();
     }
 
-    public static void RequestPath(Vector3 pathStart, Vector3 pathEnd, Action<Vector3[], bool> callback)
+    public void RequestPath(Vector3 pathStart, Vector3 pathEnd, Action<Vector3[], bool> callback)
     {
         PathRequest newRequest = new PathRequest(pathStart, pathEnd, callback);
-        _instance._pathRequestQueue.Enqueue(newRequest);
-        _instance.TryProcessNext();
+        _pathRequestQueue.Enqueue(newRequest);
+        TryProcessNext();
     }
 
     private void TryProcessNext()
