@@ -33,10 +33,9 @@ public class GAgent : MonoBehaviour, IServiceConsumer
 
     #region A*
     private PathRequestManager _aStarManager;
-    [SerializeField] private float _speed = 5f;
+    public float speed = 5f, turnDistance = 5f;
     [SerializeField] private float _waypointReachedDistance = 0.1f;
-    private Vector3[] _path;
-    private int _targetIndex;
+    private SmoothPath _path;
     private Coroutine _followCoroutine; 
     #endregion
 
@@ -162,7 +161,7 @@ public class GAgent : MonoBehaviour, IServiceConsumer
     #endregion
 
     #region A* Logic
-    private void OnPathFound(Vector3[] newPath, bool success)
+    private void OnPathFound(Vector3[] waypoints, bool success)
     {
         // El agente se desactivó o la acción se canceló mientras esperábamos el camino: se ignora el resultado.
         if(this == null || !isActiveAndEnabled || _currentAction == null || !_currentAction.executing) return;
@@ -174,15 +173,13 @@ public class GAgent : MonoBehaviour, IServiceConsumer
         }
 
         // Camino vacío: no hay nada que recorrer, el agente ya está en el destino.
-        if(newPath.Length == 0)
+        if(waypoints.Length == 0)
         {
             _arrived = true;
             return;
         }
 
-        _path = newPath;
-        _targetIndex = 0;
-
+        _path = new SmoothPath(waypoints, transform.position, turnDistance);
         StopFollowing();
         _followCoroutine = StartCoroutine(FollowPath());
     }
@@ -197,29 +194,8 @@ public class GAgent : MonoBehaviour, IServiceConsumer
 
     private IEnumerator FollowPath()
     {
-        Vector3 currentWaypoint = _path[0];
-
         while(true)
         {
-            //Se llega al waypoint por cercanía en el plano XZ, no por igualdad exacta de posición
-            Vector3 toWaypoint = currentWaypoint - transform.position;
-            toWaypoint.y = 0f;
-
-            if(toWaypoint.sqrMagnitude <= _waypointReachedDistance * _waypointReachedDistance)
-            {
-                _targetIndex++;
-
-                if(_targetIndex >= _path.Length)
-                {
-                    _arrived = true;
-                    _followCoroutine = null;
-                    yield break;
-                }
-
-                currentWaypoint = _path[_targetIndex];
-            }
-
-            transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, _speed * Time.deltaTime);
             yield return null;
         }
     }
@@ -228,18 +204,7 @@ public class GAgent : MonoBehaviour, IServiceConsumer
     private void OnDrawGizmos() 
     {
         if(_path != null)
-        {
-            for(int i = _targetIndex; i < _path.Length; i++)
-            {
-                Gizmos.color = Color.black;
-                Gizmos.DrawCube(_path[i], Vector3.one);
-
-                if(i == _targetIndex)
-                    Gizmos.DrawLine(transform.position, _path[i]);
-
-                else Debug.DrawLine(_path[i -1], _path[i]);
-            }
-        }    
+            _path.ArtificialOnDrawGizmos();
     }
     #endif
     #endregion
