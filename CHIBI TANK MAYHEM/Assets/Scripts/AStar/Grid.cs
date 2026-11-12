@@ -7,6 +7,13 @@ public class Grid : MonoBehaviour
     [SerializeField] private float _nodeRadius;
     [SerializeField] private LayerMask _unwalkeableMasks;
 
+    #region Weights
+    [Tooltip("Each TerrainType object should be assign with one layerMask per object, otherwise will mess up the code")]
+    [SerializeField] private TerrainType[] _walkableRegions;
+    private LayerMask _walkablesMask;
+    private Dictionary<int, int> _walkableRegionsDic = new Dictionary<int, int>();
+    #endregion
+
     private Node[,] _grid;
     private float _nodeDiamenter;
     private int _nodeCountInGridSizeX, _nodeCountInGridSizeY;
@@ -19,6 +26,13 @@ public class Grid : MonoBehaviour
         // Round redondea el valor de un float al entero más cercano. Ej: 1,2f = 1, 1,5f = 2, 1,8f = 2.
         _nodeCountInGridSizeX = Mathf.RoundToInt(_gridWorldSize.x / _nodeDiamenter);
         _nodeCountInGridSizeY = Mathf.RoundToInt(_gridWorldSize.y / _nodeDiamenter);
+
+        foreach(TerrainType type in _walkableRegions)
+        {
+            _walkablesMask.value |=  type.terrainMask.value;
+            _walkableRegionsDic.Add((int)Mathf.Log(type.terrainMask.value, 2), type.terrainPenalty);
+        }
+
         CreateGrid();
     }
 
@@ -36,7 +50,10 @@ public class Grid : MonoBehaviour
                 // Definición de la documentación de Unity sobre Physics.CheckSphere
                 // Returns true if there are any colliders overlapping the sphere defined by position and radius in world coordinates.
                 bool walkable = !(Physics.CheckSphere(worldPoint, _nodeRadius, _unwalkeableMasks));
-                _grid[x, y] = new Node(walkable, worldPoint, x, y);
+                // FindGroundType devuelve -1 si el nodo no es caminable. El nodo se crea igual (con penalidad 0):
+                // si quedara en null, OnDrawGizmos, GetNeighbors y NodeFromWorldPoint fallarían con NullReferenceException.
+                int movementPenalty = Mathf.Max(0, FindGroundType(walkable, worldPoint));
+                _grid[x, y] = new Node(walkable, worldPoint, x, y, movementPenalty);
             }
         }
     }
@@ -77,6 +94,20 @@ public class Grid : MonoBehaviour
         return neighbors;
     }
 
+    private int FindGroundType(bool walkable, Vector3 worldPoint)
+    {
+        if(!walkable) return -1;
+
+        int movementPenalty = 0;
+        Ray ray = new Ray(worldPoint + Vector3.up * 50, Vector3.down);
+        RaycastHit hit;
+
+        if(Physics.Raycast(ray, out hit, 100, _walkablesMask))
+            _walkableRegionsDic.TryGetValue(hit.collider.gameObject.layer, out movementPenalty);
+        
+        return movementPenalty;
+    }
+
     #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
@@ -87,7 +118,12 @@ public class Grid : MonoBehaviour
             foreach(Node node in _grid)
             {
                 if(node.isWalkable)
+                {
                     Gizmos.color = Color.white;
+
+                    if(node.movementPenalty != 0)
+                        Gizmos.color = Color.yellow;
+                }
                 
                 else Gizmos.color = Color.red;
 
@@ -96,4 +132,11 @@ public class Grid : MonoBehaviour
         }
     }
     #endif
+
+    [System.Serializable]
+    public class TerrainType
+    {
+        public LayerMask terrainMask;
+        public int terrainPenalty;
+    }
 }

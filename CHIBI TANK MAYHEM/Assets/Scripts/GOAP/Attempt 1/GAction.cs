@@ -28,14 +28,14 @@ public abstract class GAction : MonoBehaviour
     {
         if(preconditionsDic != null)
         {
-            foreach(var item in preconditionsDic)
-                preconditionsDic.Add(item.Key, item.Value);
+            foreach(var item in _preconditions)
+                preconditionsDic.Add(item.key, item.value);
         }
 
         if(effectsDic != null)
         {
-            foreach(var item in effectsDic)
-                effectsDic.Add(item.Key, item.Value);
+            foreach(var item in _afterEffects)
+                effectsDic.Add(item.key, item.value);
         }    
     }
 

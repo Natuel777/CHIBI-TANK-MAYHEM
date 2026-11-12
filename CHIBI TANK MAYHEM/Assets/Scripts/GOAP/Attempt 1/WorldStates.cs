@@ -6,6 +6,7 @@ public enum GoapStates
     Idle
 }
 
+// Se usa a modo de diccionario serializado para setear las condiciones de mundo predefinidas para cada acción de GAgent
 [System.Serializable]
 public class WorldState
 {

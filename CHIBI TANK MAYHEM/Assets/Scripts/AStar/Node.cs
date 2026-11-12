@@ -4,19 +4,20 @@ public class Node : IHeapItem<Node>
 {
     public bool isWalkable;
     public Vector3 worldPosition;
-    public int gCost, hCost, gridX, gridY;
+    public int gCost, hCost, gridX, gridY, movementPenalty;
     private int _heapIndex;
     public Node parent;
 
     public int fCost => gCost + hCost;
     public int HeapIndex {get => _heapIndex; set => _heapIndex = value;}
 
-    public Node(bool isWalkable, Vector3 worldPosition, int gridX, int gridY)
+    public Node(bool isWalkable, Vector3 worldPosition, int gridX, int gridY, int movementPenalty)
     {
         this.isWalkable = isWalkable;
         this.worldPosition = worldPosition;
         this.gridX = gridX;
         this.gridY = gridY;
+        this.movementPenalty = movementPenalty;
     }
 
     public int CompareTo(Node nodeToCompare)

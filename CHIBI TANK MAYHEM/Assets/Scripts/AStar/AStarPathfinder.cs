@@ -28,6 +28,7 @@ public class AStarPathfinder : MonoBehaviour
 
         if(startNode.isWalkable && targetNode.isWalkable)
         {
+            // Openset son los nodos ya verificados que no se recorrieron y son candidatos a recorrer.
             Heap<Node> openSet = new Heap<Node>(_grid.MaxSize);
             HashSet<Node> closedSet = new HashSet<Node>(); 
             openSet.Add(startNode);
@@ -47,7 +48,7 @@ public class AStarPathfinder : MonoBehaviour
                 {
                     if(!neighbor.isWalkable || closedSet.Contains(neighbor)) continue;
 
-                    int newMovementCostToNeighbor = currentNode.gCost + GetDistance(currentNode, neighbor);
+                    int newMovementCostToNeighbor = currentNode.gCost + GetDistance(currentNode, neighbor) + currentNode.movementPenalty;
 
                     if(newMovementCostToNeighbor < neighbor.gCost || !openSet.Contains(neighbor))
                     {
@@ -58,7 +59,6 @@ public class AStarPathfinder : MonoBehaviour
                         if(!openSet.Contains(neighbor))
                             openSet.Add(neighbor);
 
-                        // Si ya estaba en el open set, su costo mejoró y tiene que subir en el heap.
                         else openSet.UpdateItem(neighbor);
                     }
                 }

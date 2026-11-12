@@ -28,6 +28,7 @@ public class GPlanner : IServiceConsumer
 {
     private GWorld _gWorld;
 
+
     public Queue<GAction> Plan(List<GAction> actions, Dictionary<GoapStates, int> goals, WorldState states)
     {
         List<GAction> usableActions = new List<GAction>();
@@ -46,6 +47,8 @@ public class GPlanner : IServiceConsumer
             return null;
         } 
     
+        if(!_gWorld.Initialized) _gWorld.Initialize();
+
         GNode startNode = new GNode(null, 0, _gWorld.World.States, null);
         bool success = BuildGoapGraph(startNode, leaves, usableActions, goals);
         
