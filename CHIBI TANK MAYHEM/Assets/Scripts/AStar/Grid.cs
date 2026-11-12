@@ -10,8 +10,13 @@ public class Grid : MonoBehaviour
     #region Weights
     [Tooltip("Each TerrainType object should be assign with one layerMask per object, otherwise will mess up the code")]
     [SerializeField] private TerrainType[] _walkableRegions;
+    [SerializeField] private int _obstacleProximityPenalty = 5;
     private LayerMask _walkablesMask;
     private Dictionary<int, int> _walkableRegionsDic = new Dictionary<int, int>();
+
+    #if UNITY_EDITOR
+    private int _penaltyMin = int.MaxValue, _penaltyMax = int.MinValue;
+    #endif
     #endregion
 
     private Node[,] _grid;
@@ -50,12 +55,14 @@ public class Grid : MonoBehaviour
                 // Definición de la documentación de Unity sobre Physics.CheckSphere
                 // Returns true if there are any colliders overlapping the sphere defined by position and radius in world coordinates.
                 bool walkable = !(Physics.CheckSphere(worldPoint, _nodeRadius, _unwalkeableMasks));
-                // FindGroundType devuelve -1 si el nodo no es caminable. El nodo se crea igual (con penalidad 0):
-                // si quedara en null, OnDrawGizmos, GetNeighbors y NodeFromWorldPoint fallarían con NullReferenceException.
-                int movementPenalty = Mathf.Max(0, FindGroundType(walkable, worldPoint));
+                // El nodo se crea siempre, también si no es caminable: si quedara en null,
+                // OnDrawGizmos, GetNeighbors y NodeFromWorldPoint fallarían con NullReferenceException.
+                int movementPenalty = FindGroundType(walkable, worldPoint);
                 _grid[x, y] = new Node(walkable, worldPoint, x, y, movementPenalty);
             }
         }
+
+        BlurPenaltyMap(3);
     }
 
     public Node NodeFromWorldPoint(Vector3 worldPosition)
@@ -96,16 +103,81 @@ public class Grid : MonoBehaviour
 
     private int FindGroundType(bool walkable, Vector3 worldPoint)
     {
-        if(!walkable) return -1;
-
         int movementPenalty = 0;
         Ray ray = new Ray(worldPoint + Vector3.up * 50, Vector3.down);
         RaycastHit hit;
 
+        // El orden importa: TryGetValue(..., out movementPenalty) SIEMPRE escribe en la variable (0 si no encuentra la capa).
+        // El rayo ignora la capa Obstacle (no está en _walkablesMask), así que atraviesa el obstáculo y cae sobre el suelo
+        // de abajo. Si la penalidad del obstáculo se sumara antes del raycast, el TryGetValue la pisaría con la del suelo.
         if(Physics.Raycast(ray, out hit, 100, _walkablesMask))
             _walkableRegionsDic.TryGetValue(hit.collider.gameObject.layer, out movementPenalty);
-        
+
+        if(!walkable) movementPenalty += _obstacleProximityPenalty;
+
         return movementPenalty;
+    }
+
+    //Blur box algorithm
+    // In this point idk wtf i'm coding, i still have much maths to learn.
+    // I know what the algorithm does but how and why does it work like this, idk
+    // #headache
+    private void BlurPenaltyMap(int blurSize)
+    {
+        int kernelSize = blurSize * 2 + 1;
+        int kernelExtents = (kernelSize - 1) / 2;
+        int[,] penaltiesHorizontalPass = new int[_nodeCountInGridSizeX, _nodeCountInGridSizeY];
+        int[,] penaltiesVerticalPass = new int[_nodeCountInGridSizeX, _nodeCountInGridSizeY];
+
+        for(int y = 0; y < _nodeCountInGridSizeY; y++)
+        {
+            for(int x = -kernelExtents; x <= kernelExtents; x++)
+            {
+                int sampleX = Mathf.Clamp(x, 0 ,kernelExtents);
+                penaltiesHorizontalPass[0, y] += _grid[sampleX, y].movementPenalty;
+            }
+
+            for(int x2 = 1; x2 < _nodeCountInGridSizeX; x2++)
+            {
+                int removeIndex = Mathf.Clamp(x2 - kernelExtents -1, 0 , _nodeCountInGridSizeX);
+                int addIndex = Mathf.Clamp(x2 + kernelExtents, 0, _nodeCountInGridSizeX - 1);
+                penaltiesHorizontalPass[x2,y] = penaltiesHorizontalPass[x2 - 1, y] - _grid[removeIndex, y].movementPenalty + _grid[addIndex,y].movementPenalty; 
+            }
+        }
+
+        for(int x = 0; x < _nodeCountInGridSizeX; x++)
+        {
+            for(int y = -kernelExtents; y <= kernelExtents; y++)
+            {
+                int sampleY = Mathf.Clamp(y, 0 ,kernelExtents);
+                penaltiesVerticalPass[x, 0] += penaltiesHorizontalPass[x, sampleY];
+            }
+
+            int blurPenalty = Mathf.RoundToInt((float)penaltiesVerticalPass[x,0] / (kernelSize*kernelSize));
+            _grid[x,0].movementPenalty = blurPenalty;
+
+            for(int y2 = 1; y2 < _nodeCountInGridSizeY; y2++)
+            {
+                int removeIndex = Mathf.Clamp(y2 - kernelExtents -1, 0 , _nodeCountInGridSizeY);
+                int addIndex = Mathf.Clamp(y2 + kernelExtents, 0, _nodeCountInGridSizeY - 1);
+                penaltiesVerticalPass[x,y2] = penaltiesVerticalPass[x, y2 - 1] - penaltiesHorizontalPass[x, removeIndex] + penaltiesHorizontalPass[x,addIndex]; 
+                blurPenalty = Mathf.RoundToInt((float)penaltiesVerticalPass[x,y2] / (kernelSize*kernelSize));
+                _grid[x,y2].movementPenalty = blurPenalty;
+            }
+        }
+
+        #if UNITY_EDITOR
+        // Rango de la escala de colores del gizmo. Solo cuentan los nodos caminables: los obstáculos (rojos) tienen la
+        // penalidad más alta y, si entraran acá, aplastarían la escala y la aureola se vería casi blanca.
+        foreach(Node node in _grid)
+        {
+            if(!node.isWalkable) continue;
+
+            if(node.movementPenalty > _penaltyMax) _penaltyMax = node.movementPenalty;
+
+            if(node.movementPenalty < _penaltyMin) _penaltyMin = node.movementPenalty;
+        }
+        #endif
     }
 
     #if UNITY_EDITOR
@@ -119,10 +191,9 @@ public class Grid : MonoBehaviour
             {
                 if(node.isWalkable)
                 {
-                    Gizmos.color = Color.white;
-
-                    if(node.movementPenalty != 0)
-                        Gizmos.color = Color.yellow;
+                    Gizmos.color = Color.Lerp(Color.white, Color.orange, Mathf.InverseLerp(_penaltyMin, 
+                                                                                    _penaltyMax, 
+                                                                                    node.movementPenalty));
                 }
                 
                 else Gizmos.color = Color.red;
