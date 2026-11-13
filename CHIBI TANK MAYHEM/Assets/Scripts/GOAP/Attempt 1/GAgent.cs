@@ -33,10 +33,12 @@ public class GAgent : MonoBehaviour, IServiceConsumer
 
     #region A*
     private PathRequestManager _aStarManager;
+    private const float _pathUpdateThreshold = 0.5f, _minPathUpdateTime = 0.2f;
     public float speed = 5f, turnDistance = 5f;
-    [SerializeField] private float _waypointReachedDistance = 0.1f;
+    [SerializeField] private float _turnSpeed = 0f, _stoppingDistance = 10f;
     private SmoothPath _path;
     private Coroutine _followCoroutine; 
+    public Transform target;
     #endregion
 
     private void Start() 
@@ -45,6 +47,8 @@ public class GAgent : MonoBehaviour, IServiceConsumer
 
         foreach(GAction item in acts)
             actions.Add(item);
+
+        StartCoroutine(UpdatePath());
     }
 
     #region GOAP Logic
@@ -179,7 +183,7 @@ public class GAgent : MonoBehaviour, IServiceConsumer
             return;
         }
 
-        _path = new SmoothPath(waypoints, transform.position, turnDistance);
+        _path = new SmoothPath(waypoints, transform.position, turnDistance, _stoppingDistance);
         StopFollowing();
         _followCoroutine = StartCoroutine(FollowPath());
     }
@@ -192,10 +196,72 @@ public class GAgent : MonoBehaviour, IServiceConsumer
         _followCoroutine = null;
     }
 
-    private IEnumerator FollowPath()
+    private IEnumerator UpdatePath()
     {
+        // En un iterador (IEnumerator) no se puede usar "return;": para terminar la corrutina se usa "yield break;".
+        if(!TryResolveService()) yield break;
+
+        if(Time.timeSinceLevelLoad < 0.3f)
+            yield return new WaitForSeconds(0.3f);
+
+        _aStarManager.RequestPath(transform.position, target.position, OnPathFound);
+        float sqrThreshold = _pathUpdateThreshold * _pathUpdateThreshold;
+        Vector3 previousTargetPos = target.position;
+
         while(true)
         {
+            if(target.position == previousTargetPos) break;
+
+            yield return new WaitForSeconds(_minPathUpdateTime);
+
+            if((target.position - previousTargetPos).sqrMagnitude > sqrThreshold)
+            {
+                _aStarManager.RequestPath(transform.position, target.position, OnPathFound);
+                previousTargetPos = target.position;
+            }  
+        }
+    }
+
+    private IEnumerator FollowPath()
+    {
+        bool followPath = true;
+        int pathIndex = 0;
+        transform.LookAt(_path.lookPoints[0]);
+        float speedPercent = 1;
+
+        while(followPath)
+        {
+            Vector2 pos2D = new Vector2(transform.position.x, transform.position.z);
+
+            // Si ya recorrió todos los nodos / lines, termina. Esto, en clases que hereden de GAgent, debería hacerse mediante
+            // base.FollowPath()
+            while(_path.turnBoundaries[pathIndex].HasCrossedLine(pos2D))
+            {
+                if(pathIndex == _path.finishLineIndex)
+                {
+                    followPath = false;
+                    break;
+                }
+                
+                else pathIndex++;
+            }
+
+            // Rotamos y movemos el agente hacia el nodo / line objetivo
+            // Esto en realidad lo haran las clases que hereden de GAgent, con otra lógica aplicada
+            if(followPath)
+            {
+                if(pathIndex >= _path.slowDownIndex && _stoppingDistance > 0)
+                {
+                    speedPercent = Mathf.Clamp01(_path.turnBoundaries[_path.finishLineIndex].DistanceFromPoint(pos2D) / _stoppingDistance); 
+
+                    if(speedPercent < 0.01f) followPath = false;
+                }
+                    
+                Quaternion targetRotation = Quaternion.LookRotation(_path.lookPoints[pathIndex] - transform.position);
+                transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * _turnSpeed);
+                transform.Translate(Vector3.forward * Time.deltaTime * speed * speedPercent, Space.Self);
+            }
+
             yield return null;
         }
     }

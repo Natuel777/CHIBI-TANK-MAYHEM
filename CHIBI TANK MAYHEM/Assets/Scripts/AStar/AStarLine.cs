@@ -38,22 +38,31 @@ public struct Line
 
     public bool HasCrossedLine(Vector2 value) => GetSide(value) != _approachSide;
 
+    public float DistanceFromPoint(Vector2 value)
+    {
+        float yIntercepPerpendicular = value.y - _gradientPerpendicular * value.x;
+        float intersectX = (yIntercepPerpendicular - _yIntercept) / (_gradient - _gradientPerpendicular);
+        float intersectY = _gradient * intersectX + _yIntercept;
+        return Vector2.Distance(value, new Vector2(intersectX, intersectY));
+    }
+
+    #if UNITY_EDITOR
     public void ArtificialOnDrawGizmos(float length)
     {
         Vector3 lineDirection = new Vector3(1, 0, _gradient).normalized;
         Vector3 lineCenter = new Vector3(_pointOnLine_1.x, 0, _pointOnLine_1.y) + Vector3.up;
         Gizmos.DrawLine(lineCenter - lineDirection * length / 2f, lineCenter + lineDirection * length / 2f);
-
     }
+    #endif
 }
 
 public class SmoothPath
 {
     public readonly Vector3[] lookPoints;
     public readonly Line[] turnBoundaries;
-    public readonly int finishLineIndex;
+    public readonly int finishLineIndex, slowDownIndex;
 
-    public SmoothPath(Vector3[] waypoints, Vector3 startPosition, float turnDistance)
+    public SmoothPath(Vector3[] waypoints, Vector3 startPosition, float turnDistance, float stoppingDistance)
     {
         lookPoints = waypoints;
         turnBoundaries = new Line[lookPoints.Length];
@@ -67,6 +76,19 @@ public class SmoothPath
             Vector2 turnBoundaryPoint = (i == finishLineIndex)? currentPoint : currentPoint - directionToCurrentPoint * turnDistance;
             turnBoundaries[i] = new Line(turnBoundaryPoint, previousPoint - directionToCurrentPoint * turnDistance);
             previousPoint = turnBoundaryPoint;
+        }
+
+        float distanceFromEndPoint = 0;
+
+        for(int i = lookPoints.Length -1; i > 0; i--)
+        {
+            distanceFromEndPoint += Vector3.Distance(lookPoints[i], lookPoints[i - 1]);
+
+            if(distanceFromEndPoint > stoppingDistance)
+            {
+                slowDownIndex = i;
+                break;
+            }
         }
     }
 
