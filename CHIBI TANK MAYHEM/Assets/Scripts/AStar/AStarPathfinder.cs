@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
@@ -6,25 +5,18 @@ using System;
 public class AStarPathfinder : MonoBehaviour
 {
     private Grid _grid;
-    private PathRequestManager _pathRequestManager;
 
     private void Start()
     {
         _grid = GetComponent<Grid>();
-        _pathRequestManager = GetComponent<PathRequestManager>();
     }
 
-    public void StartFindPath(Vector3 startPos, Vector3 endPos)
-    {
-        StartCoroutine(FindPath(startPos, endPos));
-    }
-
-    private IEnumerator FindPath(Vector3 startPosition, Vector3 targetPosition)
+    public void FindPath(PathRequest request, Action<PathResult> callback)
     {
         Vector3[] waypoints = new Vector3[0];
         bool pathSuccess = false;
-        Node startNode = _grid.NodeFromWorldPoint(startPosition);
-        Node targetNode = _grid.NodeFromWorldPoint(targetPosition);
+        Node startNode = _grid.NodeFromWorldPoint(request.pathStart);
+        Node targetNode = _grid.NodeFromWorldPoint(request.pathEnd);
 
         if(startNode.isWalkable && targetNode.isWalkable)
         {
@@ -64,12 +56,14 @@ public class AStarPathfinder : MonoBehaviour
                 }
             }
         }
-
-        yield return null;
         
-        if(pathSuccess) waypoints = RetracePath(startNode, targetNode);
+        if(pathSuccess)
+        {
+            waypoints = RetracePath(startNode, targetNode);
+            pathSuccess = waypoints.Length > 0;
+        } 
 
-        _pathRequestManager.FinishProcessingPath(waypoints, pathSuccess);
+        callback(new PathResult(waypoints, pathSuccess, request.callback));
     }
 
     private Vector3[] RetracePath(Node startNode, Node endNode)

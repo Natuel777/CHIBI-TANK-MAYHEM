@@ -88,7 +88,7 @@ public class GAgent : MonoBehaviour, IServiceConsumer
         }
 
         _currentAction.executing = true;
-        _aStarManager.RequestPath(transform.position, _currentAction.target.position, OnPathFound);
+        _aStarManager.RequestPath(new PathRequest(transform.position, _currentAction.target.position, OnPathFound));
     }
 
     // Cancela la acción y el plan actual. El agente vuelve a planificar después de _replanDelay segundos.
@@ -204,7 +204,7 @@ public class GAgent : MonoBehaviour, IServiceConsumer
         if(Time.timeSinceLevelLoad < 0.3f)
             yield return new WaitForSeconds(0.3f);
 
-        _aStarManager.RequestPath(transform.position, target.position, OnPathFound);
+        _aStarManager.RequestPath(new PathRequest(transform.position, target.position, OnPathFound));
         float sqrThreshold = _pathUpdateThreshold * _pathUpdateThreshold;
         Vector3 previousTargetPos = target.position;
 
@@ -216,7 +216,7 @@ public class GAgent : MonoBehaviour, IServiceConsumer
 
             if((target.position - previousTargetPos).sqrMagnitude > sqrThreshold)
             {
-                _aStarManager.RequestPath(transform.position, target.position, OnPathFound);
+                _aStarManager.RequestPath(new PathRequest(transform.position, target.position, OnPathFound));
                 previousTargetPos = target.position;
             }  
         }
