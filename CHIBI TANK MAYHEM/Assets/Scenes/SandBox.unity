@@ -8100,7 +8100,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3172941148281635090, guid: 4962fb5696be0ff4c83a388d5fc0095d, type: 3}
       propertyPath: _testingMobile
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3172941148281635090, guid: 4962fb5696be0ff4c83a388d5fc0095d, type: 3}
       propertyPath: levelManager._chibiSoldierTargets.Array.size

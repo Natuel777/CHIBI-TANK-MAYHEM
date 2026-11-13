@@ -80,6 +80,7 @@ public class PlayerShoot : IShootable, IInputInitialize, IServiceConsumer
     {
         if(_mobileInputUIManager != null) return true;
 
-        return ServiceLocator.Instance.TryGet(out _mobileInputUIManager);
+        // La UI móvil es opcional: en PC no se registra (GameManager la desactiva), así que se busca sin warning.
+        return ServiceLocator.Instance.TryGetOptional(out _mobileInputUIManager);
     }
 }

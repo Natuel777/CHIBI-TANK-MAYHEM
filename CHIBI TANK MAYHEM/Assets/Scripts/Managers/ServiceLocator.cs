@@ -37,13 +37,22 @@ public sealed class ServiceLocator
 
     public bool TryGet<T>(out T service)
     {
+        if(TryGetOptional(out service)) return true;
+
+        Debug.LogWarning($"[SERVICE LOCATOR] Service of type {typeof(T)} is not registered.");
+        return false;
+    }
+
+    // Igual que TryGet pero sin warning, para servicios que pueden no existir a propósito
+    // (ej: MobileInputUIManager en PC, donde GameManager desactiva la UI móvil antes de que se registre).
+    public bool TryGetOptional<T>(out T service)
+    {
         if(_services.TryGetValue(typeof(T), out var existingService) && !IsDestroyed(existingService))
         {
             service = (T)existingService;
             return true;
         }
 
-        Debug.LogWarning($"[SERVICE LOCATOR] Service of type {typeof(T)} is not registered.");
         service = default;
         return false;
     }
